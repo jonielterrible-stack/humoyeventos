@@ -1,0 +1,7 @@
+{
+  "name": "Smoke Eventos - Humo Aéreo para Bodas y Eventos",
+  "description": "Humo Y Efectos: Líderes en disparo instantáneo de humo aéreo vertical para bodas y eventos en España. De 1 a 9 cañones con apertura en altura y disipación limpia sin residuos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
