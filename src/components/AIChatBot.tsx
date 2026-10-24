@@ -14,6 +14,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { dispatchLead } from '../utils/leadService';
+import { queryKnowledgeBase } from '../utils/chatRagEngine';
 
 interface ChatTurn {
   id: string;
@@ -205,192 +206,24 @@ export const AIChatBot: React.FC = () => {
       };
     }
 
-    // 1. Manchas / Vestido / Suelos / Limpieza (Screenshot Pregunta 1)
+    // Direct booking intent check
     if (
-      norm.includes('mancha') ||
-      norm.includes('ensucia') ||
-      norm.includes('vestido') ||
-      norm.includes('traje') ||
-      norm.includes('suelo') ||
-      norm.includes('resbala') ||
-      norm.includes('olor') ||
-      norm.includes('limpio') ||
-      norm.includes('seguro') ||
-      norm.includes('peligro')
+      (norm.includes('reserva') || norm.includes('cita') || norm.includes('agendar') || norm.includes('disponibilidad')) &&
+      !norm.includes('como') &&
+      !norm.includes('mancha') &&
+      !norm.includes('precio')
     ) {
       return {
         reply:
-          '¡Tranquilidad absoluta! Te aseguro al 100% que ninguno de nuestros efectos mancha vestidos ni trajes:\n\n' +
-          '• Humo Aéreo Sbruffo Smoke 40 (Cat. T1): Se dispara en vertical hacia el cielo, abre en abanico a 15 metros y se disipa por completo en el aire limpio en pocos segundos, sin caer poso ni dejar restos de ceniza ni tintes en el suelo.\n' +
-          '• Niebla Baja para el Vals Nupcial: Funciona mediante condensación térmica con agua caliente y hielo seco (CO2 sólido). Es vapor denso 100% puro que se mantiene a ras de suelo (bajo las rodillas), no moja, no resbala y desaparece de forma impecable sin activar alarmas de incendios.\n' +
-          '• Fuentes de Chispas Frías (Sparkulars): Es fuego frío sin pólvora ni pirotecnia tradicional; puedes pasar la mano o el vestido por encima sin riesgo alguno de quemadura.',
+          '¡Con mucho gusto te ayudo a bloquear tu fecha! Trabajamos con un cupo limitado de eventos por fin de semana para garantizar que un técnico oficial de nuestro equipo acuda personalmente a vuestra finca con todo el equipamiento.\n\nPuedes entrar en la pestaña "Agendar Cita / Evento" de arriba para facilitarnos los datos o escribirnos directamente a nuestro WhatsApp oficial (+34 600 08 24 62) y te confirmamos disponibilidad en menos de 15 minutos.',
         bookingDraft: draft,
       };
     }
 
-    // 2. Confeti y Mariposas (Screenshot Pregunta 2)
-    if (
-      norm.includes('confeti') ||
-      norm.includes('mariposa') ||
-      norm.includes('mariposas') ||
-      norm.includes('nieve') ||
-      norm.includes('biodegradable') ||
-      norm.includes('lluvia blanca')
-    ) {
-      return {
-        reply:
-          '¡Nuestros cañones de confeti crean un momento verdaderamente mágico! Disponemos de varias modalidades:\n\n' +
-          '🦋 Confeti de Mariposas de Seda: Troqueladas con forma de mariposa que planean y giran lentamente en el aire en suspensión durante 30 a 60 segundos. Es el efecto más emocionante y fotogénico para el primer baile nupcial o la salida de la ceremonia.\n' +
-          '❄️ Papel Blanco Nieve: Caída romántica que recrea una auténtica nevada pura sobre los novios.\n' +
-          '🎉 Fiesta Multicolor y Metalizado (Oro y Plata): Estallido de gran alcance (8 a 12 metros) con detonador inalámbrico para la apertura de la barra libre.\n\n' +
-          'Todo el material es 100% biodegradable e ignífugo homologado CE: no resbala y no mancha suelos de madera, mármol ni alfombras de la finca.',
-        bookingDraft: draft,
-      };
-    }
-
-    // 3. Vals con Niebla Baja y Chispas Frías
-    if (
-      norm.includes('vals') ||
-      norm.includes('niebla baja') ||
-      norm.includes('humo bajo') ||
-      norm.includes('chispas') ||
-      norm.includes('sparkular') ||
-      norm.includes('sobre las nubes') ||
-      norm.includes('fuego frio') ||
-      norm.includes('fuego frío')
-    ) {
-      return {
-        reply:
-          '¡Es nuestro efecto nupcial más solicitado! Para el primer baile creamos una alfombra de nubes densas y blancas a ras de suelo con nuestras máquinas profesionales de hielo seco (los novios parecéis flotar en el cielo).\n\n' +
-          'En el momento culminante de vuestra canción, activamos las fuentes de chispas frías Sparkulars (columnas de luz dorada de hasta 3-4 metros que no queman ni huelen). Es apto tanto para salones interiores como para jardines exteriores. ¿Tienes ya fecha para tu baile?',
-        bookingDraft: draft,
-      };
-    }
-
-    // 4. Descuento 10% y Cupones
-    if (
-      norm.includes('descuento') ||
-      norm.includes('cupon') ||
-      norm.includes('oferta') ||
-      norm.includes('promocion') ||
-      norm.includes('codigo') ||
-      norm.includes('10%')
-    ) {
-      return {
-        reply:
-          '¡Sí! Tienes activo un cupón del 10% de descuento directo en tu presupuesto según tu tipo de celebración:\n\n' +
-          '• Para Bodas Nupciales: código BODA10MAGIA\n' +
-          '• Para Revelación de Género: código REVELACION10MAGIA\n' +
-          '• Para Fiestas y Barra Libre: código FIESTA10MAGIA\n' +
-          '• Para Eventos de Marca / Rodajes: código EVENTO10MAGIA\n\n' +
-          'Si me dices tu nombre, fecha y provincia, o rellenas la pestaña "Agendar Cita / Evento", te aplicamos el 10% de descuento de inmediato.',
-        bookingDraft: draft,
-      };
-    }
-
-    // 5. Cobertura: Talavera, Madrid, Toledo, Zona Centro y España
-    if (
-      norm.includes('talavera') ||
-      norm.includes('madrid') ||
-      norm.includes('toledo') ||
-      norm.includes('zona centro') ||
-      norm.includes('avila') ||
-      norm.includes('segovia') ||
-      norm.includes('guadalajara') ||
-      norm.includes('caceres') ||
-      norm.includes('ciudad real') ||
-      norm.includes('donde') ||
-      norm.includes('cobertura') ||
-      norm.includes('desplazamiento') ||
-      norm.includes('finca') ||
-      norm.includes('llegar')
-    ) {
-      return {
-        reply:
-          '¡Llegamos a tu finca directamente! Nuestra sede central y almacén técnico oficial está en Talavera de la Reina (Toledo), con furgón técnico diario en Madrid y Toledo, y cobertura preferente en toda la Zona Centro (Ávila, Segovia, Guadalajara, Cáceres y Ciudad Real).\n\n' +
-          'También realizamos coberturas a nivel nacional en cualquier provincia de España. Nuestro equipo técnico oficial se desplaza con todo el equipamiento, revisa las distancias de seguridad con la finca y detona el efecto en el segundo exacto. ¿En qué localidad o finca celebráis el evento?',
-        bookingDraft: draft,
-      };
-    }
-
-    // 6. Cañones de Humo Aéreo, Colores y Disparador TNT
-    if (
-      norm.includes('humo aereo') ||
-      norm.includes('canones') ||
-      norm.includes('canon') ||
-      norm.includes('colores') ||
-      norm.includes('sbruffo') ||
-      norm.includes('tnt') ||
-      norm.includes('palanca') ||
-      norm.includes('revelacion') ||
-      norm.includes('genero')
-    ) {
-      return {
-        reply:
-          'Nuestros cañones de humo aéreo vertical disparan de 1 a 9 artificios en un único fogonazo instantáneo sincronizado que sube a 15 metros de altura y se abre en abanico.\n\n' +
-          'Contamos con la paleta oficial de 10 colores certificados de fábrica (Sbruffo Smoke 40 Cat. T1): Amarillo Oro, Naranja, Azul Eléctrico, Blanco Puro Nupcial, Verde Esmeralda, Rojo Pasión, Rojo Carmín, Morado, Verde Lima y Rosa Pastel.\n\n' +
-          'Para revelaciones de género incluimos la Caja TNT Retro con palanca vintage para que los papás detonen juntos la sorpresa con máxima emoción.',
-        bookingDraft: draft,
-      };
-    }
-
-    // 7. Precios y Presupuesto
-    if (
-      norm.includes('precio') ||
-      norm.includes('coste') ||
-      norm.includes('cuesta') ||
-      norm.includes('tarifa') ||
-      norm.includes('presupuesto') ||
-      norm.includes('vale')
-    ) {
-      return {
-        reply:
-          'Nuestros presupuestos son 100% personalizados y sin precios fijos inflados: se adaptan al número de cañones (de 1 a 9), el tipo de efecto (humo aéreo, mariposas, niebla baja o chispas) y la ubicación de vuestra finca, con asistencia presencial de nuestro técnico oficial incluida.\n\n' +
-          'Además tienes disponible el cupón oficial del 10% de descuento. Si me dices la fecha aproximada y el lugar, o entras en la pestaña "Agendar Cita / Evento" de arriba, te lo presupuestamos en minutos.',
-        bookingDraft: draft,
-      };
-    }
-
-    // 8. Sonido, Luces, Iluminación y Discoteca Móvil
-    if (
-      norm.includes('sonido') ||
-      norm.includes('luz') ||
-      norm.includes('luces') ||
-      norm.includes('iluminacion') ||
-      norm.includes('discoteca') ||
-      norm.includes('dj') ||
-      norm.includes('altavoces')
-    ) {
-      return {
-        reply:
-          'Ofrecemos alquiler de sonido profesional de alta fidelidad, iluminación LED robotizada, microfonía inalámbrica para ceremonias civiles y discoteca móvil completa con DJ para bodas y eventos. Se puede contratar de forma independiente o en pack combinado con humo aéreo y chispas frías.',
-        bookingDraft: draft,
-      };
-    }
-
-    // 9. Cita, Reserva, Teléfono o Contacto
-    if (
-      norm.includes('reserva') ||
-      norm.includes('fecha') ||
-      norm.includes('cita') ||
-      norm.includes('telefono') ||
-      norm.includes('llamar') ||
-      norm.includes('disponibilidad') ||
-      phoneMatch ||
-      dateMatch
-    ) {
-      return {
-        reply:
-          '¡Con mucho gusto te ayudo a bloquear tu fecha! Trabajamos con un cupo limitado de eventos por fin de semana para garantizar que un técnico oficial acuda personalmente a vuestro espacio.\n\n' +
-          'Puedes entrar en la pestaña "Agendar Cita / Evento" de arriba para dejarnos los detalles o escribirnos directamente a nuestro WhatsApp oficial (+34 600 08 24 62) y te confirmamos disponibilidad en menos de 15 minutos.',
-        bookingDraft: draft,
-      };
-    }
-
-    // 10. Saludo cordial y respuesta general de ayuda humana
+    // Query RAG Knowledge Base (grounded in index.html, smokeData and services catalog)
+    const ragResult = queryKnowledgeBase(raw);
     return {
-      reply:
-        '¡Hola! Te atiendo encantada desde el equipo de Humo Y Efectos ✨. Cuéntame qué duda tienes sobre nuestros Cañones de Humo Aéreo (1 a 9 cañones a 15m), Confeti de Mariposas o Blanco Nieve, Vals sobre las Nubes con Niebla Baja, Fuentes de Chispas Frías Sparkulars o Sonido y Discoteca Móvil.\n\n¿Para qué fecha y lugar estás planeando tu celebración?',
+      reply: ragResult.reply,
       bookingDraft: draft,
     };
   };

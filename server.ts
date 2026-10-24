@@ -124,6 +124,10 @@ TU OBJETIVO:
 1. Resolver dudas de forma cercana, humana, profesional y clara (respuestas breves, naturales y fáciles de leer en móvil, máximo 3-4 frases por turno salvo que pidan detalles concretos).
 2. Ayudar a los novios o clientes a **agendar una cita o llamada** o **pre-reservar la fecha de su boda/evento**.
 
+REGLA CRÍTICA SOBRE MANCHAS Y VESTIDOS DE NOVIA:
+- NUNCA uses frases absolutas como "nunca se va a manchar la ropa" o "garantizo que nunca mancha".
+- Usa SIEMPRE frases técnicas y precisas como: "Por regla general no se ensucia la ropa ya que por ejemplo los cañones se disparan hacia el cielo (alcanzando 14,5 a 15 metros en vertical donde abren en abanico y se disipan en pocos segundos en el aire limpio). Además nuestro técnico oficial supervisa siempre las distancias de seguridad reglamentarias y la dirección del viento para que la nube no caiga sobre las personas. En cuanto a la niebla baja de hielo seco, es vapor puro que queda a ras de suelo y se evapora sin mojar ni manchar trajes".
+
 PROMOCIÓN ESPECIAL DE BIENVENIDA (10% DE DESCUENTO):
 - Todos los visitantes que registren su email en la ventana emergente pop-up de bienvenida reciben un cupón directo del 10% de descuento (código promocional BODA10MAGIA) aplicable a cualquier servicio o pack de efectos.
 - Si el usuario pregunta por descuentos, ofertas o promociones, anímale a usar su cupón del 10% con el código BODA10MAGIA y te dé sus datos para aplicárselo directamente.
@@ -193,10 +197,10 @@ function buildFallbackResponse(userText: string): {
 } {
   const lower = userText.toLowerCase();
 
-  if (lower.includes('mancha') || lower.includes('vestido') || lower.includes('seguro')) {
+  if (lower.includes('mancha') || lower.includes('ensucia') || lower.includes('vestido') || lower.includes('ropa') || lower.includes('seguro')) {
     return {
       reply:
-        'Depende del tipo de efecto y de cómo se coloque: los cañones de humo aéreo profesional se elevan a 12-15 metros y se disipan en el aire limpiamente sin dejar residuos siempre que se respeten las distancias de seguridad (2 a 3 metros) y el viento. Si se disparan muy pegados a los novios o con viento en contra, el pigmento podría rozar la tela, por eso cuidamos siempre la distancia técnica. Si buscáis una alternativa 100% limpia sin ningún riesgo de mancha para el salón, la Niebla Baja de hielo seco con agua caliente genera puro vapor de agua que no mancha, no moja y no activa alarmas. ¿Para qué fecha tenéis pensado vuestro evento?',
+        'Por regla general no se ensucia la ropa ni los vestidos, ya que por ejemplo los cañones de humo aéreo se disparan hacia el cielo en vertical (alcanzando entre 14,5 y 15 metros de altura donde abren en abanico y se disipan en el aire en pocos segundos). Además, nuestro técnico oficial en finca cuida siempre las distancias de seguridad reglamentarias (3 metros radiales y 19 metros al público) y vigila la dirección del viento para que la nube no incida sobre los novios o invitados. En cuanto a la niebla baja para el vals nupcial, se genera con agua caliente y hielo seco: es vapor limpio que queda a ras de suelo y se evapora sin mojar ni manchar trajes.',
       bookingDraft: null,
     };
   }
