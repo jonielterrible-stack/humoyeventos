@@ -15,6 +15,7 @@ import {
   Bomb,
 } from 'lucide-react';
 import { SMOKE_COLORS, SmokeColor } from '../data/smokeData';
+import { dispatchLead } from '../utils/leadService';
 
 export type ConfigEffectType =
   | 'aereo_clasico'
@@ -133,6 +134,19 @@ ${
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+
+    if (clientName.trim() || clientPhone.trim()) {
+      dispatchLead({
+        tipo: 'configurador',
+        name: clientName.trim(),
+        phone: clientPhone.trim(),
+        date: eventDate,
+        venue: province,
+        eventType,
+        couponCode: discountApplied ? couponCode : undefined,
+        effects: `${tubes} Cañones (${colorMode === 'uniform' ? singleColor.name : mixDescription})`,
+      }).catch(console.error);
+    }
   };
 
   return (

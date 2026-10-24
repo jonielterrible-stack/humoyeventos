@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Phone, Mail, Clock, MessageSquare, Sparkles } from 'lucide-react';
+import { Send, CheckCircle2, Phone, Mail, Clock, MessageSquare, Sparkles, MessageCircle } from 'lucide-react';
+import { dispatchLead } from '../utils/leadService';
 
 export const ContactSection: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -14,19 +15,53 @@ export const ContactSection: React.FC = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formState.name || !formState.phone) {
+    if (!formState.name.trim() || !formState.phone.trim()) {
       setErrorMsg('Por favor completa al menos tu nombre y teléfono de contacto.');
       return;
     }
 
     setErrorMsg('');
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      await dispatchLead({
+        tipo: 'contacto_presupuesto',
+        name: formState.name.trim(),
+        email: formState.email.trim() || undefined,
+        phone: formState.phone.trim(),
+        date: formState.date.trim() || undefined,
+        venue: formState.venue.trim() || undefined,
+        tubes: formState.tubes,
+        colors: formState.colors,
+        notes: formState.notes.trim() || undefined,
+        effects: `${formState.tubes} (${formState.colors})`,
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Error enviando contacto:', err);
+      // Still show success to visitor and offer WhatsApp fallback
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const whatsappMessage = `¡Hola Humo Y Efectos! 👋 Acabo de solicitar presupuesto en vuestra web:
+· Nombre: ${formState.name}
+· Teléfono: ${formState.phone}
+${formState.email ? `· Email: ${formState.email}\n` : ''}· Fecha evento: ${formState.date || 'Por concretar'}
+· Finca / Lugar: ${formState.venue || 'Por concretar'}
+· Configuración: ${formState.tubes} (${formState.colors})
+${formState.notes ? `· Notas: ${formState.notes}\n` : ''}
+¿Podríais confirmarme disponibilidad y presupuesto? ¡Muchas gracias!`;
+
+  const whatsappUrl = `https://wa.me/34600082462?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <section id="contacto" className="py-20 bg-white border-b border-neutral-200">
@@ -103,17 +138,30 @@ export const ContactSection: React.FC = () => {
 
           {/* Right Column: 7 cols - Form on White */}
           <div className="lg:col-span-7">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-3xl p-8 shadow-lg">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-3xl p-6 sm:p-8 shadow-lg">
               {submitted ? (
-                <div className="text-center py-12 space-y-4">
+                <div className="text-center py-8 space-y-4">
                   <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-200">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-neutral-900 font-display">¡Solicitud recibida correctamente!</h3>
                   <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto">
-                    Gracias <strong className="text-neutral-900">{formState.name}</strong>. Hemos recibido los detalles para el{' '}
-                    <strong className="text-neutral-900">{formState.date || 'tu evento'}</strong>. Te contactaremos en menos de 2 horas con la confirmación de fecha.
+                    Gracias <strong className="text-neutral-900">{formState.name}</strong>. Hemos remitido tus datos a <strong className="text-neutral-900">humoyefectos@gmail.com</strong> para el{' '}
+                    <strong className="text-neutral-900">{formState.date || 'tu evento'}</strong>. Te contactaremos en menos de 2 horas.
                   </p>
+
+                  <div className="pt-2 max-w-md mx-auto">
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-white shrink-0" />
+                      <span>Confirmar también por WhatsApp (+34 600 08 24 62)</span>
+                    </a>
+                  </div>
+
                   <button
                     onClick={() => setSubmitted(false)}
                     className="px-5 py-2.5 text-xs font-bold text-neutral-700 bg-white hover:bg-neutral-100 rounded-xl border border-neutral-200 transition-colors cursor-pointer"
@@ -170,7 +218,7 @@ export const ContactSection: React.FC = () => {
                       </label>
                       <input
                         type="email"
-                        placeholder="nombre@gmail.com"
+                        placeholder="novios@ejemplo.com"
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-rose-500 shadow-xs"
@@ -179,13 +227,13 @@ export const ContactSection: React.FC = () => {
 
                     <div>
                       <label className="block text-xs font-bold text-neutral-700 mb-1.5">
-                        Fecha aproximada del evento
+                        Fecha aproximada
                       </label>
                       <input
                         type="date"
                         value={formState.date}
                         onChange={(e) => setFormState({ ...formState, date: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-900 focus:outline-none focus:border-rose-500 shadow-xs"
+                        className="w-full px-3.5 py-2.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-rose-500 shadow-xs"
                       />
                     </div>
                   </div>
@@ -193,28 +241,32 @@ export const ContactSection: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-neutral-700 mb-1.5">
-                        Cañones deseados (1 a 9)
+                        Número de cañones
                       </label>
                       <select
                         value={formState.tubes}
                         onChange={(e) => setFormState({ ...formState, tubes: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-900 focus:outline-none focus:border-rose-500 shadow-xs"
                       >
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
-                          <option key={n} value={`${n} Cañones`}>
-                            {n} {n === 1 ? 'Cañón' : 'Cañones (Disparo instantáneo)'}
-                          </option>
-                        ))}
+                        <option value="1 Cañón">1 Cañón (Impacto vertical único)</option>
+                        <option value="2 Cañones">2 Cañones (Dúo coordinado)</option>
+                        <option value="3 Cañones">3 Cañones (Trío espectacular)</option>
+                        <option value="4 Cañones">4 Cañones (Recomendado parejas)</option>
+                        <option value="5 Cañones">5 Cañones (Gran apertura)</option>
+                        <option value="6 Cañones">6 Cañones (Arco completo)</option>
+                        <option value="7 Cañones">7 Cañones (Cúpula panorámica)</option>
+                        <option value="8 Cañones">8 Cañones (Festial 360°)</option>
+                        <option value="9 Cañones">9 Cañones (Máximo impacto cielo)</option>
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-xs font-bold text-neutral-700 mb-1.5">
-                        Preferencia de Colores
+                        Colores preferidos
                       </label>
                       <input
                         type="text"
-                        placeholder="Ej. Todos Rosa Fucsia o 2 Azul + 2 Dorado"
+                        placeholder="Ej: Rosa Pastel y Blanco Puro"
                         value={formState.colors}
                         onChange={(e) => setFormState({ ...formState, colors: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-rose-500 shadow-xs"
@@ -228,7 +280,7 @@ export const ContactSection: React.FC = () => {
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="Indícanos finca o detalles de la boda..."
+                      placeholder="Indícanos finca, ciudad o detalles de la boda..."
                       value={formState.notes}
                       onChange={(e) => setFormState({ ...formState, notes: e.target.value })}
                       className="w-full px-3.5 py-2.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-rose-500 shadow-xs"
@@ -237,10 +289,11 @@ export const ContactSection: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-rose-600/30 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-rose-600/30 flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-50"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Solicitar Propuesta Humo Y Efectos</span>
+                    <span>{isSubmitting ? 'Enviando solicitud...' : 'Solicitar Propuesta Humo Y Efectos'}</span>
                   </button>
 
                   <p className="text-[11px] text-neutral-500 text-center">

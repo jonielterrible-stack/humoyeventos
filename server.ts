@@ -482,6 +482,39 @@ async function sendBookingEmailNotification(booking: BookingRecord) {
       </div>
     `;
 
+    // 1. Direct Webhook Delivery to humoyefectos@gmail.com with CC to jonielterrible@gmail.com
+    try {
+      await fetch('https://formsubmit.co/ajax/humoyefectos@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `📅 [Nueva Reserva/Cita] ${booking.nombre || 'Cliente'} (${booking.fechaEvento || 'Fecha pendiente'})`,
+          _cc: 'jonielterrible@gmail.com',
+          _captcha: 'false',
+          _template: 'table',
+          ID_RESERVA: booking.id,
+          TIPO_GESTION: booking.tipoGestion,
+          NOMBRE: booking.nombre,
+          TELEFONO: booking.telefono,
+          FECHA_EVENTO: booking.fechaEvento,
+          CIUDAD_FINCA: booking.ciudadFinca,
+          TIPO_EVENTO: booking.tipoEvento,
+          EFECTOS: booking.efectos,
+          HORARIO_CITA: booking.horarioCita || 'Cualquiera',
+          NOTAS: booking.notas || 'Ninguna',
+          WHATSAPP_DIRECTO: booking.telefono ? `https://wa.me/34${booking.telefono.replace(/[^0-9]/g, '')}` : 'No disponible',
+          FECHA_REGISTRO: new Date(booking.createdAt).toLocaleString('es-ES'),
+        }),
+      });
+      console.log(`[FormSubmit Reserva enviada a ${OWNER_EMAIL} y jonielterrible@gmail.com]: ${booking.id}`);
+    } catch (fsErr) {
+      console.error('Error enviando reserva por FormSubmit:', fsErr);
+    }
+
+    // 2. Transporter sendMail (if SMTP configured)
     await transporter.sendMail({
       from: `"Humo Y Efectos Reservas" <humoyefectos@gmail.com>`,
       to: OWNER_EMAIL,
@@ -606,6 +639,8 @@ async function sendLeadEmailNotification(lead: DiscountLeadRecord) {
         _subject: `🎉 [Nuevo Lead 10%] ${lead.name || 'Cliente'} (${lead.email}) · Código: ${lead.couponCode}`,
         _cc: 'jonielterrible@gmail.com',
         _replyto: lead.email,
+        _captcha: 'false',
+        _template: 'table',
         CODIGO_CUPON_10_DESCUENTO: lead.couponCode,
         EMAIL_CLIENTE: lead.email,
         NOMBRE_O_PAREJA: lead.name || 'No especificado',

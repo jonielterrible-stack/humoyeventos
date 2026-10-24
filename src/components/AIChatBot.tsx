@@ -13,6 +13,7 @@ import {
   Flame,
   ChevronRight,
 } from 'lucide-react';
+import { dispatchLead } from '../utils/leadService';
 
 interface ChatTurn {
   id: string;
@@ -160,14 +161,16 @@ export const AIChatBot: React.FC = () => {
   };
 
   const logBookingInBackground = (bookingPayload: ConfirmedBooking) => {
-    fetch('/api/bookings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      keepalive: true,
-      body: JSON.stringify(bookingPayload),
-    }).catch(() => {
-      // Non-blocking background log
-    });
+    dispatchLead({
+      tipo: bookingPayload.tipoGestion === 'reserva_evento' ? 'reserva_evento' : 'contacto_presupuesto',
+      name: bookingPayload.nombre,
+      phone: bookingPayload.telefono,
+      date: bookingPayload.fechaEvento,
+      venue: bookingPayload.ciudadFinca,
+      eventType: bookingPayload.tipoEvento,
+      effects: bookingPayload.efectos,
+      notes: bookingPayload.notas,
+    }).catch(() => {});
   };
 
   const sendMessage = async (textToSend?: string) => {

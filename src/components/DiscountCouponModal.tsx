@@ -18,6 +18,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { downloadCouponPdf } from '../utils/generateCouponPdf';
+import { dispatchLead } from '../utils/leadService';
 
 interface DiscountLead {
   email: string;
@@ -135,7 +136,7 @@ export const DiscountCouponModal: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Verificación previa en Base de Datos: Bloquear duplicados
+      // 1. Verificación previa en Base de Datos: Bloquear duplicados si el servidor responde
       const exists = await checkEmailInDatabase(cleanEmail);
       if (exists) {
         setIsSubmitting(false);
@@ -156,67 +157,40 @@ export const DiscountCouponModal: React.FC = () => {
         createdAt: new Date().toISOString(),
       };
 
-      // 3. Registrar en servidor (con validación server-side)
-      const serverRes = await fetch('/api/discount-leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadPayload),
+      // 3. Envío multi-transporte inmediato (Notifica a humoyefectos@gmail.com + CC jonielterrible@gmail.com)
+      await dispatchLead({
+        tipo: 'cupon_10',
+        email: cleanEmail,
+        name: name.trim() || undefined,
+        phone: phone.trim() || undefined,
+        eventType,
+        couponCode: generatedCode,
+        acceptedTerms: true,
       });
 
-      if (!serverRes.ok) {
-        const errorData = await serverRes.json().catch(() => ({}));
-        if (errorData.alreadyRegistered) {
-          setAlreadyRegistered(true);
-          setRegisteredCouponCode(errorData.couponCode || null);
-          setIsSubmitting(false);
-          return;
+      // 4. Guardar copia local en el navegador
+      localStorage.setItem('hye_discount_coupon_claimed', JSON.stringify(leadPayload));
+
+      // 5. Descarga de PDF client-side (solo auto-descarga en PC para no bloquear navegación en Safari/iPhone)
+      const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (!isMobile) {
+        try {
+          downloadCouponPdf({
+            couponCode: generatedCode,
+            email: cleanEmail,
+            name: name.trim() || undefined,
+            phone: phone.trim() || undefined,
+            eventType,
+            discountPercent: 10,
+          });
+        } catch (pdfErr) {
+          console.warn('PDF auto-download skipped or failed:', pdfErr);
         }
       }
 
-      // 4. SOLO para registros NUEVOS: Generar y descargar el PDF oficial
-      try {
-        downloadCouponPdf({
-          couponCode: generatedCode,
-          email: cleanEmail,
-          name: name.trim() || undefined,
-          phone: phone.trim() || undefined,
-          eventType,
-          discountPercent: 10,
-        });
-      } catch (pdfErr) {
-        console.error('Error generating PDF client-side:', pdfErr);
-      }
-
-      // 5. Envío de copia directa vía FormSubmit a humoyefectos@gmail.com
-      try {
-        fetch('https://formsubmit.co/ajax/humoyefectos@gmail.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            _subject: `🎉 [Nuevo Lead 10%] ${name.trim() || 'Cliente'} (${cleanEmail}) · Código: ${generatedCode}`,
-            _cc: 'jonielterrible@gmail.com',
-            _replyto: cleanEmail,
-            CODIGO_CUPON_10_DESCUENTO: generatedCode,
-            EMAIL_CLIENTE: cleanEmail,
-            NOMBRE_O_PAREJA: name.trim() || 'No especificado',
-            TELEFONO_WHATSAPP: phone.trim() || 'No especificado',
-            TIPO_DE_EVENTO: eventType,
-            WHATSAPP_DIRECTO: phone.trim() ? `https://wa.me/34${phone.replace(/[^0-9]/g, '')}` : 'No especificado',
-            ACEPTA_INFORMACION_Y_OFERTAS: 'SÍ (Aceptado expresamente en el pop-up)',
-            FECHA_REGISTRO: new Date().toLocaleString('es-ES'),
-          }),
-        }).catch(() => {});
-      } catch {
-        // non-blocking
-      }
-
-      // 6. Guardar estado local y mostrar confirmación
-      localStorage.setItem('hye_discount_coupon_claimed', JSON.stringify(leadPayload));
       setIsSubmitted(true);
-    } catch {
+    } catch (err) {
+      console.error('Error procesando lead de cupón:', err);
       setIsSubmitted(true);
     } finally {
       setIsSubmitting(false);
