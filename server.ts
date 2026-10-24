@@ -128,9 +128,10 @@ REGLA CRÍTICA SOBRE MANCHAS Y VESTIDOS DE NOVIA:
 - NUNCA uses frases absolutas como "nunca se va a manchar la ropa" o "garantizo que nunca mancha".
 - Usa SIEMPRE frases técnicas y precisas como: "Por regla general no se ensucia la ropa ya que por ejemplo los cañones se disparan hacia el cielo (alcanzando 14,5 a 15 metros en vertical donde abren en abanico y se disipan en pocos segundos en el aire limpio). Además nuestro técnico oficial supervisa siempre las distancias de seguridad reglamentarias y la dirección del viento para que la nube no caiga sobre las personas. En cuanto a la niebla baja de hielo seco, es vapor puro que queda a ras de suelo y se evapora sin mojar ni manchar trajes".
 
-PROMOCIÓN ESPECIAL DE BIENVENIDA (10% DE DESCUENTO):
-- Todos los visitantes que registren su email en la ventana emergente pop-up de bienvenida reciben un cupón directo del 10% de descuento (código promocional BODA10MAGIA) aplicable a cualquier servicio o pack de efectos.
-- Si el usuario pregunta por descuentos, ofertas o promociones, anímale a usar su cupón del 10% con el código BODA10MAGIA y te dé sus datos para aplicárselo directamente.
+PROMOCIÓN ESPECIAL DE BIENVENIDA (10% DE DESCUENTO OBLIGATORIO CON REGISTRO):
+- Para conseguir el 10% de descuento, EL CLIENTE TIENE QUE REGISTRARSE OBLIGATORIAMENTE con su correo electrónico en la ventana emergente de bienvenida en la web.
+- NUNCA facilites códigos genéricos abiertos ni fijos (como BODA10MAGIA) en el chat. Explica siempre que a cada persona que se registra se le genera un código único e intransferible para su celebración (con prefijo BODA10, REVELACION10 o FIESTA10) y su certificado oficial en PDF con comprobación en base de datos.
+- Anima al usuario a abrir la ventana de registro de email para recibir su cupón único.
 
 CATÁLOGO OFICIAL DE SERVICIOS POR ORDEN DE ESPECIALIDAD:
 1. **Cañones de Humo Aéreo Vertical (1 a 9 cañones) - Sbruffo Smoke 40 (Cat. T1)**:
@@ -248,7 +249,7 @@ function buildFallbackResponse(userText: string): {
   if (lower.includes('descuento') || lower.includes('cupon') || lower.includes('cupón') || lower.includes('oferta') || lower.includes('promocion') || lower.includes('promoción') || lower.includes('codigo') || lower.includes('código')) {
     return {
       reply:
-        '¡Sí! Tenemos activo un cupón del 10% de descuento registrando tu email al entrar en la web (o indicando el código BODA10MAGIA). Si me dices tu nombre, fecha y ciudad, te lo aplico directamente en tu presupuesto personalizado. ¿Para cuándo tenéis el evento?',
+        'Para conseguir tu cupón oficial del 10% de descuento es imprescindible registrarte con tu email en nuestra web. No facilitamos códigos genéricos abiertos, ya que a cada persona que se registra se le genera un código único e intransferible para su celebración (con prefijo BODA10, REVELACION10 o FIESTA10) junto con su certificado oficial en PDF descargable.\n\nPuedes abrir la ventana de registro en pantalla para indicar tu correo y recibir tu código de descuento oficial al instante.',
       bookingDraft: null,
     };
   }

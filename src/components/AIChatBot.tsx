@@ -12,6 +12,7 @@ import {
   Phone,
   Flame,
   ChevronRight,
+  Gift,
 } from 'lucide-react';
 import { dispatchLead } from '../utils/leadService';
 import { queryKnowledgeBase } from '../utils/chatRagEngine';
@@ -485,6 +486,26 @@ export const AIChatBot: React.FC = () => {
                         </div>
                       </div>
                     )}
+
+                    {/* If discount registration CTA is relevant */}
+                    {msg.role === 'model' &&
+                      (msg.text.includes('ventana de registro') ||
+                        msg.text.includes('registrarte con tu email') ||
+                        msg.text.includes('cupón oficial del 10%')) && (
+                        <div className="mt-2 w-[90%]">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              window.dispatchEvent(new CustomEvent('hye_open_discount_modal'));
+                              setIsOpen(false);
+                            }}
+                            className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-500 hover:to-amber-400 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-rose-950/40 transition-transform active:scale-95 cursor-pointer"
+                          >
+                            <Gift className="w-4 h-4 shrink-0" />
+                            <span>🎁 Abrir Registro para Recibir mi Cupón 10%</span>
+                          </button>
+                        </div>
+                      )}
                   </div>
                 ))}
 

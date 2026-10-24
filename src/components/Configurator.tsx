@@ -69,22 +69,13 @@ export const Configurator: React.FC = () => {
   }, []);
 
   const handleApplyCoupon = (codeToApply?: string) => {
-    const defaultCode = getCouponCodeForEventType(eventType);
     const code = (codeToApply || couponCode).trim().toUpperCase();
-    if (
-      code.includes('10') ||
-      code.includes('5') ||
-      code.includes('BODA') ||
-      code.includes('REVEL') ||
-      code.includes('FIESTA') ||
-      code.includes('EVENTO') ||
-      code.length >= 4
-    ) {
-      setCouponCode(code || defaultCode);
+    if (code.length >= 4) {
+      setCouponCode(code);
       setDiscountApplied(true);
     } else {
-      setCouponCode(defaultCode);
-      setDiscountApplied(true);
+      // If empty or invalid, open the official discount registration modal
+      window.dispatchEvent(new CustomEvent('hye_open_discount_modal'));
     }
   };
 
@@ -696,19 +687,19 @@ ${
                   </span>
                   <div className="flex items-center gap-1.5">
                     <span className="font-mono font-black text-emerald-700 text-xs tracking-wider">
-                      {couponCode || getCouponCodeForEventType(eventType)}
+                      {couponCode}
                     </span>
                     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-200 text-emerald-900">
-                      -10% OK
+                      -10% APLICADO
                     </span>
                   </div>
                 </div>
               ) : (
-                <div className="pt-1 mt-1">
+                <div className="pt-1 mt-1 space-y-1.5">
                   <div className="flex items-center gap-1.5">
                     <input
                       type="text"
-                      placeholder={`Código Cupón (ej. ${getCouponCodeForEventType(eventType)})`}
+                      placeholder="Introduce tu código (ej. BODA10-XXX)"
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                       className="flex-1 px-3 py-1.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-rose-500 uppercase font-mono"
@@ -718,7 +709,17 @@ ${
                       onClick={() => handleApplyCoupon()}
                       className="px-3 py-1.5 bg-neutral-900 hover:bg-black text-white text-xs font-bold rounded-xl transition-colors cursor-pointer shrink-0"
                     >
-                      Aplicar 10%
+                      Aplicar
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-neutral-500 px-1">
+                    <span>* Requiere registrar email para código único</span>
+                    <button
+                      type="button"
+                      onClick={() => window.dispatchEvent(new CustomEvent('hye_open_discount_modal'))}
+                      className="text-rose-600 font-bold hover:underline cursor-pointer"
+                    >
+                      ¿No tienes cupón? Regístrate aquí
                     </button>
                   </div>
                 </div>

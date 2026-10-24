@@ -39,7 +39,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     content:
       'Política de precios a medida: no trabajamos con tarifas fijas rígidas ni paquetes engañosos. El presupuesto se calcula según: 1) Número exacto de cañones de humo aéreo elegidos (de 1 a 9 cañones), 2) Efectos adicionales (confeti de mariposas, niebla baja con hielo seco o chispas frías), 3) Fecha del evento, y 4) Ubicación de la finca para incluir el desplazamiento con técnico oficial propio sin intermediarios.',
     directAnswer:
-      'Nuestros presupuestos son totalmente a medida y transparentes, sin precios fijos estándar cerrados, ya que cada celebración tiene necesidades distintas. El importe se ajusta en función de:\n\n1. El número de cañones de humo aéreo que elijáis (de 1 a 9 cañones disparados en abanico vertical).\n2. Los efectos combinados que queráis sumar (como la lluvia de mariposas de seda, el vals sobre las nubes o las chispas frías).\n3. La fecha del evento y la finca o localidad, para incluir el desplazamiento y asistencia presencial de nuestro técnico oficial.\n\nAdemás, disponéis del cupón promocional del 10% de descuento directo en vuestro presupuesto. Si me dices la fecha aproximada y el lugar de la celebración, o pulsas en "Agendar Cita / Evento" de arriba, os preparamos la propuesta exacta en pocos minutos.',
+      'Nuestros presupuestos son totalmente a medida y transparentes, sin precios fijos estándar cerrados, ya que cada celebración tiene necesidades distintas. El importe se ajusta en función de:\n\n1. El número de cañones de humo aéreo que elijáis (de 1 a 9 cañones disparados en abanico vertical).\n2. Los efectos combinados que queráis sumar (como la lluvia de mariposas de seda, el vals sobre las nubes o las chispas frías).\n3. La fecha del evento y la finca o localidad, para incluir el desplazamiento y asistencia presencial de nuestro técnico oficial.\n\nAdemás, podéis conseguir un 10% de descuento registrando vuestro email en la ventana de bienvenida para recibir vuestro código único oficial y certificado en PDF. Si me indicáis la fecha aproximada y el lugar de la celebración, o pulsáis en "Agendar Cita / Evento" de arriba, os preparamos la propuesta exacta en pocos minutos.',
   },
   {
     id: 'tipos-humo-aereo-canones',
@@ -137,15 +137,15 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
     id: 'cupones-descuento-promociones',
     category: 'descuento',
-    title: 'Cupones del 10% de Descuento Promocional',
+    title: 'Obtención del 10% de Descuento Oficial mediante Registro de Email',
     keywords: [
       'descuento', 'descuentos', 'cupon', 'cupón', 'codigo', 'código', 'promocion', 'promoción',
-      'oferta', 'ofertas', 'rebaja', '10%', 'boda10', 'revelacion10', 'fiesta10', 'evento10'
+      'oferta', 'ofertas', 'rebaja', '10%', 'como consigo', 'cómo consigo', 'conseguir', 'registro', 'registrarse'
     ],
     content:
-      'Descuento del 10% directo en presupuesto según celebración: BODA10MAGIA para bodas, REVELACION10MAGIA para revelaciones, FIESTA10MAGIA para fiestas/barra libre y EVENTO10MAGIA para eventos corporativos.',
+      'Para conseguir el 10% de descuento es imprescindible registrarse con el email en la web. No existen códigos fijos abiertos ni públicos. A cada usuario que se registra se le genera un código único e intransferible según su tipo de celebración (con prefijo BODA10-XXX, REVELACION10-XXX o FIESTA10-XXX) junto con su certificado oficial en PDF y verificación en base de datos.',
     directAnswer:
-      '¡Sí! Tenemos activo un cupón oficial del 10% de descuento directo aplicable sobre vuestra propuesta personalizada según el evento:\n\n• Para Bodas Nupciales: Código BODA10MAGIA\n• Para Revelación de Género: Código REVELACION10MAGIA\n• Para Festivales y Fiestas de Cumpleaños: Código FIESTA10MAGIA\n• Para Eventos de Marca / Corporativos: Código EVENTO10MAGIA\n\nSi me indicas vuestros nombres, la fecha estimada y la provincia, o completas el formulario en la pestaña superior "Agendar Cita / Evento", os aplicamos el 10% de descuento de inmediato.',
+      'Para conseguir tu cupón oficial del 10% de descuento es imprescindible registrarte con tu email en nuestra web. No facilitamos códigos genéricos abiertos, ya que a cada persona que se registra se le genera un código único e intransferible para su celebración (con prefijo BODA10-XXX, REVELACION10-XXX o FIESTA10-XXX) junto con su certificado oficial en PDF descargable.\n\n🎁 Pulsa en el botón que tienes abajo para abrir la ventana de registro, indicar tu correo y recibir tu código de descuento oficial al instante.',
   },
 ];
 
