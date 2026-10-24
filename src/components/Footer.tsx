@@ -17,14 +17,56 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-6 text-xs text-neutral-500 font-medium">
             <span>Envíos Península 24/48h</span>
             <span aria-hidden="true">·</span>
-            <span>Dispersión limpia y segura</span>
-            <span aria-hidden="true">·</span>
-            <span>Disipación en segundos</span>
           </div>
         </div>
       </div>
 
-      {/* Main Footer Sitemap */}
+      {/* High Demand Local SEO Coverage Bar */}
+      <div className="bg-neutral-900 text-white py-5 px-6 border-b border-neutral-800">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+            <span className="text-xs font-black uppercase tracking-wider text-rose-400">
+              Lugares de Mayor Demanda & Cobertura Local:
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <a
+              href="#mapa-cobertura"
+              className="px-3 py-1 rounded-xl bg-rose-600/30 hover:bg-rose-600 text-rose-200 hover:text-white border border-rose-500/40 transition-colors font-bold flex items-center gap-1.5"
+            >
+              <span>⭐ Talavera de la Reina</span>
+              <span className="text-[10px] bg-rose-500 px-1.5 py-0.2 rounded-full text-white">HQ</span>
+            </a>
+            <a
+              href="#mapa-cobertura"
+              className="px-3 py-1 rounded-xl bg-neutral-800 hover:bg-amber-600 text-neutral-200 hover:text-white border border-neutral-700 transition-colors font-semibold flex items-center gap-1.5"
+            >
+              <span>🔥 Madrid & Sierra</span>
+              <span className="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded-full">Top Fincas</span>
+            </a>
+            <a
+              href="#mapa-cobertura"
+              className="px-3 py-1 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 hover:text-white border border-neutral-700 transition-colors font-semibold flex items-center gap-1.5"
+            >
+              <span>🏰 Toledo & Cigarrales</span>
+            </a>
+            <a
+              href="#mapa-cobertura"
+              className="px-3 py-1 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 hover:text-white border border-neutral-700 transition-colors font-semibold flex items-center gap-1.5"
+            >
+              <span>📍 Zona Centro (Ávila, Segovia, Guadalajara, Cáceres)</span>
+            </a>
+            <a
+              href="#mapa-cobertura"
+              className="px-3 py-1 rounded-xl bg-neutral-800 hover:bg-emerald-600 text-neutral-200 hover:text-white border border-neutral-700 transition-colors font-semibold flex items-center gap-1.5"
+            >
+              <span>🇪🇸 Toda España</span>
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Col */}

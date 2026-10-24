@@ -7,6 +7,7 @@ import { Configurator } from './components/Configurator';
 import { PacksCatalog } from './components/PacksCatalog';
 import { QualityComparison } from './components/QualityComparison';
 import { CityCoverage } from './components/CityCoverage';
+import { CoverageMapSection } from './components/CoverageMapSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { FaqSection } from './components/FaqSection';
 import { ContactSection } from './components/ContactSection';
@@ -109,7 +110,10 @@ export default function App() {
         {/* 9. Comprehensive FAQs */}
         <FaqSection />
 
-        {/* 10. Contact & Proposal Request */}
+        {/* 10. Strategic Coverage Map & High Demand Local SEO (Talavera, Madrid, Toledo, Zona Centro, España) */}
+        <CoverageMapSection />
+
+        {/* 11. Contact & Proposal Request */}
         <ContactSection />
       </main>
 
