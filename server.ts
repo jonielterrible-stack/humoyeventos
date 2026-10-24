@@ -794,6 +794,38 @@ app.get('/api/discount-leads/check', (req, res) => {
   res.json({ exists: false });
 });
 
+// Endpoint to verify a coupon code entered by client against legitimately registered leads
+app.get('/api/discount-leads/verify-coupon', (req, res) => {
+  const rawCode = String(req.query.code || '').trim().toUpperCase();
+  if (!rawCode) {
+    res.json({ valid: false, message: 'Introduce un código de cupón' });
+    return;
+  }
+
+  // Find exact registered match in database
+  const match = discountLeadsStore.find(
+    (l) => l.couponCode && l.couponCode.trim().toUpperCase() === rawCode
+  );
+
+  if (match) {
+    res.json({
+      valid: true,
+      couponCode: match.couponCode,
+      email: match.email,
+      name: match.name,
+      eventType: match.eventType,
+      discountPercent: 10,
+    });
+    return;
+  }
+
+  // Not found in database
+  res.json({
+    valid: false,
+    message: `El código "${rawCode}" no coincide con ningún cupón oficial registrado en nuestro sistema. Para obtener tu 10% de descuento debes registrar previamente tu correo electrónico.`,
+  });
+});
+
 app.post('/api/discount-leads', async (req, res) => {
   const { email, name, phone, eventType, couponCode } = req.body || {};
   if (!email || !email.includes('@')) {

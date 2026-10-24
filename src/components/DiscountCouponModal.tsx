@@ -109,11 +109,40 @@ export const DiscountCouponModal: React.FC = () => {
     }
   };
 
+  const getLocalRegisteredMap = (): Record<string, string> => {
+    try {
+      const raw = localStorage.getItem('hye_registered_emails');
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  };
+
+  const saveEmailToLocalMap = (cleanEmail: string, code: string) => {
+    try {
+      const map = getLocalRegisteredMap();
+      map[cleanEmail.toLowerCase()] = code;
+      localStorage.setItem('hye_registered_emails', JSON.stringify(map));
+    } catch {
+      // non-blocking
+    }
+  };
+
   const checkEmailInDatabase = async (targetEmail: string) => {
     const cleanEmail = targetEmail.trim().toLowerCase();
     if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
       return false;
     }
+
+    // 1. Inmediata comprobación en caché local del navegador
+    const localMap = getLocalRegisteredMap();
+    if (localMap[cleanEmail]) {
+      setAlreadyRegistered(true);
+      setRegisteredCouponCode(localMap[cleanEmail]);
+      return true;
+    }
+
+    // 2. Comprobación directa en base de datos del servidor
     try {
       const res = await fetch(`/api/discount-leads/check?email=${encodeURIComponent(cleanEmail)}`);
       if (res.ok) {
@@ -121,6 +150,7 @@ export const DiscountCouponModal: React.FC = () => {
         if (data.exists) {
           setAlreadyRegistered(true);
           setRegisteredCouponCode(data.couponCode || null);
+          saveEmailToLocalMap(cleanEmail, data.couponCode || 'BODA10');
           return true;
         }
       }
@@ -139,6 +169,7 @@ export const DiscountCouponModal: React.FC = () => {
   const resetEmailForm = () => {
     setAlreadyRegistered(false);
     setEmail('');
+    setRegisteredCouponCode(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -154,17 +185,41 @@ export const DiscountCouponModal: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Verificación previa en Base de Datos: Bloquear duplicados si el servidor responde
+      // 1. Verificación en base de datos y caché local
       const exists = await checkEmailInDatabase(cleanEmail);
       if (exists) {
         setIsSubmitting(false);
         return;
       }
 
-      // 2. Generar código único dinámico según el tipo de celebración seleccionada:
-      // Boda -> BODA10-XXX | Revelación -> REVELACION10-XXX | Fiesta -> FIESTA10-XXX | Corporativo -> EVENTO10-XXX
+      // 2. Generar código único dinámico según el tipo de celebración
       const generatedCode = generateEventCouponCode(eventType);
       setCouponCode(generatedCode);
+
+      // 3. Registrar directamente en el backend de forma autoritativa
+      const serverRes = await fetch('/api/discount-leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: cleanEmail,
+          name: name.trim() || undefined,
+          phone: phone.trim() || undefined,
+          eventType,
+          couponCode: generatedCode,
+          acceptedTermsAndMarketing: true,
+        }),
+      });
+
+      // Si el servidor detecta que ya existía (código 409)
+      if (serverRes.status === 409) {
+        const duplicateData = await serverRes.json();
+        const existingCode = duplicateData.couponCode || generatedCode;
+        setAlreadyRegistered(true);
+        setRegisteredCouponCode(existingCode);
+        saveEmailToLocalMap(cleanEmail, existingCode);
+        setIsSubmitting(false);
+        return;
+      }
 
       const leadPayload: DiscountLead = {
         email: cleanEmail,
@@ -176,7 +231,11 @@ export const DiscountCouponModal: React.FC = () => {
         createdAt: new Date().toISOString(),
       };
 
-      // 3. Envío multi-transporte inmediato (Notifica a humoyefectos@gmail.com + CC jonielterrible@gmail.com)
+      // 4. Guardar en registro local para que el navegador recuerde que este email ya existe
+      saveEmailToLocalMap(cleanEmail, generatedCode);
+      localStorage.setItem('hye_discount_coupon_claimed', JSON.stringify(leadPayload));
+
+      // 5. Envío multi-transporte a buzón de coordinación
       await dispatchLead({
         tipo: 'cupon_10',
         email: cleanEmail,
@@ -187,10 +246,7 @@ export const DiscountCouponModal: React.FC = () => {
         acceptedTerms: true,
       });
 
-      // 4. Guardar copia local en el navegador
-      localStorage.setItem('hye_discount_coupon_claimed', JSON.stringify(leadPayload));
-
-      // 5. Descarga de PDF client-side (solo auto-descarga en PC para no bloquear navegación en Safari/iPhone)
+      // 6. Descarga de PDF client-side
       const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (!isMobile) {
         try {
@@ -210,6 +266,7 @@ export const DiscountCouponModal: React.FC = () => {
       setIsSubmitted(true);
     } catch (err) {
       console.error('Error procesando lead de cupón:', err);
+      // En caso de fallo de red, permitir que el usuario no quede bloqueado
       setIsSubmitted(true);
     } finally {
       setIsSubmitting(false);
@@ -300,10 +357,27 @@ export const DiscountCouponModal: React.FC = () => {
                   </div>
                 </div>
 
+                {registeredCouponCode && (
+                  <div className="pt-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(registeredCouponCode);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      className="w-full py-2.5 px-3 rounded-xl bg-rose-950/70 hover:bg-rose-900/90 text-rose-200 border border-rose-500/60 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-rose-400" />
+                      <span>{copied ? '¡Código Copiado al Portapapeles!' : `Copiar mi código asignado (${registeredCouponCode})`}</span>
+                    </button>
+                  </div>
+                )}
+
                 {/* BOTÓN WHATSAPP DESTACADO */}
                 <a
                   href={`https://wa.me/34600082462?text=${encodeURIComponent(
-                    `¡Hola Humo Y Efectos! 👋 Mi correo ${email} ya figura como registrado en vuestra web pero necesito asistencia con mi cupón del 10% de descuento o consultar presupuesto para mi evento.`
+                    `¡Hola Humo Y Efectos! 👋 Mi correo ${email} ya figura como registrado en vuestra web pero necesito asistencia con mi cupón del 10% de descuento (${registeredCouponCode || 'código'}) o consultar presupuesto para mi evento.`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
