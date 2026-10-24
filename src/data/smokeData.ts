@@ -5,6 +5,9 @@ export interface SmokePack {
   category: 'bodas' | 'revelacion_genero' | 'humo_aereo' | 'confeti' | 'humo_bajo' | 'chispas_frias' | 'sonido_luces' | 'bengalas';
   badge?: string;
   highlight?: boolean;
+  image: string;
+  imageAlt: string;
+  imageTitle: string;
   height: string;
   duration: string;
   tubesRecommendation: string;
@@ -152,6 +155,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: 'Un solo disparo sincronizado de alto impacto que abre en el cielo',
     category: 'humo_aereo',
     badge: 'IDEAL IGLESIAS & ALTARES',
+    image: '/assets/services/pack-salida-ceremonia-humo-colores.jpg',
+    imageAlt:
+      'Boda al aire libre con los novios saliendo de la ceremonia y columnas verticales de humo de colores a 15 metros detrás de ellos en Talavera de la Reina, Madrid y España',
+    imageTitle:
+      'Pack Salida de Ceremonia con Cañones de Humo Aéreo de Colores para Bodas | Humo Y Efectos',
     tubesRecommendation: 'De 2 a 4 Cañones sincronizados',
     height: '12 - 15 metros de altura',
     duration: 'Disparo instantáneo (abre arriba y se disipa en segundos)',
@@ -175,6 +183,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'humo_aereo',
     highlight: true,
     badge: 'MÁS ELEGIDO POR NOVIOS',
+    image: '/assets/services/pack-entrada-nupcial-humo-colores.jpg',
+    imageAlt:
+      'Batería oficial de cañones de humo aéreo vertical en 10 colores homologados CE Clase T1 para entrada triunfal de novios en finca o cóctel',
+    imageTitle:
+      'Pack Entrada Nupcial Signature con Cañones de Humo Aéreo Multicolor | Humo Y Efectos',
     tubesRecommendation: 'De 4 a 6 Cañones en abanico',
     height: '15 metros de altura vertical',
     duration: 'Disparo instantáneo simultáneo de alto impacto',
@@ -197,6 +210,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'confeti',
     highlight: true,
     badge: 'ESPECIAL BAILE & CEREMONIA',
+    image: '/assets/services/pack-confeti-romantico-mariposas-blanco.jpg',
+    imageAlt:
+      'Pareja de novios bailando rodeada de una lluvia romántica de mariposas blancas de seda y confeti blanco biodegradable en su boda',
+    imageTitle:
+      'Pack Cañones de Confeti Romántico (Mariposas & Papel Blanco) para Bodas | Humo Y Efectos',
     tubesRecommendation: 'De 2 a 4 Cañones de disparo eléctrico/neumático',
     height: '6 a 10 metros de altura',
     duration: 'Efecto de vuelo lento en suspensión (30 a 60 segundos)',
@@ -218,6 +236,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: 'Estallido multicolor y metalizado en oro y plata para momentos cumbre',
     category: 'confeti',
     badge: 'SUBIDÓN DE FIESTA',
+    image: '/assets/services/pack-confeti-fiesta-barra-libre-multicolor.jpg',
+    imageAlt:
+      'Celebración nupcial con los novios bailando rodeados de invitados y una lluvia abundante de confeti multicolor y serpentinas en la fiesta y barra libre',
+    imageTitle:
+      'Pack Cañones de Confeti Fiesta & Barra Libre Multicolor para Bodas y Eventos | Humo Y Efectos',
     tubesRecommendation: '2 a 6 Cañones de gran alcance',
     height: '8 a 12 metros de dispersión',
     duration: 'Estallido instantáneo con lluvia envolvente',
@@ -239,6 +262,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'humo_bajo',
     highlight: true,
     badge: '100% VAPOR LIMPIO',
+    image: '/assets/services/pack-humo-bajo-baile-nupcial-nubes.jpg',
+    imageAlt:
+      'Novios bailando el vals nupcial sobre una nube densa de humo blanco bajo a ras de suelo con iluminación elegante azul, violeta y cálida',
+    imageTitle:
+      'Pack Máquina de Humo Bajo y Niebla Baja para el Baile Nupcial (Vals sobre las Nubes) | Humo Y Efectos',
     tubesRecommendation: '1 o 2 Máquinas profesionales de hielo seco de alta potencia',
     height: 'Alfombra a ras de suelo (no sube de las rodillas)',
     duration: 'Vals nupcial completo (3 a 5 minutos)',
@@ -261,6 +289,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'chispas_frias',
     highlight: true,
     badge: 'FUEGO FRÍO 100% SEGURO',
+    image: '/assets/services/pack-fuentes-chispas-frias-sparkulars.jpg',
+    imageAlt:
+      'Novios celebrando su boda entre seis fuentes electrónicas de chispas frías Sparkulars que iluminan el momento sin quemar ni producir humo',
+    imageTitle:
+      'Pack Fuentes de Chispas Frías (Sparkulars) Homologadas para Bodas y Eventos | Humo Y Efectos',
     tubesRecommendation: 'De 2 a 8 Fuentes electrónicas sincronizadas',
     height: 'Regulable de 2 a 5 metros',
     duration: 'Disparos modulados por ráfagas para momentos clave',
@@ -281,6 +314,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: 'Equipamiento completo de sonido para ceremonia, banquete y fiesta con DJ',
     category: 'sonido_luces',
     badge: 'PRODUCCIÓN INTEGRAL',
+    image: '/assets/services/sonido-iluminacion.jpg',
+    imageAlt:
+      'Cabina de DJ profesional iluminada con controladora, altavoces PA y luces LED para pista de baile en bodas y eventos',
+    imageTitle:
+      'Pack Discoteca Móvil, Sonido Profesional, Iluminación LED y DJ para Bodas | Humo Y Efectos',
     tubesRecommendation: 'Equipos PA de alta gama + Puente de luces + DJ',
     height: 'Puente de iluminación regulable a 3-4 metros',
     duration: 'Cobertura del evento (desde ceremonia hasta fin de fiesta)',
@@ -303,6 +341,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'revelacion_genero',
     highlight: true,
     badge: 'TOP VIRAL PAPÁS',
+    image: '/assets/services/disparador-tnt-revelacion-real.jpg',
+    imageAlt:
+      'Caja detonadora TNT retro con palanca de empuje y decoración Niño o Niña para revelación de género sorpresa con humo rosa o azul',
+    imageTitle:
+      'Pack Revelación de Género con Disparador TNT Retro Sorpresa | Humo Y Efectos',
     tubesRecommendation: 'De 2 a 4 Cañones sorpresa + Caja TNT',
     height: '15 metros de altura hacia el cielo',
     duration: 'Disparo instantáneo con palanca de detonador vintage',
@@ -324,6 +367,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: '¿Niño o niña? La sorpresa revelada al pulsar el botón secreto inalámbrico',
     category: 'revelacion_genero',
     badge: '100% SECRETO Y CONFIDENCIAL',
+    image: '/assets/services/pack-revelacion-genero-clasico-rosa-azul.jpg',
+    imageAlt:
+      'Pareja celebrando con emoción una revelación de género al aire libre con columnas verticales de humo rosa y azul detrás de ellos',
+    imageTitle:
+      'Pack Revelación de Género Clásico con Cañones de Humo Rosa y Azul | Humo Y Efectos',
     tubesRecommendation: 'De 2 a 4 Cañones sorpresa',
     height: '15 metros de altura',
     duration: 'Disparo instantáneo que abre en el cielo',
@@ -345,6 +393,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: 'La experiencia completa que cubre todos los momentos cumbres del día',
     category: 'bodas',
     badge: 'TODO INCLUIDO',
+    image: '/assets/services/novios-baile-nubes-humo-bajo.jpg',
+    imageAlt:
+      'Celebración de boda integral combinando baile de los novios sobre niebla baja y fuentes de chispas frías Sparkulars rodeados de sus invitados',
+    imageTitle:
+      'Pack Boda Total 360° (Humo Aéreo + Confeti + Niebla Baja + Chispas Frías) | Humo Y Efectos',
     tubesRecommendation: 'Cañones Aéreos + Confeti + Niebla Baja + Chispas Frías + Sonido',
     height: '15m Aéreo + Nube Suelo + Chispas 4m + Lluvia Confeti',
     duration: 'Disparos coordinados por momentos clave',
@@ -367,6 +420,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: 'Efecto envolvente con anilla Wire-Pull de ignición fría sin mechero',
     category: 'bengalas',
     badge: 'FOTOGRAFÍA CREATIVA',
+    image: '/assets/services/pack-bengalas-humo-mano-colores.jpg',
+    imageAlt:
+      'Efecto envolvente de bengala profesional de humo de color con ignición fría por anilla para sesiones fotográficas de novios e invitados',
+    imageTitle:
+      'Pack Bengalas Profesionales de Mano para Fotografía de Bodas y Eventos | Humo Y Efectos',
     tubesRecommendation: 'Pack de 10 o 20 unidades',
     height: 'A ras de suelo / Fotos de grupo',
     duration: 'Efecto foto envolvente',

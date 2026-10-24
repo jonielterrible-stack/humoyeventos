@@ -117,61 +117,24 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
               badgeColor = 'text-rose-600';
             }
 
-            // Dedicated photo for every single pack with SEO alt and titles
-            let imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
-            let imageAlt = pack.name;
-            let imageBadge = 'Efecto Homologado CE';
-
-            if (pack.id === 'pack-revelacion-tnt') {
-              imageSrc = assetUrl('/assets/services/disparador-tnt-revelacion-real.jpg');
-              imageAlt = 'Pedestal de Madera Blanco con Disparador TNT Retro para Revelación de Género sorpresa';
-              imageBadge = 'Pedestal TNT Original para Papás';
-            } else if (pack.id === 'pack-revelacion-mando') {
-              imageSrc = assetUrl('/assets/services/pack-revelacion-rosa-azul.jpg');
-              imageAlt = 'Revelación de género sorpresa con columnas de humo vertical rosa o azul';
-              imageBadge = '100% Secreto y Sorpresa (Rosa o Azul)';
-            } else if (pack.id === 'pack-salida-ceremonia') {
-              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
-              imageAlt = 'Disparo instantáneo vertical de humo aéreo para salida de ceremonia de novios';
-              imageBadge = 'Disparo Instantáneo a 15m';
-            } else if (pack.id === 'pack-entrada-triunfal') {
-              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
-              imageAlt = 'Apertura en abanico multicolor de humo aéreo para entrada nupcial en finca';
-              imageBadge = 'Abanico Cúpula de Colores';
-            } else if (pack.id === 'pack-confeti-mariposas-blanco' || pack.id === 'pack-confeti-fiesta-colores' || isConfeti) {
-              // User official image for Confeti (Multicolor y Mariposas)
-              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0018_9dfc7d92.jpg');
-              imageAlt = 'Cañones de confeti multicolor y confeti de mariposas de seda para bodas';
-              imageBadge = 'Multicolor & Mariposas Homologadas';
-            } else if (pack.id === 'pack-chispas-frias-sparkulars' || isChispas) {
-              // User official image for Chispas Frías (Fuentes Sparkulars)
-              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0017_4f707a65.jpg');
-              imageAlt = 'Máquinas de chispas frías Sparkulars sin humo ni quemaduras para bodas';
-              imageBadge = 'Fuego Frío Inocuo (Titanio)';
-            } else if (pack.id === 'pack-humo-bajo-nubes' || isHumoBajo) {
-              // User official image for Humo Bajo / Niebla Baja
-              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0019_e63127eb.jpg');
-              imageAlt = 'Máquinas de humo bajo y niebla baja para vals sobre las nubes con hielo seco';
-              imageBadge = '100% Vapor Limpio · No Mancha';
-            } else if (pack.id === 'pack-sonido-iluminacion-discoteca' || isSonido) {
-              imageSrc = assetUrl('/assets/services/sonido-iluminacion.jpg');
-              imageAlt = 'Sonido profesional PA, iluminación LED y discoteca móvil con DJ para bodas';
-              imageBadge = 'Sonido PA & Luces Robotizadas';
-            } else if (pack.id === 'pack-boda-total') {
-              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
-              imageAlt = 'Pack Boda Total 360° con humo aéreo, confeti, niebla baja y chispas frías';
-              imageBadge = 'Experiencia Total 360°';
-            } else if (pack.id === 'pack-bengalas-humo-mano') {
-              imageSrc = assetUrl('/assets/services/pack-humo-aereo-ceremonia.jpg');
-              imageAlt = 'Bengalas profesionales de humo con anilla Wire-Pull para fotografía';
-              imageBadge = 'Sesión Fotográfica Dinámica';
-            }
+            const imageSrc = assetUrl(pack.image);
+            const imageAlt = pack.imageAlt || `${pack.name} - Efectos especiales para bodas y eventos Humo Y Efectos`;
+            const imageTitle = pack.imageTitle || `${pack.name} | Humo Y Efectos`;
+            // For the vertical TNT pedestal photo, center slightly lower so the TNT box and balloon arch both appear cleanly
+            const objectPositionClass =
+              pack.id === 'pack-revelacion-tnt' ? 'object-cover object-[center_65%]' : 'object-cover object-center';
 
             return (
-              <div
+              <article
                 key={pack.id}
+                id={pack.id}
+                itemScope
+                itemType="https://schema.org/Product"
                 className={`relative flex flex-col justify-between rounded-3xl p-7 transition-all ${cardTheme}`}
               >
+                <meta itemProp="brand" content="Humo Y Efectos" />
+                <meta itemProp="category" content={pack.category} />
+
                 {/* Header Badge */}
                 {pack.badge && (
                   <div className="mb-4">
@@ -182,7 +145,10 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                 )}
 
                 <div>
-                  <h3 className="text-xl font-bold text-neutral-900 font-display mb-1.5 flex items-center gap-2">
+                  <h3
+                    itemProp="name"
+                    className="text-xl font-bold text-neutral-900 font-display mb-1.5 flex items-center gap-2"
+                  >
                     {isTnt && <Bomb className="w-5 h-5 text-amber-600 shrink-0" />}
                     {isConfeti && <PartyPopper className="w-5 h-5 text-fuchsia-600 shrink-0" />}
                     {isChispas && <Flame className="w-5 h-5 text-amber-600 shrink-0" />}
@@ -190,19 +156,33 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                     {isSonido && <Speaker className="w-5 h-5 text-indigo-600 shrink-0" />}
                     <span>{pack.name}</span>
                   </h3>
-                  <p className="text-xs text-neutral-600 min-h-[34px] leading-relaxed mb-4">{pack.tagline}</p>
+                  <p itemProp="description" className="text-xs text-neutral-600 min-h-[34px] leading-relaxed mb-4">
+                    {pack.tagline}
+                  </p>
 
-                  {/* Photo with optimized clean uncropped display */}
+                  {/* Uniform Promotional Image Container with object-fit: cover and SEO ImageObject microdata */}
                   {imageSrc && (
-                    <div className="relative mb-4 rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center group">
+                    <figure
+                      itemProp="image"
+                      itemScope
+                      itemType="https://schema.org/ImageObject"
+                      className="relative mb-5 h-56 sm:h-60 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-900 shadow-xs group"
+                    >
                       <img
                         src={imageSrc}
                         alt={imageAlt}
-                        title={imageAlt}
-                        className="w-full h-auto max-h-52 object-contain block group-hover:scale-101 transition-transform duration-300"
+                        title={imageTitle}
+                        width={800}
+                        height={600}
                         loading="lazy"
+                        decoding="async"
+                        itemProp="contentUrl"
+                        className={`w-full h-full ${objectPositionClass} block group-hover:scale-105 transition-transform duration-500`}
                       />
-                    </div>
+                      <meta itemProp="name" content={imageTitle} />
+                      <meta itemProp="description" content={imageAlt} />
+                      <figcaption className="sr-only">{imageAlt}</figcaption>
+                    </figure>
                   )}
 
                   {/* Height and Duration Chips */}
@@ -251,7 +231,7 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                     <span>Consultar por WhatsApp</span>
                   </a>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>

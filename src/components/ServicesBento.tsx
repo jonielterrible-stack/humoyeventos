@@ -264,6 +264,18 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                     <span className="text-xs font-mono font-bold text-amber-600">02. REVELACIÓN GÉNERO</span>
                     <Bomb className="w-5 h-5 text-amber-600" />
                   </div>
+                  <div className="mb-4 h-48 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-900">
+                    <img
+                      src={assetUrl('/assets/services/disparador-tnt-revelacion-real.jpg')}
+                      alt="Caja detonadora TNT retro con palanca para revelación de género con humo rosa o azul en Talavera, Madrid y España"
+                      title="Pack Revelación de Género con Disparador TNT Retro - Humo Y Efectos"
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-[center_65%] group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <h4 className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-amber-600 transition-colors font-display">
                     Disparador TNT Retro para Papás
                   </h4>
@@ -300,6 +312,18 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-mono font-bold text-neutral-400">03. REPORTAJES FOTOGRÁFICOS</span>
                     <Flame className="w-5 h-5 text-rose-500" />
+                  </div>
+                  <div className="mb-4 h-48 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-900">
+                    <img
+                      src={assetUrl('/assets/services/pack-bengalas-humo-mano-colores.jpg')}
+                      alt="Bengalas profesionales de humo de mano en colores para sesiones fotográficas de bodas y eventos"
+                      title="Pack Bengalas Profesionales de Mano para Fotografía - Humo Y Efectos"
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                   <h4 className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-rose-600 transition-colors font-display">
                     Bengalas de Humo de Mano
