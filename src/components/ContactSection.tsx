@@ -79,8 +79,7 @@ ${formState.notes ? `· Notas: ${formState.notes}\n` : ''}
             </h2>
 
             <p className="text-sm text-neutral-600 leading-relaxed">
-              Trabajamos con un cupo limitado de eventos por fin de semana en toda España para garantizar el asesoramiento
-              directo con vuestro fotógrafo y videógrafo en el disparo instantáneo.
+              Con sede central en <strong>Talavera de la Reina (Toledo)</strong> y base técnica directa para <strong>Madrid y Zona Centro</strong>, trabajamos con un cupo limitado de eventos por fin de semana en toda España para garantizar el asesoramiento presencial con vuestro fotógrafo y videógrafo.
             </p>
 
             <div className="space-y-4 pt-4 border-t border-neutral-100 text-xs text-neutral-700">

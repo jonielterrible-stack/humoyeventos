@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { SMOKE_PACKS, SmokePack } from '../data/smokeData';
+import { assetUrl } from '../utils/assetUrl';
 
 interface PacksCatalogProps {
   onSelectPack: (pack: SmokePack) => void;
@@ -23,8 +24,8 @@ type PackFilterTab =
   | 'all'
   | 'humo_aereo'
   | 'confeti'
-  | 'humo_bajo'
   | 'chispas_frias'
+  | 'humo_bajo'
   | 'sonido_luces'
   | 'revelacion_genero';
 
@@ -53,19 +54,18 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
               Catálogo de Packs por Efecto y Servicio
             </h2>
             <p className="text-sm sm:text-base text-neutral-600 mt-2">
-              Elige tu pack ideal: 1. Cañones de humo aéreo, 2. Confeti romántico y mariposas, 3. Humo bajo sobre las nubes,
-              4. Chispas frías, o 5. Sonido profesional con discoteca móvil.
+              Elige tu pack ideal: <strong>1. Cañones de humo aéreo</strong>, <strong>2. Confeti (multicolor y mariposas)</strong>, <strong>3. Fuentes de chispas frías</strong>, <strong>4. Humo bajo sobre las nubes</strong>, o <strong>5. Sonido profesional con DJ</strong>.
             </p>
           </div>
 
-          {/* Filter tabs */}
+          {/* Filter tabs strictly ordered 1 to 5 */}
           <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-white rounded-2xl border border-neutral-200 shadow-xs shrink-0 max-w-full">
             {[
               { id: 'all', label: 'Todos' },
               { id: 'humo_aereo', label: '1. Humo Aéreo' },
               { id: 'confeti', label: '2. Confeti' },
-              { id: 'humo_bajo', label: '3. Humo Bajo' },
-              { id: 'chispas_frias', label: '4. Chispas Frías' },
+              { id: 'chispas_frias', label: '3. Chispas Frías' },
+              { id: 'humo_bajo', label: '4. Humo Bajo' },
               { id: 'sonido_luces', label: '5. Sonido & DJ' },
               { id: 'revelacion_genero', label: 'Revelación TNT' },
             ].map((tab) => (
@@ -90,8 +90,8 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
             const isHighlight = pack.highlight;
             const isTnt = pack.id === 'pack-revelacion-tnt';
             const isConfeti = pack.category === 'confeti';
-            const isHumoBajo = pack.category === 'humo_bajo';
             const isChispas = pack.category === 'chispas_frias';
+            const isHumoBajo = pack.category === 'humo_bajo';
             const isSonido = pack.category === 'sonido_luces';
 
             let cardTheme = 'border-neutral-200 hover:border-neutral-300 bg-white';
@@ -103,12 +103,12 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
             } else if (isConfeti) {
               cardTheme = 'border-2 border-fuchsia-400 shadow-xl shadow-fuchsia-500/10 bg-fuchsia-50/20';
               badgeColor = 'text-fuchsia-700';
-            } else if (isHumoBajo) {
-              cardTheme = 'border-2 border-sky-400 shadow-xl shadow-sky-500/10 bg-sky-50/20';
-              badgeColor = 'text-sky-700';
             } else if (isChispas) {
               cardTheme = 'border-2 border-amber-400 shadow-xl shadow-amber-500/10 bg-amber-50/20';
               badgeColor = 'text-amber-700';
+            } else if (isHumoBajo) {
+              cardTheme = 'border-2 border-sky-400 shadow-xl shadow-sky-500/10 bg-sky-50/20';
+              badgeColor = 'text-sky-700';
             } else if (isSonido) {
               cardTheme = 'border-2 border-indigo-400 shadow-xl shadow-indigo-500/10 bg-indigo-50/20';
               badgeColor = 'text-indigo-700';
@@ -117,71 +117,54 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
               badgeColor = 'text-rose-600';
             }
 
-            // Dedicated photo for every single pack
-            let imageSrc = '/assets/services/humo-aereo.jpg';
+            // Dedicated photo for every single pack with SEO alt and titles
+            let imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
             let imageAlt = pack.name;
             let imageBadge = 'Efecto Homologado CE';
 
             if (pack.id === 'pack-revelacion-tnt') {
-              imageSrc = '/assets/services/disparador-tnt-revelacion-real.jpg';
-              imageAlt = 'Pedestal de Madera Blanco con Disparador TNT Retro para Revelación de Género';
+              imageSrc = assetUrl('/assets/services/disparador-tnt-revelacion-real.jpg');
+              imageAlt = 'Pedestal de Madera Blanco con Disparador TNT Retro para Revelación de Género sorpresa';
               imageBadge = 'Pedestal TNT Original para Papás';
             } else if (pack.id === 'pack-revelacion-mando') {
-              imageSrc = '/assets/services/pack-revelacion-rosa-azul.jpg';
+              imageSrc = assetUrl('/assets/services/pack-revelacion-rosa-azul.jpg');
               imageAlt = 'Revelación de género sorpresa con columnas de humo vertical rosa o azul';
               imageBadge = '100% Secreto y Sorpresa (Rosa o Azul)';
             } else if (pack.id === 'pack-salida-ceremonia') {
-              imageSrc = '/assets/services/pack-humo-aereo-ceremonia.jpg';
-              imageAlt = 'Disparo instantáneo vertical de humo aéreo para salida de ceremonia';
+              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
+              imageAlt = 'Disparo instantáneo vertical de humo aéreo para salida de ceremonia de novios';
               imageBadge = 'Disparo Instantáneo a 15m';
             } else if (pack.id === 'pack-entrada-triunfal') {
-              imageSrc = '/assets/services/pack-humo-aereo-entrada.jpg';
-              imageAlt = 'Apertura en abanico multicolor de humo aéreo para entrada nupcial';
+              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
+              imageAlt = 'Apertura en abanico multicolor de humo aéreo para entrada nupcial en finca';
               imageBadge = 'Abanico Cúpula de Colores';
-            } else if (pack.id === 'pack-confeti-mariposas-blanco') {
-              imageSrc = '/assets/services/canones-confeti.jpg';
-              imageAlt = 'Cañones de confeti con lluvia de mariposas de seda y nieve blanca';
-              imageBadge = 'Mariposas de Seda & Nieve Pura';
-            } else if (pack.id === 'pack-confeti-fiesta-colores') {
-              imageSrc = '/assets/services/canones-confeti.jpg';
-              imageAlt = 'Lluvia de confeti multicolor y metalizado para apertura de fiesta';
-              imageBadge = 'Lluvia Fiesta Multicolor & Metalizada';
-            } else if (pack.id === 'pack-humo-bajo-nubes') {
-              imageSrc = '/assets/services/novios-baile-nubes-humo-bajo.jpg';
-              imageAlt = 'Vals nupcial sobre las nubes con niebla baja de hielo seco';
-              imageBadge = '100% Vapor Limpio · No Mancha';
-            } else if (pack.id === 'pack-chispas-frias-sparkulars') {
-              imageSrc = '/assets/services/chispas-frias.jpg';
-              imageAlt = 'Fuentes de chispas frías Sparkulars sin humo ni olor';
+            } else if (pack.id === 'pack-confeti-mariposas-blanco' || pack.id === 'pack-confeti-fiesta-colores' || isConfeti) {
+              // User official image for Confeti (Multicolor y Mariposas)
+              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0018_9dfc7d92.jpg');
+              imageAlt = 'Cañones de confeti multicolor y confeti de mariposas de seda para bodas';
+              imageBadge = 'Multicolor & Mariposas Homologadas';
+            } else if (pack.id === 'pack-chispas-frias-sparkulars' || isChispas) {
+              // User official image for Chispas Frías (Fuentes Sparkulars)
+              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0017_4f707a65.jpg');
+              imageAlt = 'Máquinas de chispas frías Sparkulars sin humo ni quemaduras para bodas';
               imageBadge = 'Fuego Frío Inocuo (Titanio)';
-            } else if (pack.id === 'pack-sonido-iluminacion-discoteca') {
-              imageSrc = '/assets/services/sonido-iluminacion.jpg';
-              imageAlt = 'Sonido profesional PA, iluminación LED y discoteca móvil con DJ';
+            } else if (pack.id === 'pack-humo-bajo-nubes' || isHumoBajo) {
+              // User official image for Humo Bajo / Niebla Baja
+              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0019_e63127eb.jpg');
+              imageAlt = 'Máquinas de humo bajo y niebla baja para vals sobre las nubes con hielo seco';
+              imageBadge = '100% Vapor Limpio · No Mancha';
+            } else if (pack.id === 'pack-sonido-iluminacion-discoteca' || isSonido) {
+              imageSrc = assetUrl('/assets/services/sonido-iluminacion.jpg');
+              imageAlt = 'Sonido profesional PA, iluminación LED y discoteca móvil con DJ para bodas';
               imageBadge = 'Sonido PA & Luces Robotizadas';
             } else if (pack.id === 'pack-boda-total') {
-              imageSrc = '/assets/services/novios-baile-nubes-humo-bajo.jpg';
+              imageSrc = assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg');
               imageAlt = 'Pack Boda Total 360° con humo aéreo, confeti, niebla baja y chispas frías';
               imageBadge = 'Experiencia Total 360°';
             } else if (pack.id === 'pack-bengalas-humo-mano') {
-              imageSrc = '/assets/services/pack-humo-aereo-ceremonia.jpg';
-              imageAlt = 'Bengalas profesionales de humo con anilla Wire-Pull para fotos';
+              imageSrc = assetUrl('/assets/services/pack-humo-aereo-ceremonia.jpg');
+              imageAlt = 'Bengalas profesionales de humo con anilla Wire-Pull para fotografía';
               imageBadge = 'Sesión Fotográfica Dinámica';
-            } else if (isConfeti) {
-              imageSrc = '/assets/services/canones-confeti.jpg';
-              imageAlt = 'Cañones de confeti y mariposas para bodas';
-              imageBadge = 'Confeti Homologado CE';
-            } else if (isHumoBajo) {
-              imageSrc = '/assets/services/novios-baile-nubes-humo-bajo.jpg';
-              imageAlt = 'Niebla baja de hielo seco';
-              imageBadge = '100% Vapor Limpio';
-            } else if (isChispas) {
-              imageSrc = '/assets/services/chispas-frias.jpg';
-              imageAlt = 'Fuentes de chispas frías Sparkulars';
-              imageBadge = 'Fuego Frío Titanio';
-            } else if (isSonido) {
-              imageSrc = '/assets/services/sonido-iluminacion.jpg';
-              imageAlt = 'Sonido e iluminación profesional';
-              imageBadge = 'Producción Integral';
             }
 
             return (
@@ -202,85 +185,67 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                   <h3 className="text-xl font-bold text-neutral-900 font-display mb-1.5 flex items-center gap-2">
                     {isTnt && <Bomb className="w-5 h-5 text-amber-600 shrink-0" />}
                     {isConfeti && <PartyPopper className="w-5 h-5 text-fuchsia-600 shrink-0" />}
-                    {isHumoBajo && <CloudRain className="w-5 h-5 text-sky-600 shrink-0" />}
                     {isChispas && <Flame className="w-5 h-5 text-amber-600 shrink-0" />}
+                    {isHumoBajo && <CloudRain className="w-5 h-5 text-sky-600 shrink-0" />}
                     {isSonido && <Speaker className="w-5 h-5 text-indigo-600 shrink-0" />}
                     <span>{pack.name}</span>
                   </h3>
                   <p className="text-xs text-neutral-600 min-h-[34px] leading-relaxed mb-4">{pack.tagline}</p>
 
-                  {/* Photo if available */}
+                  {/* Photo with optimized clean uncropped display */}
                   {imageSrc && (
-                    <div className="relative mb-4 rounded-2xl overflow-hidden border border-neutral-200/80 shadow-sm group">
+                    <div className="relative mb-4 rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center group">
                       <img
                         src={imageSrc}
                         alt={imageAlt}
-                        className="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        title={imageAlt}
+                        className="w-full h-auto max-h-52 object-contain block group-hover:scale-101 transition-transform duration-300"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent flex items-end p-3">
-                        <span className="text-[11px] font-bold text-white flex items-center gap-1.5">
-                          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                          <span>{imageBadge}</span>
-                        </span>
-                      </div>
                     </div>
                   )}
 
-                  {/* Recommendation row */}
-                  <div className="p-3 bg-neutral-50 rounded-2xl border border-neutral-100 mb-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-bold text-neutral-800">
-                      <Layers className="w-4 h-4 text-rose-500 shrink-0" />
-                      <span>{pack.tubesRecommendation}</span>
+                  {/* Height and Duration Chips */}
+                  <div className="grid grid-cols-2 gap-2 mb-6 text-xs text-neutral-600 bg-neutral-50 p-3 rounded-2xl border border-neutral-100">
+                    <div>
+                      <span className="block text-[10px] font-bold text-neutral-400 uppercase">Alcance / Altura</span>
+                      <span className="font-semibold text-neutral-900">{pack.height}</span>
                     </div>
-                    <span className="text-[11px] font-bold text-emerald-700 shrink-0">
-                      A medida
-                    </span>
-                  </div>
-
-                  {/* Quick specs */}
-                  <div className="grid grid-cols-2 gap-2 py-3 text-xs text-neutral-700 border-b border-neutral-100">
-                    <div className="flex items-center gap-1.5">
-                      <ArrowUp className="w-4 h-4 text-rose-500 shrink-0" />
-                      <span className="font-medium">{pack.height}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Zap className="w-4 h-4 text-amber-500 shrink-0" />
-                      <span className="font-medium">Homologado CE</span>
+                    <div>
+                      <span className="block text-[10px] font-bold text-neutral-400 uppercase">Duración</span>
+                      <span className="font-semibold text-neutral-900">{pack.duration}</span>
                     </div>
                   </div>
 
-                  {/* What's included checklist */}
-                  <div className="py-4 space-y-2.5">
-                    <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-wider">
-                      Qué incluye este pack:
-                    </p>
-                    {pack.includes.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-neutral-700">
-                        <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span className="leading-tight">{item}</span>
-                      </div>
-                    ))}
+                  {/* Includes list */}
+                  <div className="space-y-2 mb-6">
+                    <p className="text-xs font-bold text-neutral-900 uppercase tracking-wider">Incluye:</p>
+                    <ul className="space-y-1.5">
+                      {pack.includes.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-neutral-600">
+                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
-                {/* Bottom CTA buttons */}
-                <div className="pt-6 border-t border-neutral-100 mt-6 flex flex-col gap-2.5">
+                <div className="space-y-2 pt-4 border-t border-neutral-100">
                   <button
                     onClick={() => onSelectPack(pack)}
-                    className="w-full py-3 bg-neutral-900 hover:bg-black text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full py-3 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <ShoppingBag className="w-4 h-4" />
-                    <span>Configurar Este Pack</span>
+                    <span>Personalizar este Pack</span>
                   </button>
-
                   <a
-                    href={`https://wa.me/34600082462?text=Hola%20Humo%20Y%20Efectos,%20quiero%20consultar%20disponibilidad%20y%20presupuesto%20para%20el%20${encodeURIComponent(
-                      pack.name
-                    )}.`}
+                    href={`https://wa.me/34600082462?text=${encodeURIComponent(
+                      `¡Hola Humo Y Efectos! 👋 Quiero consultar presupuesto y disponibilidad para el ${pack.name}.`
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                    className="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-emerald-200"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>Consultar por WhatsApp</span>

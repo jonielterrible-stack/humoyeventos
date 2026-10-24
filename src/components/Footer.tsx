@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
               De 1 a 9 cañones con apertura en altura y disipación limpia sin niebla persistente.
             </p>
             <p className="text-[11px] text-neutral-400">
-              Sede Asturias & Delegación Zaragoza · Cobertura y envíos a toda España.
+              Sede Central en Talavera de la Reina (Toledo) · Servicio Directo en Madrid, Zona Centro y Toda España.
             </p>
           </div>
 
@@ -52,17 +52,17 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#servicios" className="hover:text-fuchsia-600 transition-colors">
-                  2. Cañones de Confeti & Mariposas
-                </a>
-              </li>
-              <li>
-                <a href="#servicios" className="hover:text-sky-600 transition-colors">
-                  3. Máquinas de Humo Bajo (Hielo Seco)
+                  2. Cañones de Confeti (Multicolor & Mariposas)
                 </a>
               </li>
               <li>
                 <a href="#servicios" className="hover:text-amber-600 transition-colors">
-                  4. Fuentes de Chispas Frías
+                  3. Fuentes de Chispas Frías (Sparkulars)
+                </a>
+              </li>
+              <li>
+                <a href="#servicios" className="hover:text-sky-600 transition-colors">
+                  4. Máquinas de Humo Bajo (Hielo Seco)
                 </a>
               </li>
               <li>
@@ -84,17 +84,22 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-neutral-600">
               <li>
                 <a href="#ciudades" className="hover:text-rose-600 transition-colors">
-                  Humo Aéreo Asturias (Oviedo y Gijón)
+                  Humo Aéreo Talavera de la Reina (Sede Central)
                 </a>
               </li>
               <li>
                 <a href="#ciudades" className="hover:text-rose-600 transition-colors">
-                  Humo Aéreo Madrid y Fincas
+                  Humo Aéreo Madrid y Fincas de la Sierra
                 </a>
               </li>
               <li>
                 <a href="#ciudades" className="hover:text-rose-600 transition-colors">
-                  Humo Aéreo Zaragoza y Aragón
+                  Humo Aéreo Toledo y Cigarrales
+                </a>
+              </li>
+              <li>
+                <a href="#ciudades" className="hover:text-rose-600 transition-colors">
+                  Efectos Especiales Zona Centro y España
                 </a>
               </li>
               <li>

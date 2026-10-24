@@ -49,9 +49,9 @@ const QUICK_QUESTIONS = [
 
 const EFFECT_OPTIONS = [
   '1. Humo Aéreo Vertical (1-9 cañones)',
-  '2. Cañones de Confeti (Mariposas / Blanco / Colores)',
-  '3. Máquina de Niebla Baja (Vals sobre las Nubes)',
-  '4. Fuentes de Chispas Frías (Sparkulars)',
+  '2. Cañones de Confeti (Multicolor y Mariposas)',
+  '3. Fuentes de Chispas Frías (Sparkulars)',
+  '4. Máquina de Niebla Baja (Vals sobre las Nubes)',
   '5. Sonido, Iluminación & Discoteca Móvil (con DJ)',
   'Revelación Género Caja TNT Retro',
   'Pack Boda Total 360°',

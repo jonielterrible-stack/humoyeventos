@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 
 import { ServiceTabType } from './ServicesBento';
+import { assetUrl } from '../utils/assetUrl';
 
 interface NavbarProps {
   onOpenConfigurator: () => void;
@@ -63,24 +64,24 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
     {
       id: 'confeti' as ServiceTabType,
-      title: '2. Cañones de Confeti (Mariposas & Blanco)',
-      desc: 'Lluvia mágica de mariposas de seda o nieve pura',
+      title: '2. Cañones de Confeti (Multicolor & Mariposas)',
+      desc: 'Mariposas de seda para el vals y fiesta multicolor',
       icon: <PartyPopper className="w-4 h-4 text-fuchsia-500" />,
-      badge: 'Vals & Salida',
-    },
-    {
-      id: 'humo-bajo' as ServiceTabType,
-      title: '3. Máquinas de Humo Bajo (Hielo Seco)',
-      desc: 'Vals sobre las nubes, 100% limpio y sin manchas',
-      icon: <CloudRain className="w-4 h-4 text-sky-500" />,
-      badge: 'Cero Residuos',
+      badge: 'Vals & Fiesta',
     },
     {
       id: 'chispas-frias' as ServiceTabType,
-      title: '4. Fuentes de Chispas Frías (Sparkulars)',
+      title: '3. Fuentes de Chispas Frías (Sparkulars)',
       desc: 'Fuego frío de titanio de 2 a 5m que no quema la piel',
       icon: <Flame className="w-4 h-4 text-amber-500" />,
       badge: 'Seguro en Interior',
+    },
+    {
+      id: 'humo-bajo' as ServiceTabType,
+      title: '4. Máquinas de Humo Bajo (Hielo Seco)',
+      desc: 'Vals sobre las nubes, 100% limpio y sin manchas',
+      icon: <CloudRain className="w-4 h-4 text-sky-500" />,
+      badge: 'Cero Residuos',
     },
     {
       id: 'sonido-luces' as ServiceTabType,
@@ -114,8 +115,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               title="Humo Y Efectos - Efectos Especiales para Eventos"
             >
               <img
-                src="/assets/logo-humo-y-efectos-eventos.png?v=7"
-                alt="HUMO Y EFECTOS"
+                src={assetUrl('/assets/logo-humo-y-efectos-eventos.png?v=7')}
+                alt="HUMO Y EFECTOS - Especialistas en Humo Aéreo y Efectos Especiales para Bodas"
                 className="h-8 sm:h-12 md:h-16 w-auto max-w-[110px] sm:max-w-[180px] md:max-w-[260px] object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.35)] filter brightness-105"
               />
             </a>

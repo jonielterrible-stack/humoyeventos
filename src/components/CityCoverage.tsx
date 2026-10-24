@@ -11,13 +11,13 @@ export const CityCoverage: React.FC = () => {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 text-xs font-bold text-rose-600 uppercase tracking-widest mb-2">
             <MapPin className="w-4 h-4 text-rose-600" />
-            <span>Cobertura Nacional en Fincas de Toda España</span>
+            <span>Sede Central Talavera · Madrid · Zona Centro · Toda España</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight font-display">
             Desplazamiento y Disparo Oficial con Técnicos en tu Finca
           </h2>
           <p className="text-sm sm:text-base text-neutral-600 mt-3 leading-relaxed">
-            Damos servicio en todas las provincias de España. Para garantizar máxima seguridad, cero problemas y 100% de éxito,
+            Con base operativa central en <strong>Talavera de la Reina</strong> y servicio técnico prioritario en <strong>Madrid y Zona Centro</strong> (Toledo, Guadalajara, Ávila, Segovia, Ciudad Real y Cáceres), cubrimos enlaces y eventos en <strong>todas las provincias de España</strong>. Para garantizar máxima seguridad, cero problemas y 100% de éxito,
             <strong> acudo yo personalmente o un técnico especialista de mi equipo</strong> directamente a tu finca o espacio para el montaje, peritaje de distancias y detonación en el instante exacto.
           </p>
         </div>

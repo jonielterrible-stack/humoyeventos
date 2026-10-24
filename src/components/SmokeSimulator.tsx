@@ -18,6 +18,8 @@ import {
 import { SMOKE_COLORS, SmokeColor } from '../data/smokeData';
 import { TntDetonatorBox } from './TntDetonatorBox';
 
+import { assetUrl } from '../utils/assetUrl';
+
 interface SmokeParticle {
   x: number;
   y: number;
@@ -41,22 +43,22 @@ export const VENUE_PHOTOS: Record<
   { url: string; name: string; tag: string }
 > = {
   jardines: {
-    url: '/assets/venues/jardines.jpg',
+    url: assetUrl('/assets/venues/jardines.jpg'),
     name: 'Jardines de Finca Nupcial',
     tag: 'Finca Nupcial',
   },
   lago: {
-    url: '/assets/venues/lago.jpg',
+    url: assetUrl('/assets/venues/lago.jpg'),
     name: 'Paseo del Lago',
     tag: 'Paseo Romántico',
   },
   palacio: {
-    url: '/assets/venues/palacio.jpg',
+    url: assetUrl('/assets/venues/palacio.jpg'),
     name: 'Palacio Señorial / Masía',
     tag: 'Casona Histórica',
   },
   vinedo: {
-    url: '/assets/venues/vinedo.jpg',
+    url: assetUrl('/assets/venues/vinedo.jpg'),
     name: 'Viñedo al Atardecer',
     tag: 'Golden Hour',
   },
@@ -992,9 +994,9 @@ export const SmokeSimulator: React.FC = () => {
           <div className="mb-4 p-3 bg-neutral-900 text-white rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-neutral-800">
             <div className="flex items-center gap-3">
               <img
-                src="/assets/aistudio/IMG-20261023-WA0001_76527510.jpg"
-                alt="Paleta oficial de fábrica 10 colores"
-                className="w-16 h-10 object-cover rounded-lg border border-neutral-700 shrink-0"
+                src={assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg')}
+                alt="Paleta oficial de fábrica 10 colores Sbruffo Smoke 40"
+                className="w-20 h-12 object-cover object-center rounded-lg border border-neutral-700 shrink-0 shadow-sm"
               />
               <div>
                 <div className="flex items-center gap-2">

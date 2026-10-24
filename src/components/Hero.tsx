@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Play, Flame, Sparkles } from 'lucide-react';
+import { assetUrl } from '../utils/assetUrl';
 
 interface HeroProps {
   onScrollToSimulator: () => void;
@@ -288,8 +289,8 @@ export const Hero: React.FC<HeroProps> = ({
         
         {/* 1. REAL VIDEO BACKGROUND OF THE LUXURY ESTATE */}
         <video
-          src="/assets/videos/humo-aereo-real.mp4"
-          poster="/assets/venues/palacio.jpg"
+          src={assetUrl('/assets/videos/humo-aereo-real.mp4')}
+          poster={assetUrl('/assets/venues/palacio.jpg')}
           autoPlay
           loop
           muted
@@ -307,8 +308,9 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="absolute inset-x-0 bottom-0 h-full pointer-events-none z-20 flex items-end justify-center lg:justify-end lg:pr-[6%] xl:pr-[10%]">
           <div className="relative h-[85%] sm:h-[88%] lg:h-[82%] max-h-[380px] sm:max-h-[440px] lg:max-h-[700px] flex items-end select-none">
             <img
-              src="/assets/novios-hero.png"
-              alt="Novios celebrando delante del disparo de humo aéreo"
+              src={assetUrl('/assets/novios-hero.png')}
+              alt="Novios celebrando su boda delante de un espectacular disparo instantáneo de humo aéreo vertical de Humo Y Efectos"
+              title="Disparo Instantáneo de Humo Aéreo para Bodas - Humo Y Efectos"
               referrerPolicy="no-referrer"
               className="h-full w-auto object-contain object-bottom drop-shadow-[0_14px_36px_rgba(0,0,0,0.65)]"
             />
@@ -349,6 +351,9 @@ export const Hero: React.FC<HeroProps> = ({
           </p>
 
           <div className="flex flex-wrap items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-neutral-300 pt-0.5">
+            <span className="px-2 py-0.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300">
+              📍 Talavera · Madrid · España
+            </span>
             <span className="px-2 py-0.5 rounded-lg bg-white/10 border border-white/10 text-white">
               ✓ 10 Colores Oficiales
             </span>
@@ -415,6 +420,9 @@ export const Hero: React.FC<HeroProps> = ({
 
               {/* Key Features Quick Tags */}
               <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold text-neutral-300 pt-1">
+                <span className="px-2.5 py-1 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 font-extrabold">
+                  📍 Sede Talavera · Madrid · España
+                </span>
                 <span className="px-2.5 py-1 rounded-lg bg-white/10 border border-white/10 text-white">
                   ✓ 10 Colores Oficiales en Stock
                 </span>

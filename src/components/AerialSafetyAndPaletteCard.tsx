@@ -12,6 +12,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { OFFICIAL_SAFETY_SPECS, SMOKE_COLORS, SmokeColor } from '../data/smokeData';
+import { assetUrl } from '../utils/assetUrl';
 
 interface AerialSafetyAndPaletteCardProps {
   onSelectColor?: (color: SmokeColor) => void;
@@ -64,73 +65,30 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
               </h4>
             </div>
 
-            {/* Selector de Fotografía Visual vs Tubos Reales */}
-            <div className="flex items-center gap-1 p-1 bg-neutral-100 rounded-xl border border-neutral-200 self-start sm:self-auto">
-              <button
-                type="button"
-                onClick={() => setActivePhotoTab('poster')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  activePhotoTab === 'poster'
-                    ? 'bg-neutral-900 text-white shadow-xs'
-                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/60'
-                }`}
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>Cartel Visual en Todos los Colores</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActivePhotoTab('tubos')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  activePhotoTab === 'tubos'
-                    ? 'bg-neutral-900 text-white shadow-xs'
-                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/60'
-                }`}
-              >
-                <Layers className="w-3.5 h-3.5 text-rose-400" />
-                <span>Foto de Tubos Certificados</span>
-              </button>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold self-start sm:self-auto">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Gama Oficial Homologada CE</span>
             </div>
           </div>
 
           {/* FOTO PRINCIPAL DESTACADA */}
-          <div className="rounded-3xl border border-neutral-200 overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 relative shadow-md group">
-            {activePhotoTab === 'poster' ? (
-              <div className="relative flex items-center justify-center p-2 sm:p-4 bg-neutral-950">
-                <img
-                  src="/assets/aistudio/Humo_A_reo_en_Todos_los_Colores_b74ac735.png"
-                  alt="Humo Aéreo en todos los colores - Humo Y Efectos Especiales para Eventos"
-                  className="w-full max-h-[580px] sm:max-h-[640px] object-contain rounded-2xl mx-auto shadow-2xl transition-transform duration-300 group-hover:scale-[1.005]"
-                />
-                <button
-                  type="button"
-                  onClick={() => setIsZoomOpen(true)}
-                  className="absolute bottom-4 right-4 bg-neutral-900/90 hover:bg-neutral-800 text-white px-3.5 py-2 rounded-xl text-xs font-bold backdrop-blur-md border border-white/20 shadow-xl transition-all cursor-pointer flex items-center gap-1.5"
-                >
-                  <Maximize2 className="w-3.5 h-3.5" />
-                  <span>Ver en Pantalla Completa</span>
-                </button>
-              </div>
-            ) : (
-              <div className="relative">
-                <img
-                  src="/assets/aistudio/IMG-20261023-WA0001_76527510.jpg"
-                  alt="Fotografía real de catálogo · Tubos homologados Pirotecnica Manna"
-                  className="w-full h-64 sm:h-80 md:h-96 object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4 sm:p-6">
-                  <div className="text-white">
-                    <span className="text-[10px] font-black uppercase tracking-wider bg-rose-600 px-2 py-0.5 rounded text-white inline-block mb-1">
-                      Stock Real en Almacén
-                    </span>
-                    <p className="text-xs sm:text-sm font-semibold text-neutral-100">
-                      Fotografía real de los 10 tubos calibrados Sbruffo Smoke 40 (Pirotecnica Manna). Máxima densidad y homologación CE Cat. T1.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
+          <div className="rounded-3xl border border-neutral-200 overflow-hidden bg-neutral-950 relative shadow-md group">
+            <div className="relative flex items-center justify-center p-2 sm:p-4 bg-neutral-950">
+              <img
+                src={assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg')}
+                alt="¡Humo Aéreo en todos los colores! Tú eliges cuánta cantidad de humo quieres - Paleta Oficial 10 Colores Humo Y Efectos"
+                title="Paleta Oficial de Colores Humo Aéreo - Humo Y Efectos"
+                className="w-full h-auto max-h-[580px] sm:max-h-[640px] object-contain rounded-2xl mx-auto shadow-2xl transition-transform duration-300 group-hover:scale-[1.005]"
+              />
+              <button
+                type="button"
+                onClick={() => setIsZoomOpen(true)}
+                className="absolute bottom-4 right-4 bg-neutral-900/90 hover:bg-neutral-800 text-white px-3.5 py-2 rounded-xl text-xs font-bold backdrop-blur-md border border-white/20 shadow-xl transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>Ver en Pantalla Completa</span>
+              </button>
+            </div>
           </div>
 
           {/* 10 Interactive Color Swatches */}
@@ -308,8 +266,9 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
               <X className="w-6 h-6" />
             </button>
             <img
-              src="/assets/aistudio/Humo_A_reo_en_Todos_los_Colores_b74ac735.png"
+              src={assetUrl('/assets/aistudio/Humo_A_reo_en_Todos_los_Colores_b74ac735.png')}
               alt="Cartel Visual Oficial de Humo Aéreo en todos los colores"
+              title="Cartel Oficial Humo Aéreo Sbruffo Smoke 40"
               className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
             />
           </div>

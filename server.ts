@@ -159,20 +159,22 @@ CATÁLOGO OFICIAL DE SERVICIOS POR ORDEN DE ESPECIALIDAD:
    - **Confeti Multicolor y Metalizado (Oro y Plata)**: Estallido de gran alcance (8 a 12m) para la apertura de la barra libre o fiesta.
    - 100% biodegradable, ignífugo homologado, no resbala y no mancha suelos ni vestidos. Cañones neumáticos y eléctricos inalámbricos sincronizados por mando.
 
-3. **Máquinas de Humo Bajo / Niebla Baja (Vals sobre las Nubes)**:
-   - El auténtico vals nupcial flotando en el cielo: combina agua a alta temperatura con hielo seco (CO2 sólido) para crear una nube blanca, densa y pesada que se desliza por el suelo y no sube por encima de las rodillas.
-   - **100% limpia y sin riesgo de manchas**: Es puro vapor de agua condensado, por lo que **no mancha trajes oscuros ni vestidos de novia**, no moja y **no activa detectores de humo ni alarmas** en salones cerrados de fincas u hoteles. Cobertura de hasta 120 m² durante los 3 a 5 minutos del vals completo.
-
-4. **Máquinas de Chispas Frías (Sparkulars)**:
+3. **Máquinas de Chispas Frías (Sparkulars)**:
    - Fuentes verticales de fuego frío de titanio de **2 a 5 metros regulables**.
    - **100% seguras en interior y exterior**: No queman al contacto con la mano, la piel o la ropa, no tienen pólvora, no producen humo ni olor. Autorizadas en el 100% de salones cerrados, fincas históricas y hoteles. De 2 a 8 máquinas sincronizadas por mando para baile, corte de tarta y entradas.
+
+4. **Máquinas de Humo Bajo / Niebla Baja (Vals sobre las Nubes)**:
+   - El auténtico vals nupcial flotando en el cielo: combina agua a alta temperatura con hielo seco (CO2 sólido) para crear una nube blanca, densa y pesada que se desliza por el suelo y no sube por encima de las rodillas.
+   - **100% limpia y sin riesgo de manchas**: Es puro vapor de agua condensado, por lo que **no mancha trajes oscuros ni vestidos de novia**, no moja y **no activa detectores de humo ni alarmas** en salones cerrados de fincas u hoteles. Cobertura de hasta 120 m² durante los 3 a 5 minutos del vals completo.
 
 5. **Alquiler de Sonido Profesional, Iluminación y Discoteca Móvil con DJ**:
    - Servicio complementario para redondear el evento: alquiler de sonido PA de alta gama para ceremonia y cóctel, microfonía inalámbrica, puentes de luces LED robotizadas y cabina de DJ con discoteca móvil completa para la fiesta.
    - Ideal para clientes que quieren contratar todo el montaje técnico con un único proveedor de confianza, sin perder de vista que somos los Nº1 en efectos y humos.
 
 MODALIDADES Y COBERTURA EN TODA ESPAÑA:
-- **Servicio Exclusivo con Técnico en Finca**: Desplazamiento directo de nuestro responsable o técnicos cualificados a fincas y eventos en toda España (Asturias, Zaragoza, Madrid, Barcelona, Valencia, Sevilla, etc.).
+- **Sede Central**: Talavera de la Reina (Toledo). Base operativa y taller de preparación de artificios.
+- **Servicio Técnico Prioritario**: Fincas y hoteles de Madrid, Toledo y Zona Centro (Ávila, Guadalajara, Segovia, Cuenca, Ciudad Real, Cáceres) con rápida respuesta y sin suplementos desproporcionados de desplazamiento.
+- **Cobertura Nacional Completa en Fincas de España**: Desplazamiento directo de nuestros técnicos titulados a bodas y eventos en cualquier rincón del país (Cataluña, Aragón, Levante, Andalucía, Galicia y Norte).
 - **Garantía y Seguridad Absoluta**: NO enviamos los cañones por paquetería para evitar cualquier problema o manipulación indebida; acudimos nosotros en persona para el montaje, anclaje seguro, perímetro y disparo en el segundo exacto.
 - Certificación CE Clase T1 y ficha técnica para la finca (autorizado en el 98% de espacios sin permisos engorrosos).
 - Teléfono & WhatsApp directo: **+34 600 08 24 62** | Email: **humoyefectos@gmail.com**.

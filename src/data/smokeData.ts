@@ -141,7 +141,7 @@ export const OFFICIAL_SAFETY_SPECS = {
     publicLabel: 'Distancia mínima de seguridad obligatoria a personas / público',
   },
   images: {
-    palette10: '/assets/aistudio/IMG-20261023-WA0001_76527510.jpg',
+    palette10: '/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg',
   },
 };
 
@@ -423,53 +423,60 @@ export const COMPARISON_DATA = [
 
 export const CITIES_SEO = [
   {
-    name: 'Asturias (Oviedo, Gijón, Avilés)',
-    slug: 'asturias',
-    badge: 'Base Central Humo Y Efectos',
+    name: 'Talavera de la Reina (Sede Central)',
+    slug: 'talavera',
+    badge: 'Sede Central Humo Y Efectos',
     description:
-      'Servicio presencial con técnicos titulados para bodas en casonas asturianas, palacios y llagares. Desplazamiento inmediato y stock permanente.',
+      'Nuestra sede central y base operativa. Asistencia inmediata para bodas, comuniones y eventos en fincas de Talavera de la Reina, Comarca de la Jara, La Vera y alrededores sin costes de kilometraje ni suplementos.',
+  },
+  {
+    name: 'Madrid (Fincas y Hoteles)',
+    slug: 'madrid',
+    badge: 'Servicio Técnico Directo Fincas',
+    description:
+      'Servicio prioritario en las fincas más reconocidas de la Comunidad de Madrid, Sierra de Guadarrama, Pozuelo, Las Rozas, Aranjuez, San Lorenzo de El Escorial y Alcalá de Henares con técnicos propios.',
+  },
+  {
+    name: 'Toledo y Cigarrales',
+    slug: 'toledo',
+    badge: 'Técnicos Oficiales Toledo',
+    description:
+      'Especialistas en enlaces en cigarrales de Toledo, bodegas y cortijos toledanos. Disparo instantáneo de humo aéreo milimétrico con control técnico de viento y máxima seguridad.',
+  },
+  {
+    name: 'Zona Centro (Ávila, Segovia, Guadalajara, Cáceres)',
+    slug: 'zona-centro',
+    badge: 'Cobertura Furgón Técnico',
+    description:
+      'Desplazamiento directo desde Talavera y Madrid para celebraciones en fincas de Ávila, Segovia, Guadalajara, Cuenca, Ciudad Real y Cáceres.',
+  },
+  {
+    name: 'Toda España (Nivel Nacional)',
+    slug: 'espana',
+    badge: 'Nº 1 en Toda España',
+    description:
+      'Nos desplazamos por toda España con técnicos propios cualificados: Cataluña, Aragón, Levante, Andalucía, Galicia y Norte. Todo el equipamiento viaja con nosotros.',
   },
   {
     name: 'Zaragoza y Aragón',
     slug: 'zaragoza',
     badge: 'Delegación Logística',
     description:
-      'Especialistas en fincas de Zaragoza, Huesca y Teruel. Disparo instantáneo calculado para condiciones de viento local.',
-  },
-  {
-    name: 'Madrid y Zona Centro',
-    slug: 'madrid',
-    badge: 'Servicio Express 24h',
-    description:
-      'Entregas urgentes y técnicos para las fincas más exclusivas de la Sierra de Madrid, Toledo, Segovia y Guadalajara.',
-  },
-  {
-    name: 'Barcelona y Cataluña',
-    slug: 'barcelona',
-    badge: 'Técnicos Oficiales',
-    description:
-      'Desplazamiento directo de nuestro equipo técnico a masías, bodegas del Penedès y enlaces frente al Mediterráneo.',
+      'Especialistas en fincas de Zaragoza, Huesca y Teruel con disparo instantáneo y efectos especiales para bodas.',
   },
   {
     name: 'Valencia y Levante',
     slug: 'valencia',
     badge: 'Alta Demanda Fiestas',
     description:
-      'Humo aéreo instantáneo para alquerías, barracas y enlaces costeros en Alicante, Castellón y Valencia.',
+      'Humo aéreo instantáneo, confeti y fuego frío para alquerías, barracas y enlaces costeros en Alicante, Castellón y Valencia.',
   },
   {
     name: 'Sevilla y Andalucía',
     slug: 'andalucia',
     badge: 'Cobertura Completa',
     description:
-      'Ideal para haciendas sevillanas, cortijos y bodas con luz natural vibrante.',
-  },
-  {
-    name: 'Galicia y Cantabria',
-    slug: 'norte',
-    badge: 'Técnicos de Zona',
-    description:
-      'Pazos gallegos y casonas cántabras con efectos resistentes a la humedad ambiental.',
+      'Ideal para haciendas sevillanas, cortijos y bodas con luz natural vibrante en el sur.',
   },
 ];
 
@@ -514,11 +521,11 @@ export const FAQS = [
 export const TESTIMONIALS = [
   {
     id: 1,
-    couple: 'Elena & Marcos',
-    location: 'Palacio de la Concepción (Gijón, Asturias)',
-    date: 'Septiembre 2024',
+    couple: 'Lucía & Álvaro',
+    location: 'Finca Los Lavaderos (Talavera de la Reina, Toledo)',
+    date: 'Octubre 2024',
     rating: 5,
-    text: 'Elegimos 6 cañones combinando Rosa Fucsia y Azul Turquesa para la entrada al banquete. El disparo fue súper rápido, abrió altísimo y las fotos son un espectáculo. A los pocos segundos el cielo ya estaba despejado sin agobiar a los invitados.',
+    text: 'Contratamos 6 cañones de humo aéreo en Talavera y fue el momentazo absoluto de la boda. Abrieron a 15 metros en el aire con un colorido espectacular y se disiparon enseguida sin manchar nada. ¡Todo el mundo quedó impresionado!',
     pack: 'Pack Entrada Nupcial Signature',
   },
   {

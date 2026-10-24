@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { SMOKE_COLORS, SmokeColor } from '../data/smokeData';
 import { dispatchLead } from '../utils/leadService';
+import { assetUrl } from '../utils/assetUrl';
 
 export type ConfigEffectType =
   | 'aereo_clasico'
@@ -24,6 +25,13 @@ export type ConfigEffectType =
   | 'chispas_frias'
   | 'sonido_luces'
   | 'boda_completa';
+
+export function getCouponCodeForEventType(type: string): string {
+  if (type === 'reveal') return 'REVELACION10MAGIA';
+  if (type === 'festival') return 'FIESTA10MAGIA';
+  if (type === 'corporativo') return 'EVENTO10MAGIA';
+  return 'BODA10MAGIA';
+}
 
 export const Configurator: React.FC = () => {
   const [eventType, setEventType] = useState<'boda' | 'reveal' | 'festival' | 'corporativo'>('boda');
@@ -61,9 +69,21 @@ export const Configurator: React.FC = () => {
   }, []);
 
   const handleApplyCoupon = (codeToApply?: string) => {
+    const defaultCode = getCouponCodeForEventType(eventType);
     const code = (codeToApply || couponCode).trim().toUpperCase();
-    if (code.includes('10') || code.includes('5') || code.includes('BODA') || code.length >= 4) {
-      setCouponCode(code || 'BODA10MAGIA');
+    if (
+      code.includes('10') ||
+      code.includes('5') ||
+      code.includes('BODA') ||
+      code.includes('REVEL') ||
+      code.includes('FIESTA') ||
+      code.includes('EVENTO') ||
+      code.length >= 4
+    ) {
+      setCouponCode(code || defaultCode);
+      setDiscountApplied(true);
+    } else {
+      setCouponCode(defaultCode);
       setDiscountApplied(true);
     }
   };
@@ -102,8 +122,9 @@ export const Configurator: React.FC = () => {
         ? '5. Alquiler de Sonido Profesional, Iluminación LED & Discoteca Móvil con DJ'
         : 'Pack Boda Total 360° (Humo Aéreo + Confeti + Niebla Baja + Chispas Frías)';
 
+    const activeCode = couponCode || getCouponCodeForEventType(eventType);
     const discountText = discountApplied
-      ? `\n🎁 *Cupón de Descuento 10%:* Aplicado con código *${couponCode || 'BODA10MAGIA'}* (-10% en presupuesto)`
+      ? `\n🎁 *Cupón de Descuento 10%:* Aplicado con código *${activeCode}* (-10% en presupuesto)`
       : '';
 
     const text = `¡Hola Humo Y Efectos! 👋 Quiero consultar disponibilidad y presupuesto personalizado para mi ${eventLabel.toUpperCase()}:
@@ -184,9 +205,24 @@ ${
                   key={t.id}
                   type="button"
                   onClick={() => {
-                    setEventType(t.id as any);
-                    if (t.id === 'reveal') {
+                    const newType = t.id as any;
+                    setEventType(newType);
+                    if (newType === 'reveal') {
                       setHasTntTrigger(true);
+                    }
+                    const newCoupon = getCouponCodeForEventType(newType);
+                    if (
+                      !couponCode ||
+                      couponCode === 'BODA10MAGIA' ||
+                      couponCode === 'REVELACION10MAGIA' ||
+                      couponCode === 'FIESTA10MAGIA' ||
+                      couponCode === 'EVENTO10MAGIA' ||
+                      couponCode.startsWith('BODA10') ||
+                      couponCode.startsWith('REVELACION10') ||
+                      couponCode.startsWith('FIESTA10') ||
+                      couponCode.startsWith('EVENTO10')
+                    ) {
+                      setCouponCode(newCoupon);
                     }
                   }}
                   className={`p-3 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
@@ -216,21 +252,21 @@ ${
                 },
                 {
                   id: 'confeti',
-                  title: '2. Cañones de Confeti (Mariposas, Nieve Blanca o Fiesta)',
+                  title: '2. Cañones de Confeti (Multicolor y Mariposas)',
                   desc: 'Lluvia mágica de mariposas troqueladas que planean en el aire, papel blanco nieve o fiesta multicolor.',
                   badge: 'Especial Baile & Salida',
                 },
                 {
-                  id: 'humo_bajo',
-                  title: '3. Máquina de Niebla Baja (Vals sobre las Nubes)',
-                  desc: 'Hielo seco con agua caliente: nube densa a ras de suelo que no mancha, no moja y no activa alarmas.',
-                  badge: '100% Vapor Limpio',
-                },
-                {
                   id: 'chispas_frias',
-                  title: '4. Fuentes de Chispas Frías (Sparkulars)',
+                  title: '3. Fuentes de Chispas Frías (Sparkulars)',
                   desc: 'Chorro vertical de fuego frío de titanio de 2 a 5m que no quema la piel ni la ropa. Sin pólvora ni olor.',
                   badge: 'Fuego Frío Inocuo',
+                },
+                {
+                  id: 'humo_bajo',
+                  title: '4. Máquina de Niebla Baja (Vals sobre las Nubes)',
+                  desc: 'Hielo seco con agua caliente: nube densa a ras de suelo que no mancha, no moja y no activa alarmas.',
+                  badge: '100% Vapor Limpio',
                 },
                 {
                   id: 'sonido_luces',
@@ -365,9 +401,9 @@ ${
                 <div className="p-3 bg-neutral-900 text-white rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-neutral-800">
                   <div className="flex items-center gap-3">
                     <img
-                      src="/assets/aistudio/IMG-20261023-WA0001_76527510.jpg"
-                      alt="Paleta oficial 10 colores de fábrica"
-                      className="w-16 h-10 object-cover rounded-lg border border-neutral-700 shrink-0"
+                      src={assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg')}
+                      alt="Paleta oficial 10 colores de fábrica certificados para disparo vertical"
+                      className="w-16 h-10 object-cover object-center rounded-lg border border-neutral-700 shrink-0 shadow-sm"
                     />
                     <div>
                       <span className="text-xs font-bold text-rose-400 block">
@@ -660,7 +696,7 @@ ${
                   </span>
                   <div className="flex items-center gap-1.5">
                     <span className="font-mono font-black text-emerald-700 text-xs tracking-wider">
-                      {couponCode || 'BODA10MAGIA'}
+                      {couponCode || getCouponCodeForEventType(eventType)}
                     </span>
                     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-200 text-emerald-900">
                       -10% OK
@@ -672,7 +708,7 @@ ${
                   <div className="flex items-center gap-1.5">
                     <input
                       type="text"
-                      placeholder="Código Cupón (ej. BODA10MAGIA)"
+                      placeholder={`Código Cupón (ej. ${getCouponCodeForEventType(eventType)})`}
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                       className="flex-1 px-3 py-1.5 text-xs bg-white border border-neutral-200 rounded-xl text-neutral-800 placeholder-neutral-400 focus:outline-none focus:border-rose-500 uppercase font-mono"

@@ -30,7 +30,25 @@ interface DiscountLead {
   createdAt: string;
 }
 
-const DEFAULT_COUPON_CODE = 'BODA10MAGIA';
+export function getEventCouponPrefix(type: string): string {
+  const norm = (type || '').toLowerCase();
+  if (norm.includes('revela') || norm.includes('genero') || norm.includes('género')) {
+    return 'REVELACION10';
+  }
+  if (norm.includes('fiesta') || norm.includes('cumple') || norm.includes('barra')) {
+    return 'FIESTA10';
+  }
+  if (norm.includes('corporativo') || norm.includes('empresa') || norm.includes('marca')) {
+    return 'EVENTO10';
+  }
+  return 'BODA10';
+}
+
+export function generateEventCouponCode(type: string): string {
+  const prefix = getEventCouponPrefix(type);
+  const randomSuffix = Math.floor(100 + Math.random() * 900);
+  return `${prefix}-${randomSuffix}`;
+}
 
 export const DiscountCouponModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +60,7 @@ export const DiscountCouponModal: React.FC = () => {
   const [acceptTermsAndMarketing, setAcceptTermsAndMarketing] = useState(false);
   const [termsError, setTermsError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [couponCode, setCouponCode] = useState(DEFAULT_COUPON_CODE);
+  const [couponCode, setCouponCode] = useState('BODA10MAGIA');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [registeredCouponCode, setRegisteredCouponCode] = useState<string | null>(null);
@@ -143,8 +161,9 @@ export const DiscountCouponModal: React.FC = () => {
         return;
       }
 
-      // 2. Generar código único para nuevo cliente
-      const generatedCode = `BODA10-${Math.floor(100 + Math.random() * 900)}`;
+      // 2. Generar código único dinámico según el tipo de celebración seleccionada:
+      // Boda -> BODA10-XXX | Revelación -> REVELACION10-XXX | Fiesta -> FIESTA10-XXX | Corporativo -> EVENTO10-XXX
+      const generatedCode = generateEventCouponCode(eventType);
       setCouponCode(generatedCode);
 
       const leadPayload: DiscountLead = {
@@ -376,7 +395,12 @@ export const DiscountCouponModal: React.FC = () => {
                   </label>
                   <select
                     value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
+                    onChange={(e) => {
+                      const newType = e.target.value;
+                      setEventType(newType);
+                      const prefix = getEventCouponPrefix(newType);
+                      setCouponCode(`${prefix}MAGIA`);
+                    }}
                     className="w-full px-3 py-1.5 text-xs bg-neutral-900 border border-neutral-700 rounded-xl text-white focus:outline-none focus:border-rose-500 cursor-pointer"
                   >
                     <option value="Boda Nupcial">Boda Nupcial (Vals, Salida, Entrada)</option>
