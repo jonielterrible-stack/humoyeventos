@@ -342,13 +342,9 @@ export const Hero: React.FC<HeroProps> = ({
       {/* MOBILE HERO CARD: Sits neatly BELOW the visual stage ("sale abajo en móvil") */}
       <div className="relative z-30 px-3.5 sm:px-6 pb-10 pt-1 -mt-4 w-full max-w-xl mx-auto lg:hidden pointer-events-auto">
         <div className="bg-neutral-950/90 backdrop-blur-md border border-white/15 p-5 sm:p-7 rounded-3xl shadow-2xl space-y-3.5">
-          <div
-            role="heading"
-            aria-level={2}
-            className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight font-display drop-shadow-md"
-          >
-            Humo Aéreo, Confeti, Niebla Baja y Chispas Frías
-          </div>
+          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight font-display drop-shadow-md">
+            Humo Aéreo y Efectos para Bodas en España
+          </h1>
 
           <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
             Disparo instantáneo vertical a 15 metros, lluvia poética de mariposas de seda, vals sobre las nubes con hielo seco y fuentes de chispas frías 100% seguras.
@@ -422,7 +418,7 @@ export const Hero: React.FC<HeroProps> = ({
 
               {/* Main Headline */}
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight font-display drop-shadow-md">
-                Humo Aéreo, Confeti, Niebla Baja y Chispas Frías
+                Humo Aéreo y Efectos para Bodas en España
               </h1>
 
               {/* Subheading */}

@@ -60,9 +60,9 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-100 pb-3">
             <div className="flex items-center gap-2">
               <Palette className="w-4 h-4 text-rose-600" />
-              <h4 className="text-base font-extrabold text-neutral-900 font-display">
+              <p className="text-base font-extrabold text-neutral-900 font-display">
                 Paleta Oficial de Fábrica (10 Colores Disponibles)
-              </h4>
+              </p>
             </div>
 
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold self-start sm:self-auto">
@@ -169,9 +169,9 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-100 pb-3">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-rose-600" />
-              <h4 className="text-base font-extrabold text-neutral-900 font-display">
+              <p className="text-base font-extrabold text-neutral-900 font-display">
                 Distancias de Seguridad Técnicas (CE Cat. T1)
-              </h4>
+              </p>
             </div>
             <span className="text-xs font-medium text-neutral-500">
               Normativa Europea Sbruffo Smoke 40 (0163-T1-6069)
