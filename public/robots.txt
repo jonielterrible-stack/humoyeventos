@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap oficial de Humo Y Efectos
+Sitemap: https://humoyefectos.es/sitemap.xml

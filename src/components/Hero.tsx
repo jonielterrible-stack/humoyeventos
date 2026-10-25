@@ -342,9 +342,13 @@ export const Hero: React.FC<HeroProps> = ({
       {/* MOBILE HERO CARD: Sits neatly BELOW the visual stage ("sale abajo en móvil") */}
       <div className="relative z-30 px-3.5 sm:px-6 pb-10 pt-1 -mt-4 w-full max-w-xl mx-auto lg:hidden pointer-events-auto">
         <div className="bg-neutral-950/90 backdrop-blur-md border border-white/15 p-5 sm:p-7 rounded-3xl shadow-2xl space-y-3.5">
-          <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight font-display drop-shadow-md">
+          <div
+            role="heading"
+            aria-level={2}
+            className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight font-display drop-shadow-md"
+          >
             Humo Aéreo, Confeti, Niebla Baja y Chispas Frías
-          </h1>
+          </div>
 
           <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
             Disparo instantáneo vertical a 15 metros, lluvia poética de mariposas de seda, vals sobre las nubes con hielo seco y fuentes de chispas frías 100% seguras.
@@ -366,21 +370,29 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2.5 pt-1.5">
-            <button
-              onClick={onScrollToSimulator}
+            <a
+              href="#simulador"
+              onClick={(e) => {
+                e.preventDefault();
+                onScrollToSimulator();
+              }}
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-600 hover:from-rose-500 hover:to-pink-500 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-rose-600/40 cursor-pointer active:scale-98 transition-all"
             >
               <Sparkles className="w-3.5 h-3.5 fill-current" />
               <span>Visualiza Tu Momento (Simulador)</span>
-            </button>
+            </a>
 
-            <button
-              onClick={onOpenConfigurator}
+            <a
+              href="#configurador"
+              onClick={(e) => {
+                e.preventDefault();
+                onOpenConfigurator();
+              }}
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/30 font-bold text-xs rounded-xl cursor-pointer active:scale-98 transition-all"
             >
               <span>Pedir Presupuesto</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -436,21 +448,29 @@ export const Hero: React.FC<HeroProps> = ({
 
               {/* Dual CTA Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={onScrollToSimulator}
+                <a
+                  href="#simulador"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onScrollToSimulator();
+                  }}
                   className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-600 hover:from-rose-500 hover:to-pink-500 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg shadow-rose-600/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
                 >
                   <Sparkles className="w-4 h-4 fill-current" />
                   <span>Visualiza Tu Momento (Simulador)</span>
-                </button>
+                </a>
 
-                <button
-                  onClick={onOpenConfigurator}
+                <a
+                  href="#configurador"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onOpenConfigurator();
+                  }}
                   className="flex items-center justify-center gap-2 px-5 py-3 bg-white/15 hover:bg-white/25 text-white border border-white/30 font-bold text-xs sm:text-sm rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer whitespace-nowrap"
                 >
                   <span>Pedir Presupuesto</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
 
             </div>

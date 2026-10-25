@@ -22,14 +22,19 @@ export const CityCoverage: React.FC = () => {
           </p>
         </div>
 
-        {/* City Selector Buttons */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        {/* City Selector Links / Tabs for Search Engines & Users */}
+        <nav aria-label="Provincias y Ciudades de Cobertura" className="flex flex-wrap gap-2 mb-8">
           {CITIES_SEO.map((city) => {
             const active = selectedCity.slug === city.slug;
             return (
-              <button
+              <a
                 key={city.slug}
-                onClick={() => setSelectedCity(city)}
+                href={`#ciudad-${city.slug}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedCity(city);
+                }}
+                title={`Ver cobertura técnica de efectos especiales en ${city.name}`}
                 className={`px-4 py-2.5 text-xs font-bold rounded-2xl border transition-all cursor-pointer ${
                   active
                     ? 'bg-rose-600 border-rose-600 text-white shadow-md'
@@ -37,10 +42,10 @@ export const CityCoverage: React.FC = () => {
                 }`}
               >
                 {city.name.split(' (')[0]}
-              </button>
+              </a>
             );
           })}
-        </div>
+        </nav>
 
         {/* Active City Detail Panel */}
         <div className="bg-white border border-neutral-200 rounded-3xl p-8 shadow-lg">

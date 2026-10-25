@@ -11,20 +11,29 @@ import {
   CloudRain,
   ChevronDown,
   Palette,
-  ShieldCheck,
   PartyPopper,
   Zap,
+  Home,
+  ShoppingBag,
+  Heart,
+  Mail,
+  MapPin,
+  ExternalLink,
 } from 'lucide-react';
-
 import { ServiceTabType } from './ServicesBento';
+import { PageView } from '../types/navigation';
 import { assetUrl } from '../utils/assetUrl';
 
 interface NavbarProps {
+  currentView?: PageView;
+  onNavigate?: (view: PageView) => void;
   onOpenConfigurator: () => void;
   onSelectServiceTab?: (tab: ServiceTabType) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
+  currentView = 'inicio',
+  onNavigate,
   onOpenConfigurator,
   onSelectServiceTab,
 }) => {
@@ -46,9 +55,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleServiceNavClick = (tab: ServiceTabType) => {
+  const handleNavClick = (view: PageView) => {
+    if (onNavigate) {
+      onNavigate(view);
+    }
+    setServicesDropdownOpen(false);
+    setMobileMenuOpen(false);
+  };
+
+  const handleServiceItemClick = (tab: ServiceTabType) => {
     if (onSelectServiceTab) {
       onSelectServiceTab(tab);
+    }
+    if (onNavigate) {
+      onNavigate('servicios');
     }
     setServicesDropdownOpen(false);
     setMobileMenuOpen(false);
@@ -98,21 +118,26 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Main Balanced Navbar Flex: Logo Left, Menu Center, Actions Right */}
         <div className="flex items-center justify-between h-16 sm:h-20 md:h-22 w-full gap-1.5 sm:gap-4">
           
-          {/* 1. LADO IZQUIERDO: LOGO NÍTIDO Y PROPORCIONADO */}
+          {/* 1. LADO IZQUIERDO: TOGGLE MÓVIL + LOGO NÍTIDO */}
           <div className="flex items-center shrink-0">
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-neutral-300 hover:text-white rounded-lg sm:rounded-xl border border-neutral-800 hover:border-neutral-700 bg-neutral-900/90 transition-colors lg:hidden mr-1 sm:mr-2 cursor-pointer shrink-0"
-              aria-label="Abrir menú"
+              className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-neutral-300 hover:text-white rounded-xl border border-neutral-800 hover:border-neutral-700 bg-neutral-900/90 transition-colors lg:hidden mr-2 cursor-pointer shrink-0"
+              aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              title={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             >
-              {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-rose-400" /> : <Menu className="w-5 h-5 text-cyan-400" />}
             </button>
 
             <a
-              href="/"
+              href="#inicio"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('inicio');
+              }}
               className="flex items-center transition-all duration-300 hover:opacity-95"
-              title="Humo Y Efectos - Efectos Especiales para Eventos"
+              title="Humo Y Efectos - Ir a la Página Principal"
             >
               <img
                 src={assetUrl('/assets/logo-humo-y-efectos-eventos.png?v=7')}
@@ -122,37 +147,83 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </div>
 
-          {/* 2. CENTRO: BARRA DE NAVEGACIÓN ENCAJADA Y CENTRADA (DESKTOP) */}
-          <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2">
-            
-            {/* ICONO Y DROPDOWN DE SERVICIOS (Soluciona el solapamiento) */}
+          {/* 2. CENTRO: BARRA DE NAVEGACIÓN DE ESCRITORIO (DESKTOP) */}
+          <nav aria-label="Navegación Principal" className="hidden lg:flex items-center justify-center gap-1 xl:gap-2">
+            {/* Enlace Inicio */}
+            <a
+              href="#inicio"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('inicio');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                currentView === 'inicio'
+                  ? 'bg-rose-600/30 text-rose-200 border border-rose-500/40'
+                  : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+              }`}
+            >
+              <Home className="w-3.5 h-3.5 text-rose-400" />
+              <span>Inicio</span>
+            </a>
+
+            {/* Dropdown Servicios Oficiales */}
             <div className="relative" ref={dropdownRef}>
-              <button
-                type="button"
-                onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
-                  servicesDropdownOpen
-                    ? 'bg-neutral-800 text-white shadow-inner'
-                    : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
-                }`}
-              >
-                <Layers className="w-4 h-4 text-cyan-400" />
-                <span>Servicios</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180 text-cyan-400' : 'text-neutral-500'}`} />
-              </button>
+              <div className="flex items-center">
+                <a
+                  href="#servicios"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick('servicios');
+                  }}
+                  className={`flex items-center gap-1.5 pl-3 pr-1 py-2 rounded-l-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
+                    currentView === 'servicios'
+                      ? 'bg-neutral-800 text-cyan-300 shadow-inner'
+                      : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+                  }`}
+                >
+                  <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Servicios</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                  className={`px-1.5 py-2 rounded-r-xl text-xs transition-all cursor-pointer ${
+                    servicesDropdownOpen
+                      ? 'bg-neutral-800 text-white'
+                      : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
+                  }`}
+                  aria-label="Desplegar catálogo de servicios"
+                  title="Desplegar los 5 servicios oficiales"
+                >
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180 text-cyan-400' : ''}`} />
+                </button>
+              </div>
 
               {/* Dropdown Menu Panel */}
               {servicesDropdownOpen && (
                 <div className="absolute top-full left-0 mt-2 w-80 bg-neutral-950 border border-neutral-800 rounded-2xl shadow-2xl p-2 z-50 animate-fade-in divide-y divide-neutral-900">
-                  <div className="p-2 text-[10px] uppercase font-black tracking-widest text-neutral-400">
-                    Catálogo Oficial (1 a 5)
+                  <div className="p-2 flex items-center justify-between text-[10px] uppercase font-black tracking-widest text-neutral-400">
+                    <span>Catálogo Oficial (1 a 5)</span>
+                    <a
+                      href="#servicios"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick('servicios');
+                      }}
+                      className="text-cyan-400 hover:underline"
+                    >
+                      Ver todos →
+                    </a>
                   </div>
                   <div className="pt-1 space-y-1">
                     {servicesList.map((s) => (
                       <a
                         key={s.id}
                         href="#servicios"
-                        onClick={() => handleServiceNavClick(s.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleServiceItemClick(s.id);
+                        }}
                         className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-neutral-900 transition-colors group cursor-pointer text-left"
                       >
                         <div className="mt-0.5 p-1.5 rounded-lg bg-neutral-900 border border-neutral-800 group-hover:border-neutral-700">
@@ -175,41 +246,72 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
 
-            {/* Enlace Simulador */}
-            <a
-              href="#simulador"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider text-neutral-300 hover:text-white hover:bg-neutral-900 transition-all whitespace-nowrap"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-rose-400" />
-              <span>Simulador</span>
-            </a>
-
-            {/* Enlace Paleta & Distancias */}
-            <a
-              href="#servicios"
-              onClick={() => handleServiceNavClick('humo-aereo')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider text-neutral-300 hover:text-white hover:bg-neutral-900 transition-all whitespace-nowrap"
-            >
-              <Palette className="w-3.5 h-3.5 text-amber-400" />
-              <span>Paleta 10 Colores</span>
-            </a>
-
             {/* Enlace Packs */}
             <a
               href="#packs"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider text-neutral-300 hover:text-white hover:bg-neutral-900 transition-all whitespace-nowrap"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('packs');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                currentView === 'packs'
+                  ? 'bg-amber-500/25 text-amber-200 border border-amber-500/40'
+                  : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+              }`}
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <ShoppingBag className="w-3.5 h-3.5 text-amber-400" />
               <span>Packs</span>
             </a>
 
-            {/* Enlace Cobertura */}
+            {/* Enlace Simulador */}
             <a
-              href="#ciudades"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider text-neutral-300 hover:text-white hover:bg-neutral-900 transition-all whitespace-nowrap"
+              href="#simulador"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('simulador');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                currentView === 'simulador'
+                  ? 'bg-cyan-500/25 text-cyan-200 border border-cyan-500/40'
+                  : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+              }`}
             >
-              <Calendar className="w-3.5 h-3.5 text-sky-400" />
-              <span>España</span>
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Simulador</span>
+            </a>
+
+            {/* Enlace Opiniones */}
+            <a
+              href="#opiniones"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('opiniones');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                currentView === 'opiniones'
+                  ? 'bg-rose-500/25 text-rose-200 border border-rose-500/40'
+                  : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+              }`}
+            >
+              <Heart className="w-3.5 h-3.5 text-rose-400" />
+              <span>Opiniones 2026</span>
+            </a>
+
+            {/* Enlace Contacto */}
+            <a
+              href="#contacto"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('contacto');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                currentView === 'contacto'
+                  ? 'bg-emerald-500/25 text-emerald-200 border border-emerald-500/40'
+                  : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+              }`}
+            >
+              <Mail className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Contacto</span>
             </a>
           </nav>
 
@@ -222,7 +324,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               rel="noopener noreferrer"
               aria-label="Contactar por WhatsApp al 600082462"
               title="Contactar por WhatsApp (+34 600 08 24 62)"
-              className="h-8 sm:h-11 px-2 sm:px-4 rounded-lg sm:rounded-xl font-black text-white bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 shadow-md shadow-emerald-500/25 transition-all hover:scale-102 active:scale-98 cursor-pointer flex items-center justify-center gap-1 sm:gap-2 border border-emerald-400/30 whitespace-nowrap"
+              className="h-8 sm:h-11 px-2.5 sm:px-4 rounded-lg sm:rounded-xl font-black text-white bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 shadow-md shadow-emerald-500/25 transition-all hover:scale-102 active:scale-98 cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 border border-emerald-400/30 whitespace-nowrap"
             >
               <svg
                 className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-white shrink-0"
@@ -236,15 +338,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </a>
 
-            {/* Botón Configurador FX (Azul y Rosa) */}
-            <button
-              onClick={onOpenConfigurator}
+            {/* Botón Configurador FX */}
+            <a
+              href="#configurador"
+              onClick={(e) => {
+                e.preventDefault();
+                onOpenConfigurator();
+              }}
               className="h-8 sm:h-11 px-2.5 sm:px-4 text-[10px] sm:text-xs font-black uppercase tracking-wider rounded-lg sm:rounded-xl text-white bg-gradient-to-r from-cyan-500 via-fuchsia-600 to-rose-600 hover:from-cyan-400 hover:via-fuchsia-500 hover:to-rose-500 shadow-md shadow-fuchsia-600/25 transition-all hover:scale-102 active:scale-98 cursor-pointer flex items-center gap-1 sm:gap-1.5 whitespace-nowrap shrink-0"
-              title="Configurar presupuesto personalizado"
+              title="Configurar presupuesto personalizado online"
             >
               <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
               <span>Configurar</span>
-            </button>
+            </a>
           </div>
 
         </div>
@@ -253,80 +359,214 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Línea de acento degradado neón */}
       <div className="h-[2px] w-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 opacity-90 shadow-[0_0_12px_rgba(236,72,153,0.5)]" />
 
-      {/* Menú móvil desplegable */}
+      {/* MENÚ MÓVIL DESPLEGABLE ESTRUCTURADO Y MEJORADO (Screenshot Fix) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-neutral-950 border-b border-neutral-800 px-6 py-6 space-y-5 shadow-2xl animate-fade-in">
-          <div className="space-y-1">
-            <div className="text-[10px] uppercase font-black tracking-widest text-neutral-400 mb-2 px-1">
-              Servicios Oficiales
+        <div className="lg:hidden bg-neutral-950 border-b border-neutral-800 px-5 py-6 space-y-6 shadow-2xl animate-fade-in max-h-[85vh] overflow-y-auto">
+          
+          {/* SECCIÓN 1: APARTADOS PRINCIPALES DE LA WEB */}
+          <div className="space-y-2">
+            <div className="text-[10px] uppercase font-black tracking-widest text-neutral-400 px-1 flex items-center justify-between">
+              <span>Secciones Principales</span>
+              <span className="text-rose-400 font-bold">Navegación</span>
             </div>
-            <nav className="flex flex-col gap-1.5 text-xs sm:text-sm font-bold">
+
+            <nav className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm font-bold">
+              {/* Inicio */}
+              <a
+                href="#inicio"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('inicio');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'inicio'
+                    ? 'bg-rose-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Home className="w-4 h-4 text-rose-400" />
+                  <span>Inicio (Web Principal)</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-neutral-300">
+                  Portada & Humo
+                </span>
+              </a>
+
+              {/* Servicios */}
+              <a
+                href="#servicios"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('servicios');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'servicios'
+                    ? 'bg-cyan-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Layers className="w-4 h-4 text-cyan-400" />
+                  <span>Servicios Oficiales</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-cyan-300">
+                  5 Efectos
+                </span>
+              </a>
+
+              {/* Catálogo de Packs */}
+              <a
+                href="#packs"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('packs');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'packs'
+                    ? 'bg-amber-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <ShoppingBag className="w-4 h-4 text-amber-400" />
+                  <span>Catálogo de Packs</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-amber-300">
+                  Bodas & TNT
+                </span>
+              </a>
+
+              {/* Simulador de Escenarios */}
+              <a
+                href="#simulador"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('simulador');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'simulador'
+                    ? 'bg-fuchsia-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Sparkles className="w-4 h-4 text-fuchsia-400" />
+                  <span>Simulador de Escenarios</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-fuchsia-300">
+                  En Directo
+                </span>
+              </a>
+
+              {/* Opiniones 2026 */}
+              <a
+                href="#opiniones"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('opiniones');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'opiniones'
+                    ? 'bg-rose-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Heart className="w-4 h-4 text-rose-400" />
+                  <span>Opiniones de Novios 2026</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-rose-300">
+                  4.9 ★
+                </span>
+              </a>
+
+              {/* Contacto & Presupuesto */}
+              <a
+                href="#contacto"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('contacto');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'contacto'
+                    ? 'bg-emerald-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Mail className="w-4 h-4 text-emerald-400" />
+                  <span>Contacto & Presupuesto</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-emerald-300">
+                  Formulario
+                </span>
+              </a>
+            </nav>
+          </div>
+
+          {/* SECCIÓN 2: ACCESO RÁPIDO A LOS 5 SERVICIOS INDIVIDUALES */}
+          <div className="space-y-1.5 pt-4 border-t border-neutral-900">
+            <div className="text-[10px] uppercase font-black tracking-widest text-neutral-400 px-1 mb-1">
+              Catálogo de Servicios Individuales
+            </div>
+            <nav className="flex flex-col gap-1 text-xs">
               {servicesList.map((s) => (
                 <a
                   key={s.id}
                   href="#servicios"
-                  onClick={() => handleServiceNavClick(s.id)}
-                  className="flex items-center justify-between py-2 px-3 rounded-xl text-neutral-200 hover:text-white hover:bg-neutral-900 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleServiceItemClick(s.id);
+                  }}
+                  className="flex items-center justify-between py-2 px-3 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900 transition-colors"
                 >
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2 truncate">
                     {s.icon}
-                    <span>{s.title}</span>
+                    <span className="truncate">{s.title}</span>
                   </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-800 text-neutral-300">
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400 shrink-0">
                     {s.badge}
                   </span>
                 </a>
               ))}
-
-              <div className="pt-2 border-t border-neutral-900 space-y-1">
-                <a
-                  href="#simulador"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2.5 py-2 px-3 rounded-xl text-cyan-300 hover:text-white hover:bg-neutral-900 transition-colors"
-                >
-                  <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>Simulador de Escenarios</span>
-                </a>
-                <a
-                  href="#packs"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2.5 py-2 px-3 rounded-xl text-neutral-200 hover:text-white hover:bg-neutral-900 transition-colors"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Colección de Packs</span>
-                </a>
-                <a
-                  href="#ciudades"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2.5 py-2 px-3 rounded-xl text-neutral-300 hover:text-white hover:bg-neutral-900 transition-colors"
-                >
-                  <Calendar className="w-4 h-4 text-sky-400 shrink-0" />
-                  <span>Cobertura en España</span>
-                </a>
-              </div>
             </nav>
           </div>
 
-          <div className="pt-3 border-t border-neutral-900 flex flex-col gap-2.5">
+          {/* SECCIÓN 3: SEDE CENTRAL TALAVERA INFO BAR */}
+          <div className="p-3.5 rounded-2xl bg-neutral-900/90 border border-neutral-800 text-xs space-y-1.5">
+            <p className="font-bold text-neutral-200 flex items-center gap-1.5 text-[11px]">
+              <MapPin className="w-3.5 h-3.5 text-rose-500" />
+              <span>Sede Central: Talavera de la Reina (Toledo)</span>
+            </p>
+            <p className="text-[11px] text-neutral-400 leading-snug">
+              Desplazamiento técnico directo en Madrid, Toledo, Zona Centro y toda España.
+            </p>
+          </div>
+
+          {/* SECCIÓN 4: ACCIONES PRINCIPALES (WHATSAPP + CONFIGURADOR) */}
+          <div className="pt-2 border-t border-neutral-900 flex flex-col gap-2.5">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 text-center text-xs font-black uppercase tracking-wider text-white bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3.5 text-center text-xs font-black uppercase tracking-wider text-white bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 cursor-pointer"
             >
-              <PhoneCall className="w-4 h-4" />
+              <PhoneCall className="w-4 h-4 fill-white" />
               <span>WhatsApp Directo · 600 08 24 62</span>
             </a>
-            <button
-              onClick={() => {
+            <a
+              href="#configurador"
+              onClick={(e) => {
+                e.preventDefault();
                 setMobileMenuOpen(false);
                 onOpenConfigurator();
               }}
-              className="w-full py-2.5 text-center text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 via-fuchsia-600 to-rose-600 rounded-xl shadow-md cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full py-3 text-center text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-cyan-500 via-fuchsia-600 to-rose-600 rounded-xl shadow-md cursor-pointer flex items-center justify-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Abrir Configurador</span>
-            </button>
+              <span>Abrir Configurador de Presupuesto</span>
+            </a>
           </div>
         </div>
       )}

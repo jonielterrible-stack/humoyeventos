@@ -22,7 +22,8 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="faqs" className="py-20 bg-neutral-50/70 border-b border-neutral-200">
+    <section id="faqs" className="py-20 bg-neutral-50/70 border-b border-neutral-200 relative">
+      <div id="faq" className="absolute -top-24 left-0 pointer-events-none" />
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 uppercase tracking-widest mb-2">

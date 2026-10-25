@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://humoyefectos.es/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://humoyefectos.es/assets/humo-y-efectos-humo-aereo-bodas-eventos.png</image:loc>
+      <image:title>Humo Y Efectos - Cañones de Humo Aéreo y Efectos Especiales para Bodas</image:title>
+      <image:caption>Disparo de humo aéreo vertical de colores para salidas de ceremonia en España</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://humoyefectos.es/assets/services/pack-salida-ceremonia-humo-colores.jpg</image:loc>
+      <image:title>Pack Salida de Ceremonia con Humo Aéreo</image:title>
+      <image:caption>Columnas verticales de humo de colores de 15 metros para bodas al aire libre</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://humoyefectos.es/assets/services/pack-confeti-romantico-mariposas-blanco.jpg</image:loc>
+      <image:title>Pack Confeti Romántico con Mariposas Blancas</image:title>
+      <image:caption>Mariposas de seda troqueladas en suspensión para el vals nupcial</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://humoyefectos.es/assets/services/pack-confeti-fiesta-barra-libre-multicolor.jpg</image:loc>
+      <image:title>Pack Cañones de Confeti Fiesta y Barra Libre</image:title>
+      <image:caption>Lluvia multicolor y metalizada para fiesta de boda</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://humoyefectos.es/assets/services/pack-humo-bajo-baile-nupcial-nubes.jpg</image:loc>
+      <image:title>Pack Humo Bajo Niebla para Baile Nupcial</image:title>
+      <image:caption>Efecto bailar sobre las nubes con hielo seco para novios</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://humoyefectos.es/assets/services/pack-fuentes-chispas-frias-sparkulars.jpg</image:loc>
+      <image:title>Pack Fuentes de Chispas Frías Sparkulars</image:title>
+      <image:caption>Fuego frío de titanio que no quema para interiores y exteriores</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#servicios</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#packs</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#simulador</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#seguridad</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#ciudades</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#mapa-cobertura</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#faq</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://humoyefectos.es/#contacto</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
