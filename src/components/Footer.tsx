@@ -1,5 +1,16 @@
 import React from 'react';
-import { ShieldCheck, MessageSquare, PhoneCall, ExternalLink, ChevronRight, MapPin, Sparkles, CheckCircle2 } from 'lucide-react';
+import {
+  ShieldCheck,
+  MessageSquare,
+  PhoneCall,
+  ExternalLink,
+  ChevronRight,
+  MapPin,
+  Sparkles,
+  CheckCircle2,
+  Instagram,
+  Facebook,
+} from 'lucide-react';
 import { PageView } from '../types/navigation';
 
 interface FooterProps {
@@ -21,13 +32,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto flex items-center flex-wrap gap-2 text-[11px] text-neutral-400">
           <span className="text-neutral-500 font-bold uppercase tracking-wider text-[10px]">Estás en:</span>
           <nav aria-label="Migas de pan" className="flex items-center flex-wrap gap-1.5">
-            <a href="#inicio" onClick={(e) => handleNav('inicio', e)} className="hover:text-white transition-colors">Inicio</a>
+            <a href="/" onClick={(e) => handleNav('inicio', e)} className="hover:text-white transition-colors">Inicio</a>
             <ChevronRight className="w-3 h-3 text-neutral-600" />
-            <a href="#servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-rose-400 transition-colors">Servicios Oficiales</a>
+            <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-rose-400 transition-colors">Servicios Oficiales</a>
             <ChevronRight className="w-3 h-3 text-neutral-600" />
-            <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">Catálogo de Packs</a>
+            <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">Catálogo de Packs</a>
             <ChevronRight className="w-3 h-3 text-neutral-600" />
-            <a href="#contacto" onClick={(e) => handleNav('contacto', e)} className="hover:text-emerald-400 transition-colors">Contacto & Presupuesto</a>
+            <a href="/simulador" onClick={(e) => handleNav('simulador', e)} className="hover:text-cyan-400 transition-colors">Simulador</a>
+            <ChevronRight className="w-3 h-3 text-neutral-600" />
+            <a href="/opiniones" onClick={(e) => handleNav('opiniones', e)} className="hover:text-fuchsia-400 transition-colors">Opiniones 2026</a>
+            <ChevronRight className="w-3 h-3 text-neutral-600" />
+            <a href="/contacto" onClick={(e) => handleNav('contacto', e)} className="hover:text-emerald-400 transition-colors">Contacto & Presupuesto</a>
             <ChevronRight className="w-3 h-3 text-neutral-600" />
             <span className="text-neutral-200 font-bold">Sede Talavera · Madrid · España</span>
           </nav>
@@ -130,6 +145,42 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </p>
               <p>Rutas técnicas semanales en Madrid, Toledo y Zona Centro.</p>
             </div>
+
+            {/* Redes Sociales Oficiales: Instagram y Facebook */}
+            <div className="pt-3 border-t border-neutral-900">
+              <p className="text-[11px] font-bold text-neutral-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-pink-500" />
+                <span>Síguenos en Redes Sociales:</span>
+              </p>
+              <div className="flex flex-col gap-2">
+                <a
+                  href="https://www.instagram.com/humoyefectos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between px-3 py-2 rounded-xl bg-gradient-to-r from-purple-950/70 via-pink-950/70 to-rose-950/70 border border-pink-500/40 text-pink-200 hover:text-white hover:border-pink-400 transition-all text-xs font-bold shadow-xs group"
+                  title="Perfil Oficial en Instagram @humoyefectos - Vídeos de humo aéreo y bodas reales"
+                >
+                  <div className="flex items-center gap-2">
+                    <Instagram className="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform" />
+                    <span>Instagram Oficial</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-pink-300">@humoyefectos</span>
+                </a>
+                <a
+                  href="https://www.facebook.com/humoyefectos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-between px-3 py-2 rounded-xl bg-blue-950/70 border border-blue-500/40 text-blue-200 hover:text-white hover:border-blue-400 transition-all text-xs font-bold shadow-xs group"
+                  title="Página Oficial en Facebook @humoyefectos - Efectos especiales para bodas"
+                >
+                  <div className="flex items-center gap-2">
+                    <Facebook className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
+                    <span>Página de Facebook</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-blue-300">@humoyefectos</span>
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Col 2: Servicios Oficiales */}
@@ -140,37 +191,37 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h3>
             <ul className="space-y-2 text-neutral-400">
               <li>
-                <a href="#servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-rose-400 transition-colors flex items-center gap-1">
+                <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-rose-400 transition-colors flex items-center gap-1">
                   <span>1. Humo Aéreo Vertical (1-9 cañones)</span>
                 </a>
               </li>
               <li>
-                <a href="#servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-fuchsia-400 transition-colors">
+                <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-fuchsia-400 transition-colors">
                   2. Cañones de Confeti (Multicolor & Mariposas)
                 </a>
               </li>
               <li>
-                <a href="#servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-amber-400 transition-colors">
                   3. Fuentes de Chispas Frías (Sparkulars)
                 </a>
               </li>
               <li>
-                <a href="#servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-sky-400 transition-colors">
+                <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-sky-400 transition-colors">
                   4. Máquinas de Humo Bajo (Hielo Seco)
                 </a>
               </li>
               <li>
-                <a href="#servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-indigo-400 transition-colors">
+                <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-indigo-400 transition-colors">
                   5. Sonido, Iluminación & Discoteca con DJ
                 </a>
               </li>
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-rose-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-rose-400 transition-colors">
                   Revelación de Género con Detonador TNT Retro
                 </a>
               </li>
               <li>
-                <a href="#simulador" onClick={(e) => handleNav('simulador', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/simulador" onClick={(e) => handleNav('simulador', e)} className="hover:text-cyan-400 transition-colors">
                   Simulador de Efectos en Directo
                 </a>
               </li>
@@ -185,37 +236,37 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h3>
             <ul className="space-y-2 text-neutral-400">
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
                   Pack Salida de Ceremonia Signature
                 </a>
               </li>
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
                   Pack Confeti Romántico (Mariposas de Seda)
                 </a>
               </li>
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
                   Pack Cañones Fiesta & Barra Libre
                 </a>
               </li>
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
                   Pack Baile Nupcial sobre las Nubes
                 </a>
               </li>
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
                   Pack Fuentes de Chispas Frías Titanio
                 </a>
               </li>
               <li>
-                <a href="#packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
+                <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-amber-400 transition-colors">
                   Pack Boda Total 360° Multiefecto
                 </a>
               </li>
               <li>
-                <a href="#contacto" onClick={(e) => handleNav('contacto', e)} className="hover:text-rose-400 font-bold transition-colors">
+                <a href="/contacto" onClick={(e) => handleNav('contacto', e)} className="hover:text-rose-400 font-bold transition-colors">
                   Solicitar Presupuesto Personalizado
                 </a>
               </li>
@@ -283,6 +334,32 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div>
                 <p className="text-[11px] font-bold text-neutral-300 mb-1.5">Enlaces de Interés & Autoridad:</p>
                 <ul className="space-y-1.5 text-[11px]">
+                  <li>
+                    <a
+                      href="https://www.instagram.com/humoyefectos/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-pink-300 hover:text-white transition-colors inline-flex items-center gap-1 font-semibold"
+                      title="Instagram oficial de Humo Y Efectos @humoyefectos"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-pink-400" />
+                      <span>Instagram (@humoyefectos)</span>
+                      <ExternalLink className="w-3 h-3 text-neutral-500" />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.facebook.com/humoyefectos/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-300 hover:text-white transition-colors inline-flex items-center gap-1 font-semibold"
+                      title="Página oficial de Facebook de Humo Y Efectos"
+                    >
+                      <Facebook className="w-3.5 h-3.5 text-blue-400" />
+                      <span>Facebook Oficial</span>
+                      <ExternalLink className="w-3 h-3 text-neutral-500" />
+                    </a>
+                  </li>
                   <li>
                     <a
                       href="https://maps.google.com/?q=Talavera+de+la+Reina,+Toledo"
@@ -395,16 +472,34 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* 5. Bottom Copyright & Legal Links */}
         <div className="pt-8 mt-10 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
           <p>© {new Date().getFullYear()} Humo Y Efectos. Especialistas en Cañones de Humo Aéreo y Efectos para Bodas en España.</p>
-          <div className="flex items-center gap-4">
-            <a href="#seguridad" className="hover:text-neutral-300 transition-colors">
-              Homologación CE Clase T1
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <a
+              href="https://www.instagram.com/humoyefectos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-400 hover:text-white transition-colors flex items-center gap-1 font-bold"
+              title="Instagram Oficial @humoyefectos"
+            >
+              <Instagram className="w-3.5 h-3.5" />
+              <span>Instagram</span>
             </a>
             <span aria-hidden="true" className="text-neutral-700">·</span>
-            <a href="#faq" className="hover:text-neutral-300 transition-colors">
-              Preguntas Frecuentes FAQ
+            <a
+              href="https://www.facebook.com/humoyefectos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-white transition-colors flex items-center gap-1 font-bold"
+              title="Facebook Oficial @humoyefectos"
+            >
+              <Facebook className="w-3.5 h-3.5" />
+              <span>Facebook</span>
             </a>
             <span aria-hidden="true" className="text-neutral-700">·</span>
-            <a href="#contacto" className="hover:text-neutral-300 transition-colors">
+            <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-neutral-300 transition-colors">
+              Servicios Homologados CE
+            </a>
+            <span aria-hidden="true" className="text-neutral-700">·</span>
+            <a href="/contacto" onClick={(e) => handleNav('contacto', e)} className="hover:text-neutral-300 transition-colors">
               Contacto y Reservas
             </a>
           </div>

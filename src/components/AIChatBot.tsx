@@ -582,9 +582,9 @@ export const AIChatBot: React.FC = () => {
                     <p className="text-[11px] font-bold uppercase tracking-widest text-emerald-400">
                       Enviando a WhatsApp · Ref #{confirmedBooking.id}
                     </p>
-                    <h4 className="text-base font-extrabold text-white">
+                    <p className="text-base font-extrabold text-white">
                       ¡Abriendo WhatsApp, {confirmedBooking.nombre}!
-                    </h4>
+                    </p>
                     <p className="text-xs text-neutral-300">
                       Te hemos redirigido directamente a nuestro WhatsApp con tu reserva lista para enviar. Si no se ha abierto automáticamente, pulsa aquí abajo:
                     </p>

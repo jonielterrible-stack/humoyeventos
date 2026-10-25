@@ -570,9 +570,9 @@ export const SmokeSimulator: React.FC = () => {
             <div className="w-16 h-16 rounded-3xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center mb-4 text-rose-500 shadow-lg">
               <Camera className="w-8 h-8" />
             </div>
-            <h4 className="text-xl sm:text-2xl font-extrabold text-white mb-2 font-display">
+            <p className="text-xl sm:text-2xl font-extrabold text-white mb-2 font-display">
               Vuestra Finca, Palacio o Jardín
-            </h4>
+            </p>
             <p className="text-xs sm:text-sm text-neutral-300 max-w-md mb-6 leading-relaxed">
               Haz una foto en directo si estás ahora en el lugar del evento o sube una imagen de tu galería para ver el disparo exacto sobre vuestro espacio.
             </p>
@@ -619,7 +619,7 @@ export const SmokeSimulator: React.FC = () => {
         {isDraggingFile && (
           <div className="absolute inset-0 z-30 bg-rose-950/80 backdrop-blur-xs flex flex-col items-center justify-center text-white border-4 border-dashed border-rose-500 m-2 rounded-2xl pointer-events-none animate-pulse">
             <Upload className="w-12 h-12 text-rose-400 mb-3" />
-            <h4 className="text-xl font-black">Suelta aquí la foto de vuestra finca o palacio</h4>
+            <p className="text-xl font-black">Suelta aquí la foto de vuestra finca o palacio</p>
             <p className="text-sm text-rose-200">Se adaptará automáticamente al suelo del simulador</p>
           </div>
         )}
@@ -1166,9 +1166,9 @@ export const SmokeSimulator: React.FC = () => {
                   <Camera className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-sm sm:text-base text-neutral-900 font-display">
+                  <p className="font-extrabold text-sm sm:text-base text-neutral-900 font-display">
                     Personalizar Escenario
-                  </h4>
+                  </p>
                   <p className="text-[11px] text-neutral-500">¿Cómo prefieres añadir la foto de vuestro lugar?</p>
                 </div>
               </div>

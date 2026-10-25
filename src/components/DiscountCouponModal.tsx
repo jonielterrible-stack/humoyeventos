@@ -336,9 +336,9 @@ export const DiscountCouponModal: React.FC = () => {
                       <AlertTriangle className="w-5 h-5 text-red-400 animate-pulse" />
                     </div>
                     <div className="space-y-1.5 flex-1">
-                      <h4 className="text-xs font-black uppercase tracking-wider text-red-300">
+                      <p className="text-xs font-black uppercase tracking-wider text-red-300">
                         ⚠ AVISO: CORREO YA REGISTRADO EN LA BASE DE DATOS
-                      </h4>
+                      </p>
                       <p className="text-xs text-red-100 leading-snug">
                         El correo <strong className="text-white underline decoration-red-400">{email}</strong> ya figura en nuestra base de datos y ya ha recibido su cupón oficial del 10%.
                       </p>

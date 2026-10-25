@@ -19,6 +19,8 @@ import {
   Mail,
   MapPin,
   ExternalLink,
+  Instagram,
+  Facebook,
 } from 'lucide-react';
 import { ServiceTabType } from './ServicesBento';
 import { PageView } from '../types/navigation';
@@ -131,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <a
-              href="#inicio"
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('inicio');
@@ -147,11 +149,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </div>
 
-          {/* 2. CENTRO: BARRA DE NAVEGACIÓN DE ESCRITORIO (DESKTOP) */}
+          {/* 2. CENTRO: BARRA DE NAVEGACIÓN DE ESCRITORIO (DESKTOP CON RUTAS REALES) */}
           <nav aria-label="Navegación Principal" className="hidden lg:flex items-center justify-center gap-1 xl:gap-2">
             {/* Enlace Inicio */}
             <a
-              href="#inicio"
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('inicio');
@@ -170,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative" ref={dropdownRef}>
               <div className="flex items-center">
                 <a
-                  href="#servicios"
+                  href="/servicios"
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick('servicios');
@@ -205,7 +207,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <div className="p-2 flex items-center justify-between text-[10px] uppercase font-black tracking-widest text-neutral-400">
                     <span>Catálogo Oficial (1 a 5)</span>
                     <a
-                      href="#servicios"
+                      href="/servicios"
                       onClick={(e) => {
                         e.preventDefault();
                         handleNavClick('servicios');
@@ -219,7 +221,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {servicesList.map((s) => (
                       <a
                         key={s.id}
-                        href="#servicios"
+                        href="/servicios"
                         onClick={(e) => {
                           e.preventDefault();
                           handleServiceItemClick(s.id);
@@ -248,7 +250,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Enlace Packs */}
             <a
-              href="#packs"
+              href="/packs"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('packs');
@@ -265,7 +267,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Enlace Simulador */}
             <a
-              href="#simulador"
+              href="/simulador"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('simulador');
@@ -282,7 +284,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Enlace Opiniones */}
             <a
-              href="#opiniones"
+              href="/opiniones"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('opiniones');
@@ -299,7 +301,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Enlace Contacto */}
             <a
-              href="#contacto"
+              href="/contacto"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('contacto');
@@ -315,8 +317,32 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </nav>
 
-          {/* 3. LADO DERECHO: WHATSAPP DIRECTO + CONFIGURAR FX */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          {/* 3. LADO DERECHO: REDES SOCIALES + WHATSAPP DIRECTO + CONFIGURAR FX */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Social Links (Instagram & Facebook for SEO and visitors) */}
+            <div className="hidden xl:flex items-center gap-1.5">
+              <a
+                href="https://www.instagram.com/humoyefectos/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-lg bg-neutral-900 hover:bg-pink-950/60 border border-neutral-800 hover:border-pink-500/50 flex items-center justify-center text-neutral-300 hover:text-pink-400 transition-all group"
+                title="Perfil Oficial de Instagram @humoyefectos"
+                aria-label="Instagram Oficial Humo Y Efectos"
+              >
+                <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="https://www.facebook.com/humoyefectos/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-lg bg-neutral-900 hover:bg-blue-950/60 border border-neutral-800 hover:border-blue-500/50 flex items-center justify-center text-neutral-300 hover:text-blue-400 transition-all group"
+                title="Página Oficial de Facebook @humoyefectos"
+                aria-label="Facebook Oficial Humo Y Efectos"
+              >
+                <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
+
             {/* Botón WhatsApp */}
             <a
               href={whatsappUrl}
@@ -373,7 +399,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <nav className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm font-bold">
               {/* Inicio */}
               <a
-                href="#inicio"
+                href="/"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('inicio');
@@ -395,7 +421,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Servicios */}
               <a
-                href="#servicios"
+                href="/servicios"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('servicios');
@@ -417,7 +443,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Catálogo de Packs */}
               <a
-                href="#packs"
+                href="/packs"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('packs');
@@ -439,7 +465,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Simulador de Escenarios */}
               <a
-                href="#simulador"
+                href="/simulador"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('simulador');
@@ -461,14 +487,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Opiniones 2026 */}
               <a
-                href="#opiniones"
+                href="/opiniones"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('opiniones');
                 }}
                 className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
                   currentView === 'opiniones'
-                    ? 'bg-rose-600 text-white shadow-md'
+                    ? 'bg-rose-500 text-white shadow-md'
                     : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
                 }`}
               >
@@ -483,7 +509,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Contacto & Presupuesto */}
               <a
-                href="#contacto"
+                href="/contacto"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('contacto');
@@ -514,7 +540,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {servicesList.map((s) => (
                 <a
                   key={s.id}
-                  href="#servicios"
+                  href="/servicios"
                   onClick={(e) => {
                     e.preventDefault();
                     handleServiceItemClick(s.id);
@@ -544,7 +570,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             </p>
           </div>
 
-          {/* SECCIÓN 4: ACCIONES PRINCIPALES (WHATSAPP + CONFIGURADOR) */}
+          {/* SECCIÓN 4: REDES SOCIALES OFICIALES (INSTAGRAM & FACEBOOK) */}
+          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-950/40 via-neutral-900 to-blue-950/40 border border-neutral-800 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-white">Síguenos en Redes</span>
+              <span className="text-[10px] text-neutral-400">Vídeos y fotos semanales</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="https://www.instagram.com/humoyefectos/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2 px-3 rounded-xl bg-pink-950/60 hover:bg-pink-900/70 border border-pink-500/40 text-pink-200 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-1.5"
+                title="Instagram Oficial @humoyefectos"
+              >
+                <Instagram className="w-4 h-4 text-pink-400" />
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://www.facebook.com/humoyefectos/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2 px-3 rounded-xl bg-blue-950/60 hover:bg-blue-900/70 border border-blue-500/40 text-blue-200 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-1.5"
+                title="Facebook Oficial @humoyefectos"
+              >
+                <Facebook className="w-4 h-4 text-blue-400" />
+                <span>Facebook</span>
+              </a>
+            </div>
+          </div>
+
+          {/* SECCIÓN 5: ACCIONES PRINCIPALES (WHATSAPP + CONFIGURADOR) */}
           <div className="pt-2 border-t border-neutral-900 flex flex-col gap-2.5">
             <a
               href={whatsappUrl}

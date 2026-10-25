@@ -27,17 +27,18 @@
         try {
           var origin = window.location.origin;
           var pathname = window.location.pathname || '/';
-          if (origin && !origin.includes('humoyefectos.es') && !origin.includes('localhost')) {
-            var curr = origin + pathname;
-            var can = document.getElementById('canonical-url');
-            if (can) can.href = curr;
-            var h1 = document.getElementById('hreflang-es');
-            if (h1) h1.href = curr;
-            var h2 = document.getElementById('hreflang-es-es');
-            if (h2) h2.href = curr;
-            var h3 = document.getElementById('hreflang-default');
-            if (h3) h3.href = curr;
-          }
+          var baseUrl = (origin && (origin.includes('humoyefectos.es') || origin.includes('localhost')))
+            ? 'https://humoyefectos.es'
+            : origin;
+          var fullUrl = baseUrl + (pathname === '/' ? '/' : pathname.replace(/\/$/, ''));
+          var can = document.getElementById('canonical-url');
+          if (can) can.href = fullUrl;
+          var h1 = document.getElementById('hreflang-es');
+          if (h1) h1.href = fullUrl;
+          var h2 = document.getElementById('hreflang-es-es');
+          if (h2) h2.href = fullUrl;
+          var h3 = document.getElementById('hreflang-default');
+          if (h3) h3.href = fullUrl;
         } catch(e) {}
       })();
     </script>
@@ -93,7 +94,8 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": ["LocalBusiness", "EntertainmentBusiness"],
+          "@type": "EntertainmentBusiness",
+          "additionalType": "https://schema.org/LocalBusiness",
           "@id": "https://humoyefectos.es/#organization",
           "name": "Humo Y Efectos",
           "legalName": "Humo Y Efectos",
@@ -106,6 +108,8 @@
           "priceRange": "€€",
           "hasMap": "https://maps.google.com/?q=Talavera+de+la+Reina,+Toledo",
           "sameAs": [
+            "https://www.instagram.com/humoyefectos/",
+            "https://www.facebook.com/humoyefectos/",
             "https://www.bodas.net/",
             "https://wa.me/34600082462",
             "https://maps.google.com/?q=Talavera+de+la+Reina,+Toledo"
@@ -147,55 +151,55 @@
                 "@type": "Offer",
                 "name": "Pack Salida de Ceremonia con Cañones de Humo Aéreo Vertical",
                 "description": "Disparo instantáneo vertical de 12 a 15 metros de altura con apertura en abanico y disipación limpia en el aire sin residuos. Artificio Sbruffo Smoke 40 homologado CE Clase T1.",
-                "price": "190",
+                "price": "190.00",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://humoyefectos.es/#packs"
+                "url": "https://humoyefectos.es/packs"
               },
               {
                 "@type": "Offer",
                 "name": "Pack Cañones de Confeti Romántico (Mariposas & Papel Blanco)",
                 "description": "Lluvia de mariposas de seda de vuelo lento en suspensión para vals y salida nupcial y confeti blanco efecto nieve 100% biodegradable e ignífugo.",
-                "price": "150",
+                "price": "150.00",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://humoyefectos.es/#packs"
+                "url": "https://humoyefectos.es/packs"
               },
               {
                 "@type": "Offer",
                 "name": "Pack Cañones de Confeti Fiesta & Barra Libre Multicolor",
                 "description": "Estallido de confeti multicolor y metalizado en oro y plata de 8 a 12 metros de alcance para apertura de barra libre y fiestas.",
-                "price": "140",
+                "price": "140.00",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://humoyefectos.es/#packs"
+                "url": "https://humoyefectos.es/packs"
               },
               {
                 "@type": "Offer",
                 "name": "Pack Revelación de Género con Disparador TNT Retro",
                 "description": "Cañones de humo aéreo sorpresa en rosa intenso o azul cielo a 15 metros de altura con detonador TNT vintage.",
-                "price": "220",
+                "price": "220.00",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://humoyefectos.es/#packs"
+                "url": "https://humoyefectos.es/packs"
               },
               {
                 "@type": "Offer",
                 "name": "Pack Máquina de Niebla Baja (Vals sobre las Nubes)",
                 "description": "Vals nupcial sobre las nubes con hielo seco y agua caliente. Manto blanco denso a ras de suelo, 100% vapor limpio que no moja ni mancha vestidos.",
-                "price": "280",
+                "price": "280.00",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://humoyefectos.es/#packs"
+                "url": "https://humoyefectos.es/packs"
               },
               {
                 "@type": "Offer",
                 "name": "Pack Fuentes de Chispas Frías (Sparkulars)",
                 "description": "Fuentes de fuego frío de titanio de 2 a 5 metros regulables. No queman la piel ni la ropa, sin humo ni pólvora. Autorizadas en interiores.",
-                "price": "250",
+                "price": "250.00",
                 "priceCurrency": "EUR",
                 "availability": "https://schema.org/InStock",
-                "url": "https://humoyefectos.es/#packs"
+                "url": "https://humoyefectos.es/packs"
               }
             ]
           },
@@ -291,31 +295,31 @@
               "@type": "ListItem",
               "position": 2,
               "name": "Servicios Oficiales",
-              "item": "https://humoyefectos.es/#servicios"
+              "item": "https://humoyefectos.es/servicios"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Catálogo de Packs",
-              "item": "https://humoyefectos.es/#packs"
+              "item": "https://humoyefectos.es/packs"
             },
             {
               "@type": "ListItem",
               "position": 4,
               "name": "Simulador de Escenarios",
-              "item": "https://humoyefectos.es/#simulador"
+              "item": "https://humoyefectos.es/simulador"
             },
             {
               "@type": "ListItem",
               "position": 5,
               "name": "Opiniones 2026",
-              "item": "https://humoyefectos.es/#opiniones"
+              "item": "https://humoyefectos.es/opiniones"
             },
             {
               "@type": "ListItem",
               "position": 6,
               "name": "Contacto & Presupuesto",
-              "item": "https://humoyefectos.es/#contacto"
+              "item": "https://humoyefectos.es/contacto"
             }
           ]
         }

@@ -36,14 +36,97 @@ import {
   Palette,
 } from 'lucide-react';
 
+const PAGE_META: Record<PageView, { title: string; desc: string; path: string }> = {
+  inicio: {
+    title: 'Humo Y Efectos | Humo Aéreo y Efectos para Bodas en España',
+    desc: 'Humo aéreo, confeti, chispas frías y niebla baja para bodas. Sede en Talavera y servicio en Madrid y toda España.',
+    path: '/',
+  },
+  servicios: {
+    title: 'Servicios Oficiales de Efectos Especiales para Bodas | Humo Y Efectos',
+    desc: 'Catálogo de 5 efectos para bodas: humo aéreo vertical, confeti nupcial, chispas frías Sparkulars y humo bajo de hielo seco.',
+    path: '/servicios',
+  },
+  packs: {
+    title: 'Catálogo de Packs y Precios para Bodas y Eventos | Humo Y Efectos',
+    desc: 'Precios y packs oficiales de efectos especiales para bodas: salida de ceremonia, vals sobre las nubes, chispas y detonador TNT.',
+    path: '/packs',
+  },
+  simulador: {
+    title: 'Simulador de Cañones de Humo Aéreo en Directo | Humo Y Efectos',
+    desc: 'Prueba el disparo instantáneo de 1 a 9 cañones de humo aéreo en directo con la cámara de tu móvil o la foto de vuestra finca.',
+    path: '/simulador',
+  },
+  opiniones: {
+    title: 'Opiniones y Reseñas Reales de Bodas 2026 | Humo Y Efectos',
+    desc: 'Opiniones 2026 de novios y parejas sobre cañones de humo aéreo y efectos especiales para bodas en Talavera, Madrid y España.',
+    path: '/opiniones',
+  },
+  contacto: {
+    title: 'Contacto Oficial y Presupuesto para Bodas | Humo Y Efectos',
+    desc: 'Solicita presupuesto para tu boda o evento con Humo Y Efectos. Sede en Talavera con servicio en Madrid, Toledo y toda España.',
+    path: '/contacto',
+  },
+};
+
 function getInitialView(): PageView {
-  const hash = window.location.hash.toLowerCase().replace('#', '');
-  if (hash === 'servicios') return 'servicios';
-  if (hash === 'packs') return 'packs';
-  if (hash === 'simulador') return 'simulador';
-  if (hash === 'opiniones') return 'opiniones';
-  if (hash === 'contacto') return 'contacto';
+  try {
+    // 1. Check pathname (e.g. /servicios, /contacto)
+    const rawPath = window.location.pathname.toLowerCase().replace(/^\/+/, '').replace(/\/+$/, '');
+    if (rawPath === 'servicios') return 'servicios';
+    if (rawPath === 'packs') return 'packs';
+    if (rawPath === 'simulador') return 'simulador';
+    if (rawPath === 'opiniones') return 'opiniones';
+    if (rawPath === 'contacto') return 'contacto';
+
+    // 2. Check query parameter fallback (e.g. ?p=servicios)
+    const urlParams = new URLSearchParams(window.location.search);
+    const pParam = urlParams.get('p')?.toLowerCase();
+    if (pParam === 'servicios') return 'servicios';
+    if (pParam === 'packs') return 'packs';
+    if (pParam === 'simulador') return 'simulador';
+    if (pParam === 'opiniones') return 'opiniones';
+    if (pParam === 'contacto') return 'contacto';
+
+    // 3. Check hash fallback (e.g. #servicios)
+    const hash = window.location.hash.toLowerCase().replace('#', '').replace(/^\/+/, '');
+    if (hash === 'servicios') return 'servicios';
+    if (hash === 'packs') return 'packs';
+    if (hash === 'simulador') return 'simulador';
+    if (hash === 'opiniones') return 'opiniones';
+    if (hash === 'contacto') return 'contacto';
+  } catch (e) {
+    // Fallback safe
+  }
   return 'inicio';
+}
+
+function updateSeoMeta(view: PageView) {
+  try {
+    const meta = PAGE_META[view] || PAGE_META.inicio;
+    document.title = meta.title;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', meta.desc);
+
+    const baseUrl =
+      window.location.origin &&
+      (window.location.origin.includes('humoyefectos.es') || window.location.origin.includes('localhost'))
+        ? 'https://humoyefectos.es'
+        : window.location.origin;
+
+    const fullUrl = baseUrl + meta.path;
+    const can = document.getElementById('canonical-url');
+    if (can) can.setAttribute('href', fullUrl);
+    const h1 = document.getElementById('hreflang-es');
+    if (h1) h1.setAttribute('href', fullUrl);
+    const h2 = document.getElementById('hreflang-es-es');
+    if (h2) h2.setAttribute('href', fullUrl);
+    const h3 = document.getElementById('hreflang-default');
+    if (h3) h3.setAttribute('href', fullUrl);
+  } catch (e) {
+    // Non-critical
+  }
 }
 
 export default function App() {
@@ -52,20 +135,37 @@ export default function App() {
   const configuratorRef = useRef<HTMLDivElement | null>(null);
   const simulatorRef = useRef<HTMLDivElement | null>(null);
 
-  // Sync state with URL hash
+  // Sync state and meta on initial mount and browser navigation (Back / Forward)
   useEffect(() => {
-    const handleHashChange = () => {
+    const initial = getInitialView();
+    updateSeoMeta(initial);
+
+    const handleLocationChange = () => {
       const view = getInitialView();
       setCurrentView(view);
+      updateSeoMeta(view);
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   const navigateTo = (view: PageView) => {
     setCurrentView(view);
-    window.location.hash = '#' + view;
+    const meta = PAGE_META[view] || PAGE_META.inicio;
+    
+    // Real HTML5 History API URL path change (e.g. /servicios, /contacto)
+    try {
+      window.history.pushState({ view }, '', meta.path);
+    } catch (e) {
+      window.location.hash = '#' + view;
+    }
+
+    updateSeoMeta(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

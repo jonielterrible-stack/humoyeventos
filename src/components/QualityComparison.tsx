@@ -141,9 +141,9 @@ export const QualityComparison: React.FC = () => {
               <ShieldCheck className="w-5 h-5 text-rose-600" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-neutral-900 font-display">
+              <p className="text-sm font-bold text-neutral-900 font-display">
                 Compromiso Humo Y Efectos: Dossier Aprobado para Fincas
-              </h4>
+              </p>
               <p className="text-xs text-neutral-600">
                 Disparo instantáneo que se disipa en segundos. Entregamos certificado CE Clase T1 y seguro de
                 responsabilidad civil para el metre de la finca.

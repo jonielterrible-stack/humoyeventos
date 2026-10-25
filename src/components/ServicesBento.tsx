@@ -169,9 +169,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       </span>
                     </div>
 
-                    <h4 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
                       Humo Aéreo en Todos los Colores: Tú Eliges la Cantidad de Cañones (1 a 9)
-                    </h4>
+                    </p>
 
                     <p className="text-sm text-neutral-600 leading-relaxed">
                       Artificio pirotécnico <strong>Sbruffo Smoke 40 homologado CE Clase T1</strong>. Propulsa columnas verticales ultrarrápidas a <strong>14-15 metros de altura</strong>. Al alcanzar el cenit, abre en un espectacular abanico multicolor para la fotografía cumbre de vuestra boda y <strong>se disipa limpiamente en el aire en pocos segundos</strong> sin dejar rastro, niebla pesada ni residuos.
@@ -209,9 +209,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                   </div>
 
                   <div className="lg:col-span-5 bg-neutral-50 p-6 rounded-2xl border border-neutral-200/80 space-y-4">
-                    <h5 className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                    <p className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Garantía Técnica y Seguridad en Finca
-                    </h5>
+                    </p>
 
                     <ul className="space-y-2.5 text-xs text-neutral-700">
                       <li className="flex items-center gap-2">
@@ -276,9 +276,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       className="w-full h-full object-cover object-[center_65%] group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-amber-600 transition-colors font-display">
+                  <p className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-amber-600 transition-colors font-display">
                     Disparador TNT Retro para Papás
-                  </h4>
+                  </p>
                   <p className="text-xs text-neutral-600 leading-relaxed mb-4">
                     Los futuros papás bajan juntos la palanca de nuestra icónica caja detonadora TNT vintage y al instante los
                     cañones estallan hacia el cielo en rosa o azul sorpresa. Embalaje neutro 100% confidencial con código secreto para cómplice o ginecólogo.
@@ -325,9 +325,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-rose-600 transition-colors font-display">
+                  <p className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-rose-600 transition-colors font-display">
                     Bengalas de Humo de Mano
-                  </h4>
+                  </p>
                   <p className="text-xs text-neutral-600 leading-relaxed mb-3">
                     Activación por anilla sin mechero para sesiones de fotos dinámicas, prebodas y photocalls.
                   </p>
@@ -396,9 +396,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       </span>
                     </div>
 
-                    <h4 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
                       Todos los Tipos de Confeti en un Solo Lugar: Mariposas, Nieve y Multicolor
-                    </h4>
+                    </p>
 
                     <p className="text-sm text-neutral-600 leading-relaxed">
                       Ponemos a vuestra disposición la gama completa de cañones neumáticos y eléctricos inalámbricos con todos los acabados disponibles para cada instante del evento:
@@ -436,9 +436,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                   </div>
 
                   <div className="lg:col-span-5 bg-neutral-50 p-6 rounded-2xl border border-neutral-200/80 space-y-4">
-                    <h5 className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                    <p className="text-xs font-bold uppercase tracking-wider text-neutral-900">
                       Garantías Técnicas y Seguridad Oficial
-                    </h5>
+                    </p>
 
                     <ul className="space-y-2.5 text-xs text-neutral-700">
                       <li className="flex items-center gap-2">
@@ -527,9 +527,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                     </span>
                   </div>
 
-                  <h4 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-amber-600 transition-colors font-display">
+                  <p className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-amber-600 transition-colors font-display">
                     Fuentes de Chispas Frías para Entradas, Baile y Tarta
-                  </h4>
+                  </p>
 
                   <p className="text-sm text-neutral-600 leading-relaxed mb-6">
                     Chorros verticales continuos o ráfagas rítmicas de chispas luminosas basadas en microgránulos de titanio a baja temperatura.
@@ -623,9 +623,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                     </span>
                   </div>
 
-                  <h4 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-sky-600 transition-colors font-display">
+                  <p className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-sky-600 transition-colors font-display">
                     Máquina de Niebla Baja (Baile sobre las Nubes para Novios)
-                  </h4>
+                  </p>
 
                   <p className="text-sm text-neutral-600 leading-relaxed mb-6">
                     La máquina profesional de humo bajo sumerge hielo seco en agua a alta temperatura para liberar
@@ -731,9 +731,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       </span>
                     </div>
 
-                    <h4 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-indigo-600 transition-colors font-display">
+                    <p className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-indigo-600 transition-colors font-display">
                       Alquiler de Sonido, Luces y Discotecas Móviles con DJ
-                    </h4>
+                    </p>
 
                     <p className="text-sm text-neutral-600 leading-relaxed mb-6">
                       Aunque nuestra gran especialidad número uno son los efectos de humo y pirotecnia homologada, ponemos a tu disposición

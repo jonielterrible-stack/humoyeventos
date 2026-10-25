@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Phone, Mail, Clock, MessageSquare, Sparkles, MessageCircle } from 'lucide-react';
+import { Send, CheckCircle2, Phone, Mail, Clock, MessageSquare, Sparkles, MessageCircle, Instagram, Facebook, ExternalLink } from 'lucide-react';
 import { dispatchLead } from '../utils/leadService';
 
 export const ContactSection: React.FC = () => {
@@ -132,6 +132,36 @@ ${formState.notes ? `· Notas: ${formState.notes}\n` : ''}
                 <MessageSquare className="w-4 h-4" />
                 <span>Abrir chat de WhatsApp directo →</span>
               </a>
+            </div>
+
+            {/* Social Media Channels */}
+            <div className="p-4 rounded-2xl bg-neutral-900 text-white border border-neutral-800 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-neutral-200">Canales Sociales Oficiales:</span>
+                <span className="text-[10px] text-neutral-400">@humoyefectos</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <a
+                  href="https://www.instagram.com/humoyefectos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2 px-3 rounded-xl bg-pink-950/60 hover:bg-pink-900/70 border border-pink-500/40 text-pink-200 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-1.5"
+                  title="Perfil Oficial de Instagram @humoyefectos"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-pink-400" />
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href="https://www.facebook.com/humoyefectos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2 px-3 rounded-xl bg-blue-950/60 hover:bg-blue-900/70 border border-blue-500/40 text-blue-200 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-1.5"
+                  title="Página Oficial de Facebook @humoyefectos"
+                >
+                  <Facebook className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Facebook</span>
+                </a>
+              </div>
             </div>
           </div>
 
