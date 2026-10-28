@@ -1,6 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Star, Quote, Heart, ExternalLink, ArrowRight, CheckCircle2, Sparkles, ZoomIn, X, Maximize2 } from 'lucide-react';
-import { TESTIMONIALS } from '../data/smokeData';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Star,
+  Quote,
+  Heart,
+  ExternalLink,
+  ArrowRight,
+  CheckCircle2,
+  Sparkles,
+  ZoomIn,
+  X,
+  Share2,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { TESTIMONIALS, Testimonial } from '../data/smokeData';
 import { assetUrl } from '../utils/assetUrl';
 
 export const TestimonialsSection: React.FC = () => {
@@ -11,6 +26,12 @@ export const TestimonialsSection: React.FC = () => {
     couple: string;
     location?: string;
   } | null>(null);
+
+  const [copiedId, setCopiedId] = useState<number | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Curate top high-credibility testimonials with the photo at the front
+  const displayedTestimonials = TESTIMONIALS.slice(0, 5);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -28,10 +49,60 @@ export const TestimonialsSection: React.FC = () => {
     };
   }, [modalImage]);
 
+  // Handle direct hash navigation e.g. #opinion-1
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash.startsWith('#opinion-')) {
+      const el = document.getElementById(window.location.hash.slice(1));
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }, 350);
+      }
+    }
+  }, []);
+
+  const handleShare = async (t: Testimonial) => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+    const shareUrl = `${origin}${pathname}#opinion-${t.id}`;
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setCopiedId(t.id);
+      setTimeout(() => setCopiedId(null), 2500);
+    } catch (err) {
+      console.error('Error al copiar al portapapeles:', err);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -360, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 360, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="opiniones" aria-label="Opiniones de Parejas 2026" className="py-20 bg-white border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-bold text-rose-600 uppercase tracking-widest mb-2">
               <Heart className="w-4 h-4 fill-rose-600 text-rose-600" />
@@ -41,7 +112,7 @@ export const TestimonialsSection: React.FC = () => {
               Más de 385 clientes y parejas han confiado en Humo Y Efectos
             </h2>
             <p className="text-sm text-neutral-600 mt-2">
-              Opiniones reales de bodas, revelaciones de género y eventos privados en Talavera de la Reina, Madrid, Toledo y toda España que han vivido su momento inolvidable.
+              Experiencias reales de bodas y eventos con humo aéreo y efectos especiales. Desliza para explorar las opiniones destacadas.
             </p>
           </div>
 
@@ -71,31 +142,101 @@ export const TestimonialsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Testimonial Cards on White */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => {
+        {/* Carousel Controls Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Opiniones destacadas · Desplazamiento horizontal</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={scrollLeft}
+              className="p-2.5 rounded-xl border border-neutral-200 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-700 transition-colors cursor-pointer shadow-2xs"
+              title="Desplazar a la izquierda"
+              aria-label="Desplazar a la izquierda"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={scrollRight}
+              className="p-2.5 rounded-xl border border-neutral-200 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-700 transition-colors cursor-pointer shadow-2xs"
+              title="Desplazar a la derecha"
+              aria-label="Desplazar a la derecha"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Horizontal Scroll Track with Framer Motion Fade-In & Upward Motion */}
+        <div
+          ref={scrollContainerRef}
+          tabIndex={0}
+          aria-label="Carrusel de opiniones de clientes"
+          className="flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:thin] [scrollbar-color:#d4d4d8_transparent]"
+        >
+          {displayedTestimonials.map((t, index) => {
             const hasPhoto = Boolean(t.photo);
+            const isCopied = copiedId === t.id;
+
             return (
-              <article
+              <motion.article
                 key={t.id}
+                id={`opinion-${t.id}`}
                 itemScope
                 itemType="https://schema.org/Review"
-                className={`rounded-3xl p-7 flex flex-col justify-between shadow-sm transition-all ${
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
+                className={`min-w-[320px] sm:min-w-[380px] max-w-[400px] shrink-0 snap-start rounded-3xl p-7 flex flex-col justify-between shadow-sm transition-all ${
                   hasPhoto
-                    ? 'bg-amber-50/25 border-2 border-amber-300 hover:border-amber-400 shadow-md'
+                    ? 'bg-amber-50/25 border-2 border-amber-300 hover:border-amber-400 shadow-md ring-1 ring-amber-200/50'
                     : 'bg-neutral-50 border border-neutral-200 hover:border-neutral-300'
                 }`}
               >
                 <div>
-                  {/* Badge if available */}
-                  {t.badge && (
-                    <div className="mb-3.5 flex items-center justify-between">
+                  {/* Top Bar with Badge & Share Button */}
+                  <div className="mb-3.5 flex items-center justify-between gap-2">
+                    {t.badge ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-amber-500/10 text-amber-900 border border-amber-300">
                         <Sparkles className="w-3 h-3 text-amber-600" />
                         {t.badge}
                       </span>
-                    </div>
-                  )}
+                    ) : (
+                      <span className="text-[11px] font-bold text-neutral-400 font-mono uppercase tracking-wider">
+                        Cliente Verificado
+                      </span>
+                    )}
+
+                    {/* Share Button (Clipboard API) */}
+                    <button
+                      type="button"
+                      onClick={() => handleShare(t)}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
+                        isCopied
+                          ? 'bg-emerald-600 text-white shadow-xs'
+                          : 'bg-white hover:bg-neutral-100 text-neutral-700 hover:text-neutral-900 border border-neutral-200 shadow-2xs'
+                      }`}
+                      title="Copiar enlace directo a esta opinión"
+                      aria-label="Compartir y copiar enlace a esta opinión"
+                    >
+                      {isCopied ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-white" />
+                          <span>¡Copiado!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Share2 className="w-3.5 h-3.5 text-neutral-500" />
+                          <span>Compartir</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
 
                   {/* Customer Event Photo (compact thumbnail with click-to-expand) */}
                   {t.photo && (
@@ -153,6 +294,7 @@ export const TestimonialsSection: React.FC = () => {
                     </figure>
                   )}
 
+                  {/* Rating Stars & Quote Icon */}
                   <div className="flex items-center justify-between mb-4">
                     <div
                       className="flex text-amber-400"
@@ -169,11 +311,13 @@ export const TestimonialsSection: React.FC = () => {
                     <Quote className="w-5 h-5 text-neutral-300" />
                   </div>
 
+                  {/* Review Text */}
                   <p itemProp="reviewBody" className="text-xs sm:text-sm text-neutral-700 italic leading-relaxed mb-6 font-medium">
                     "{t.text}"
                   </p>
                 </div>
 
+                {/* Footer with Author, Location & Date */}
                 <div className="pt-4 border-t border-neutral-200">
                   <p itemProp="author" itemScope itemType="https://schema.org/Person" className="text-sm font-bold text-neutral-900 font-display">
                     <span itemProp="name">{t.couple}</span>
@@ -188,13 +332,13 @@ export const TestimonialsSection: React.FC = () => {
                     </span>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>
 
         {/* Internal Cross-Link Banner */}
-        <div className="mt-10 p-5 rounded-2xl bg-gradient-to-r from-rose-50 via-neutral-50 to-amber-50 border border-rose-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-8 p-5 rounded-2xl bg-gradient-to-r from-rose-50 via-neutral-50 to-amber-50 border border-rose-100 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
             <p className="text-xs text-neutral-700">
