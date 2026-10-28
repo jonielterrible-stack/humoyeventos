@@ -1,8 +1,13 @@
 import React from 'react';
-import { ShieldCheck, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
+import { ShieldCheck, AlertTriangle, CheckCircle, XCircle, FileText, ArrowRight } from 'lucide-react';
 import { COMPARISON_DATA } from '../data/smokeData';
+import { PageView } from '../types/navigation';
 
-export const QualityComparison: React.FC = () => {
+interface QualityComparisonProps {
+  onNavigate?: (view: PageView) => void;
+}
+
+export const QualityComparison: React.FC<QualityComparisonProps> = ({ onNavigate }) => {
   return (
     <section id="seguridad" className="py-20 bg-white border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-6">
@@ -66,6 +71,17 @@ export const QualityComparison: React.FC = () => {
                 Garantía técnica regulada conforme a la legislación vigente de la Unión Europea y del Reino de España para pirotecnia de uso en eventos (Categoría T1):
               </p>
             </div>
+            <a
+              href="/seguridad"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate?.('seguridad');
+              }}
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-colors cursor-pointer shrink-0"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Abrir Dossier Técnico Completo →</span>
+            </a>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-neutral-800 text-xs">
@@ -134,7 +150,7 @@ export const QualityComparison: React.FC = () => {
           </div>
         </div>
 
-        {/* Guarantee Callout Banner */}
+        {/* Guarantee Callout Banner with Link to Safety Dossier */}
         <div className="mt-6 p-6 rounded-2xl bg-gradient-to-r from-rose-50 via-neutral-50 to-amber-50 border border-rose-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center shrink-0">
@@ -145,19 +161,31 @@ export const QualityComparison: React.FC = () => {
                 Compromiso Humo Y Efectos: Dossier Aprobado para Fincas
               </p>
               <p className="text-xs text-neutral-600">
-                Disparo instantáneo que se disipa en segundos. Entregamos certificado CE Clase T1 y seguro de
-                responsabilidad civil para el metre de la finca.
+                Disparo instantáneo que se disipa en segundos. Homologación oficial CE Clase T1 de venta y uso libre para mayores de 18 años, sin licencias, sin carnet y sin transporte ADR.
               </p>
             </div>
           </div>
-          <a
-            href="https://wa.me/34600082462?text=Hola%20Humo%20Y%20Efectos,%20quisiera%20solicitar%20el%20dossier%20técnico%20y%20certificado%20CE%20para%20mi%20finca."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-xs font-bold text-white rounded-xl shadow-xs transition-colors whitespace-nowrap shrink-0 cursor-pointer"
-          >
-            Solicitar Dossier Técnico CE
-          </a>
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <a
+              href="/seguridad"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate?.('seguridad');
+              }}
+              className="px-4 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-xs font-bold text-white rounded-xl shadow-xs transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5"
+            >
+              <FileText className="w-3.5 h-3.5 text-rose-400" />
+              <span>Ver y Descargar Dossier Técnico (PDF) →</span>
+            </a>
+            <a
+              href="https://wa.me/34600082462?text=Hola%20Humo%20Y%20Efectos,%20quisiera%20solicitar%20el%20dossier%20técnico%20y%20certificado%20CE%20sellado%20para%20mi%20finca."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-xl shadow-xs transition-colors whitespace-nowrap cursor-pointer"
+            >
+              Solicitar por WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>

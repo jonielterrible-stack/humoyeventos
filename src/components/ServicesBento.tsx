@@ -10,9 +10,12 @@ import {
   Bomb,
   MessageCircle,
   Sparkles,
+  ShieldCheck,
+  FileText,
 } from 'lucide-react';
 import { AerialSafetyAndPaletteCard } from './AerialSafetyAndPaletteCard';
 import { assetUrl } from '../utils/assetUrl';
+import { PageView } from '../types/navigation';
 
 export type ServiceTabType =
   | 'todos'
@@ -26,12 +29,14 @@ interface ServicesBentoProps {
   onSelectService: (serviceName: string) => void;
   activeTab: ServiceTabType;
   onTabChange: (tab: ServiceTabType) => void;
+  onNavigate?: (view: PageView) => void;
 }
 
 export const ServicesBento: React.FC<ServicesBentoProps> = ({
   onSelectService,
   activeTab,
   onTabChange,
+  onNavigate,
 }) => {
   return (
     <section id="servicios" className="py-20 bg-neutral-50/70 border-b border-neutral-200">
@@ -124,6 +129,34 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
               <span>5. Sonido & DJ</span>
             </button>
           </div>
+        </div>
+
+        {/* Safety & Fincas Guarantee Callout */}
+        <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-white border border-rose-200/90 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs sm:text-sm font-extrabold text-neutral-900">
+                ¿Vuestra finca o wedding planner solicita normativa técnica y distancias?
+              </p>
+              <p className="text-xs text-neutral-600 mt-0.5">
+                Disponemos de Homologación Oficial Europea CE Clase T1 (EN 16263), distancias certificadas y material de uso libre (+18 años) sin licencias ni ADR.
+              </p>
+            </div>
+          </div>
+          <a
+            href="/seguridad"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate?.('seguridad');
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-bold transition-all shadow-xs cursor-pointer shrink-0"
+          >
+            <FileText className="w-4 h-4 text-rose-400" />
+            <span>Consultar Dossier de Seguridad →</span>
+          </a>
         </div>
 
         {/* ======================================================== */}

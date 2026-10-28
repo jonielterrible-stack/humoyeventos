@@ -42,6 +42,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ChevronRight className="w-3 h-3 text-neutral-600" />
             <a href="/opiniones" onClick={(e) => handleNav('opiniones', e)} className="hover:text-fuchsia-400 transition-colors">Opiniones 2026</a>
             <ChevronRight className="w-3 h-3 text-neutral-600" />
+            <a href="/seguridad" onClick={(e) => handleNav('seguridad', e)} className="hover:text-rose-400 transition-colors font-semibold">Dossier de Seguridad</a>
+            <ChevronRight className="w-3 h-3 text-neutral-600" />
             <a href="/contacto" onClick={(e) => handleNav('contacto', e)} className="hover:text-emerald-400 transition-colors">Contacto & Presupuesto</a>
             <ChevronRight className="w-3 h-3 text-neutral-600" />
             <span className="text-neutral-200 font-bold">Sede Talavera · Madrid · España</span>
@@ -52,29 +54,34 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       {/* 2. Top Trust & Certification Banner */}
       <div className="border-b border-neutral-900 py-6 bg-neutral-900/40">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-rose-950/70 border border-rose-500/30 flex items-center justify-center shrink-0">
+          <a
+            href="/seguridad"
+            onClick={(e) => handleNav('seguridad', e)}
+            className="flex items-center gap-3 group hover:opacity-95 transition-opacity"
+            title="Ver Dossier Técnico Oficial de Seguridad y Homologación CE Clase T1"
+          >
+            <div className="w-9 h-9 rounded-xl bg-rose-950/70 border border-rose-500/30 flex items-center justify-center shrink-0 group-hover:border-rose-400 transition-colors">
               <ShieldCheck className="w-5 h-5 text-rose-500" />
             </div>
             <div>
-              <span className="text-white font-bold text-xs block">
-                Humo Y Efectos · Artificios Pirotécnicos Homologados CE Clase T1 (EN 16263)
+              <span className="text-white font-bold text-xs block group-hover:text-rose-300 transition-colors">
+                Humo Y Efectos · Artificios Pirotécnicos Homologados CE Clase T1 (EN 16263) →
               </span>
               <p className="text-[11px] text-neutral-400">
-                Aprobados para bodas al aire libre e interiores de salones en toda la Unión Europea.
+                Aprobados para bodas al aire libre e interiores en la Unión Europea. Material de uso libre (+18 años) sin licencias ni ADR.
               </p>
             </div>
-          </div>
+          </a>
 
           <div className="flex items-center gap-4 text-xs text-neutral-300 font-semibold">
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Desplazamiento Técnico Propio</span>
+              <span>Soporte y Montaje Propio</span>
             </span>
             <span aria-hidden="true" className="text-neutral-700">·</span>
             <span className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-rose-400" />
-              <span>Seguro de Responsabilidad Civil</span>
+              <span>Uso Libre (+18) Sin Licencias ni ADR</span>
             </span>
           </div>
         </div>
@@ -433,8 +440,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     </a>
                   </li>
                   <li>
-                    <a href="#seguridad" className="text-emerald-400 hover:underline font-semibold block pt-1">
-                      Ver dossier de seguridad para fincas →
+                    <a
+                      href="/seguridad"
+                      onClick={(e) => handleNav('seguridad', e)}
+                      className="text-emerald-400 hover:underline font-semibold block pt-1"
+                    >
+                      Ver dossier técnico oficial de seguridad para fincas (PDF) →
                     </a>
                   </li>
                 </ul>
@@ -493,6 +504,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             >
               <Facebook className="w-3.5 h-3.5" />
               <span>Facebook</span>
+            </a>
+            <span aria-hidden="true" className="text-neutral-700">·</span>
+            <a href="/seguridad" onClick={(e) => handleNav('seguridad', e)} className="hover:text-rose-400 transition-colors font-medium">
+              Dossier Técnico CE T1
             </a>
             <span aria-hidden="true" className="text-neutral-700">·</span>
             <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-neutral-300 transition-colors">

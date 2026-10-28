@@ -13,15 +13,19 @@ import {
 } from 'lucide-react';
 import { OFFICIAL_SAFETY_SPECS, SMOKE_COLORS, SmokeColor } from '../data/smokeData';
 import { assetUrl } from '../utils/assetUrl';
+import { PageView } from '../types/navigation';
+import { FileText } from 'lucide-react';
 
 interface AerialSafetyAndPaletteCardProps {
   onSelectColor?: (color: SmokeColor) => void;
   onOpenConfigurator?: () => void;
+  onNavigate?: (view: PageView) => void;
 }
 
 export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProps> = ({
   onSelectColor,
   onOpenConfigurator,
+  onNavigate,
 }) => {
   const [activeColor, setActiveColor] = useState<SmokeColor>(SMOKE_COLORS[9]); // Rosa Pastel default
   const [activePhotoTab, setActivePhotoTab] = useState<'poster' | 'tubos'>('poster');
@@ -35,7 +39,7 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-400/30 text-rose-300 text-xs font-bold uppercase tracking-wider mb-2.5">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Homologación Oficial CE Cat. T1 · Montaje con Técnico</span>
+              <span>Homologación Oficial CE Cat. T1 · Venta y Uso Libre (+18)</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
               Esta es Nuestra Paleta de Colores Oficial
@@ -45,9 +49,23 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
               Nuestros técnicos profesionales se encargan de todo el montaje, anclaje y disparo inalámbrico en tu evento respetando las distancias de seguridad.
             </p>
           </div>
-          <div className="hidden md:flex items-center gap-2 text-xs font-mono text-neutral-400 bg-white/5 border border-white/10 px-3.5 py-2 rounded-2xl shrink-0">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>10 Tonos en Stock Real</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="/seguridad"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate?.('seguridad');
+              }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all shadow-sm cursor-pointer shrink-0"
+              title="Consultar distancias y normativa técnica para fincas"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>Dossier Técnico Fincas</span>
+            </a>
+            <div className="hidden md:flex items-center gap-2 text-xs font-mono text-neutral-400 bg-white/5 border border-white/10 px-3.5 py-2 rounded-2xl shrink-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>10 Tonos en Stock Real</span>
+            </div>
           </div>
         </div>
       </div>
@@ -243,9 +261,19 @@ export const AerialSafetyAndPaletteCard: React.FC<AerialSafetyAndPaletteCardProp
                 </p>
               </div>
             </div>
-            <span className="text-[11px] font-mono text-neutral-400 bg-neutral-800 px-3 py-1.5 rounded-xl shrink-0">
-              CE 0163-T1-6069 · 35g NEC
-            </span>
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href="/seguridad"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate?.('seguridad');
+                }}
+                className="text-[11px] font-mono font-bold text-rose-300 hover:text-white bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 px-3 py-1.5 rounded-xl transition-colors cursor-pointer"
+                title="Ver homologación completa CE Clase T1 en el Dossier Técnico"
+              >
+                CE 0163-T1-6069 · Ver Dossier →
+              </a>
+            </div>
           </div>
         </div>
       </div>

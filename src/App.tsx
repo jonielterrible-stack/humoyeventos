@@ -15,6 +15,7 @@ import { Footer } from './components/Footer';
 import { AIChatBot } from './components/AIChatBot';
 import { DiscountCouponModal } from './components/DiscountCouponModal';
 import { AerialSafetyAndPaletteCard } from './components/AerialSafetyAndPaletteCard';
+import { TechnicalSafetyDossier } from './components/TechnicalSafetyDossier';
 import { SmokePack } from './data/smokeData';
 import { PageView } from './types/navigation';
 import {
@@ -34,6 +35,7 @@ import {
   Mail,
   Heart,
   Palette,
+  ShieldCheck,
 } from 'lucide-react';
 
 const PAGE_META: Record<PageView, { title: string; desc: string; path: string }> = {
@@ -67,17 +69,23 @@ const PAGE_META: Record<PageView, { title: string; desc: string; path: string }>
     desc: 'Solicita presupuesto para tu boda o evento con Humo Y Efectos. Sede en Talavera con servicio en Madrid, Toledo y toda España.',
     path: '/contacto',
   },
+  seguridad: {
+    title: 'Dossier Técnico de Seguridad y Normas de Uso | Humo Y Efectos',
+    desc: 'Dossier oficial de seguridad para fincas: homologación CE Clase T1 (EN 16263), distancias certificadas y material de uso libre (+18 años) sin licencias ni ADR.',
+    path: '/seguridad',
+  },
 };
 
 function getInitialView(): PageView {
   try {
-    // 1. Check pathname (e.g. /servicios, /contacto)
+    // 1. Check pathname (e.g. /servicios, /contacto, /seguridad)
     const rawPath = window.location.pathname.toLowerCase().replace(/^\/+/, '').replace(/\/+$/, '');
     if (rawPath === 'servicios') return 'servicios';
     if (rawPath === 'packs') return 'packs';
     if (rawPath === 'simulador') return 'simulador';
     if (rawPath === 'opiniones') return 'opiniones';
     if (rawPath === 'contacto') return 'contacto';
+    if (rawPath === 'seguridad' || rawPath === 'dossier' || rawPath === 'normas') return 'seguridad';
 
     // 2. Check query parameter fallback (e.g. ?p=servicios)
     const urlParams = new URLSearchParams(window.location.search);
@@ -87,6 +95,7 @@ function getInitialView(): PageView {
     if (pParam === 'simulador') return 'simulador';
     if (pParam === 'opiniones') return 'opiniones';
     if (pParam === 'contacto') return 'contacto';
+    if (pParam === 'seguridad' || pParam === 'dossier' || pParam === 'normas') return 'seguridad';
 
     // 3. Check hash fallback (e.g. #servicios)
     const hash = window.location.hash.toLowerCase().replace('#', '').replace(/^\/+/, '');
@@ -95,6 +104,7 @@ function getInitialView(): PageView {
     if (hash === 'simulador') return 'simulador';
     if (hash === 'opiniones') return 'opiniones';
     if (hash === 'contacto') return 'contacto';
+    if (hash === 'seguridad' || hash === 'dossier' || hash === 'normas') return 'seguridad';
   } catch (e) {
     // Fallback safe
   }
@@ -243,6 +253,7 @@ export default function App() {
 
                 <AerialSafetyAndPaletteCard
                   onOpenConfigurator={scrollToConfigurator}
+                  onNavigate={navigateTo}
                 />
               </div>
             </section>
@@ -413,13 +424,14 @@ export default function App() {
               onSelectService={handleSelectService}
               activeTab={serviceTab}
               onTabChange={setServiceTab}
+              onNavigate={navigateTo}
             />
 
             {/* Full Catalog of Pack Types */}
             <PacksCatalog onSelectPack={handleSelectPack} />
 
             {/* Safety & Legal Standards CE */}
-            <QualityComparison />
+            <QualityComparison onNavigate={navigateTo} />
 
             {/* Comprehensive FAQs */}
             <FaqSection />
@@ -516,7 +528,10 @@ export default function App() {
             </div>
 
             <div className="max-w-7xl mx-auto px-6 pb-16">
-              <AerialSafetyAndPaletteCard onOpenConfigurator={scrollToConfigurator} />
+              <AerialSafetyAndPaletteCard
+                onOpenConfigurator={scrollToConfigurator}
+                onNavigate={navigateTo}
+              />
             </div>
           </div>
         )}
@@ -577,13 +592,22 @@ export default function App() {
             </div>
 
             {/* Contact Form & Direct Channels */}
-            <ContactSection />
+            <ContactSection onNavigate={navigateTo} />
 
             {/* Clean Sede Central in Talavera de la Reina with Google Maps link */}
             <CoverageMapSection />
 
             {/* Regional Coverage in Spain */}
             <CityCoverage />
+          </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* VISTA 7: DOSSIER TÉCNICO DE SEGURIDAD & NORMAS DE USO     */}
+        {/* ========================================================= */}
+        {currentView === 'seguridad' && (
+          <div className="animate-fade-in">
+            <TechnicalSafetyDossier onNavigate={navigateTo} />
           </div>
         )}
 

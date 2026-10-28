@@ -4,4 +4,5 @@ export type PageView =
   | 'packs'
   | 'simulador'
   | 'opiniones'
-  | 'contacto';
+  | 'contacto'
+  | 'seguridad';

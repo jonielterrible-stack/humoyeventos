@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Phone, Mail, Clock, MessageSquare, Sparkles, MessageCircle, Instagram, Facebook, ExternalLink } from 'lucide-react';
+import { Send, CheckCircle2, Phone, Mail, Clock, MessageSquare, Sparkles, MessageCircle, Instagram, Facebook, ExternalLink, ShieldCheck, FileText } from 'lucide-react';
 import { dispatchLead } from '../utils/leadService';
+import { PageView } from '../types/navigation';
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  onNavigate?: (view: PageView) => void;
+}
+
+export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -162,6 +167,28 @@ ${formState.notes ? `· Notas: ${formState.notes}\n` : ''}
                   <span>Facebook</span>
                 </a>
               </div>
+            </div>
+
+            {/* Dossier de Seguridad para Fincas & Wedding Planners */}
+            <div className="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-2">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-rose-600 shrink-0" />
+                <span className="text-xs font-bold text-neutral-900">¿Eres finca, metre o wedding planner?</span>
+              </div>
+              <p className="text-[11px] text-neutral-600 leading-relaxed">
+                Ponemos a vuestra disposición el dossier técnico oficial con marcado CE Clase T1 (EN 16263), distancias certificadas y régimen legal de uso libre (+18 años) sin licencias ni ADR.
+              </p>
+              <a
+                href="/seguridad"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate?.('seguridad');
+                }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 hover:text-rose-800 hover:underline pt-1 cursor-pointer"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Ver y descargar Dossier Técnico de Seguridad →</span>
+              </a>
             </div>
           </div>
 

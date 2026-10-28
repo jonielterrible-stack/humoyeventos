@@ -408,7 +408,7 @@ export const SMOKE_PACKS: SmokePack[] = [
       'Máquina de niebla baja (hielo seco y agua caliente) para el primer baile nupcial',
       'Fuentes de Chispas Frías (Sparkulars) que no queman para interiores y noche',
       'Montaje y disparo oficial con técnico presencial en finca',
-      'Dossier de homologación y seguro de responsabilidad civil para la finca',
+      'Dossier de homologación CE Clase T1 y normas de uso libre (+18 años) para la finca',
     ],
     description:
       'La cobertura definitiva: disparo de humo aéreo al aire libre, lluvia de mariposas o confeti blanco, baile sobre las nubes con niebla baja y fuentes de chispas frías en el salón.',

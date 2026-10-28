@@ -21,6 +21,7 @@ import {
   ExternalLink,
   Instagram,
   Facebook,
+  ShieldCheck,
 } from 'lucide-react';
 import { ServiceTabType } from './ServicesBento';
 import { PageView } from '../types/navigation';
@@ -244,6 +245,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </a>
                     ))}
                   </div>
+                  
+                  {/* Dropdown Footer: Direct Link to Technical Safety Dossier */}
+                  <div className="p-2 pt-2.5 border-t border-neutral-900 bg-neutral-900/40 rounded-b-xl flex items-center justify-between text-[11px]">
+                    <div className="flex items-center gap-1.5 text-neutral-400">
+                      <ShieldCheck className="w-3.5 h-3.5 text-rose-500" />
+                      <span>Fincas & Normas:</span>
+                    </div>
+                    <a
+                      href="/seguridad"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick('seguridad');
+                      }}
+                      className="font-bold text-rose-400 hover:text-rose-300 transition-colors flex items-center gap-1"
+                    >
+                      <span>Dossier Técnico CE T1 →</span>
+                    </a>
+                  </div>
                 </div>
               )}
             </div>
@@ -297,6 +316,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Heart className="w-3.5 h-3.5 text-rose-400" />
               <span>Opiniones 2026</span>
+            </a>
+
+            {/* Enlace Dossier de Seguridad & Normas */}
+            <a
+              href="/seguridad"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('seguridad');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                currentView === 'seguridad'
+                  ? 'bg-rose-600/30 text-rose-200 border border-rose-500/50'
+                  : 'text-neutral-300 hover:text-white hover:bg-neutral-900'
+              }`}
+              title="Dossier Técnico Oficial de Seguridad y Homologación CE Clase T1 para Fincas"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-rose-400" />
+              <span>Dossier Técnico</span>
             </a>
 
             {/* Enlace Contacto */}
@@ -504,6 +541,28 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-rose-300">
                   4.9 ★
+                </span>
+              </a>
+
+              {/* Dossier Técnico de Seguridad */}
+              <a
+                href="/seguridad"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('seguridad');
+                }}
+                className={`flex items-center justify-between py-2.5 px-3.5 rounded-2xl transition-all ${
+                  currentView === 'seguridad'
+                    ? 'bg-rose-600 text-white shadow-md'
+                    : 'text-neutral-200 hover:text-white hover:bg-neutral-900 bg-neutral-900/60 border border-neutral-800/80'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <ShieldCheck className="w-4 h-4 text-rose-400" />
+                  <span>Dossier Técnico & Seguridad</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/40 text-rose-300">
+                  CE Clase T1
                 </span>
               </a>
 
