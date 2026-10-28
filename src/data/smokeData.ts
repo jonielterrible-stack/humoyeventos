@@ -597,7 +597,7 @@ export const TESTIMONIALS: Testimonial[] = [
     location: 'Evento Privado · Revelación con TNT (Talavera / Madrid)',
     date: 'Octubre 2026',
     rating: 5,
-    text: 'Jonathan y María José confiaron en nosotros para hacer su revelación con TNT súper especial. Bajaron juntos la palanca del detonador vintage y al instante el cielo se tiñó con un impresionante humo rosa vertical de 15 metros enmarcado por el arco de globos. ¡Fue el momento más emocionante y viral de la celebración familiar!',
+    text: 'Confiamos en Humo Y Efectos para nuestra revelación de género con el disparador TNT y fue sencillamente precioso, un momento mágico que nunca olvidaremos. Bajamos la palanca juntos y al instante subió una columna de humo rosa impresionante de 15 metros que dejó a toda nuestra familia e invitados sin palabras. El servicio fue de diez: súper atentos, profesionales, puntuales y cuidando cada detalle de seguridad. ¡Muchísimas gracias por hacerlo tan especial!',
     pack: 'Pack Revelación de Género con Disparador TNT Retro',
     photo: '/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png',
     photoAlt:

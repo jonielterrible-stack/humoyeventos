@@ -1,9 +1,33 @@
-import React from 'react';
-import { Star, Quote, Heart, ExternalLink, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Star, Quote, Heart, ExternalLink, ArrowRight, CheckCircle2, Sparkles, ZoomIn, X, Maximize2 } from 'lucide-react';
 import { TESTIMONIALS } from '../data/smokeData';
 import { assetUrl } from '../utils/assetUrl';
 
 export const TestimonialsSection: React.FC = () => {
+  const [modalImage, setModalImage] = useState<{
+    src: string;
+    alt: string;
+    title: string;
+    couple: string;
+    location?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setModalImage(null);
+    };
+    if (modalImage) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [modalImage]);
+
   return (
     <section id="opiniones" aria-label="Opiniones de Parejas 2026" className="py-20 bg-white border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-6">
@@ -58,7 +82,7 @@ export const TestimonialsSection: React.FC = () => {
                 itemType="https://schema.org/Review"
                 className={`rounded-3xl p-7 flex flex-col justify-between shadow-sm transition-all ${
                   hasPhoto
-                    ? 'bg-amber-50/20 border-2 border-amber-400/80 hover:border-amber-500 shadow-md md:col-span-2 lg:col-span-1'
+                    ? 'bg-amber-50/25 border-2 border-amber-300 hover:border-amber-400 shadow-md'
                     : 'bg-neutral-50 border border-neutral-200 hover:border-neutral-300'
                 }`}
               >
@@ -73,25 +97,56 @@ export const TestimonialsSection: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Customer Event Photo (displayed fully without crop) */}
+                  {/* Customer Event Photo (compact thumbnail with click-to-expand) */}
                   {t.photo && (
                     <figure
                       itemProp="image"
                       itemScope
                       itemType="https://schema.org/ImageObject"
-                      className="mb-5 h-64 sm:h-72 w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800 p-1.5 shadow-inner flex items-center justify-center group"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() =>
+                        setModalImage({
+                          src: assetUrl(t.photo!),
+                          alt: t.photoAlt || `${t.couple} - Evento con Humo Y Efectos`,
+                          title: t.photoTitle || `${t.couple} | Humo Y Efectos`,
+                          couple: t.couple,
+                          location: t.location,
+                        })
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setModalImage({
+                            src: assetUrl(t.photo!),
+                            alt: t.photoAlt || `${t.couple} - Evento con Humo Y Efectos`,
+                            title: t.photoTitle || `${t.couple} | Humo Y Efectos`,
+                            couple: t.couple,
+                            location: t.location,
+                          });
+                        }
+                      }}
+                      title="Haz clic para ver la foto en grande"
+                      className="mb-4 h-40 sm:h-44 w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800 p-1 shadow-inner flex items-center justify-center group cursor-pointer relative transition-transform hover:scale-[1.01]"
                     >
                       <img
                         src={assetUrl(t.photo)}
                         alt={t.photoAlt || `${t.couple} - Evento con Humo Y Efectos`}
                         title={t.photoTitle || `${t.couple} | Humo Y Efectos`}
-                        width={700}
-                        height={700}
+                        width={400}
+                        height={400}
                         loading="lazy"
                         decoding="async"
                         itemProp="contentUrl"
-                        className="w-full h-full object-contain mx-auto rounded-xl group-hover:scale-102 transition-transform duration-500"
+                        className="w-full h-full object-contain mx-auto rounded-xl transition-all duration-300 group-hover:opacity-90"
                       />
+                      {/* Zoom Indicator Overlay on Hover */}
+                      <div className="absolute inset-0 bg-neutral-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900/90 text-white text-[11px] font-bold rounded-xl shadow-lg border border-white/20">
+                          <ZoomIn className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Ver en grande</span>
+                        </span>
+                      </div>
                       <meta itemProp="name" content={t.photoTitle || t.couple} />
                       <meta itemProp="description" content={t.photoAlt || t.text} />
                       <figcaption className="sr-only">{t.photoAlt}</figcaption>
@@ -163,6 +218,67 @@ export const TestimonialsSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal for Full-Size Photo View */}
+      {modalImage && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Foto de ${modalImage.couple}`}
+          className="fixed inset-0 z-50 bg-neutral-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          onClick={() => setModalImage(null)}
+        >
+          <div
+            className="relative max-w-3xl w-full bg-neutral-900 rounded-3xl p-3 sm:p-4 border border-neutral-800 shadow-2xl flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Top Bar with Title and Close Button */}
+            <div className="w-full flex items-center justify-between px-3 py-2 border-b border-neutral-800 mb-3">
+              <div>
+                <p className="text-sm font-bold text-white font-display flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <span>{modalImage.couple}</span>
+                </p>
+                {modalImage.location && (
+                  <p className="text-[11px] text-neutral-400">{modalImage.location}</p>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => setModalImage(null)}
+                className="p-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors cursor-pointer"
+                title="Cerrar (Esc)"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* High-Resolution Full-Size Image Container (100% visible, no crop) */}
+            <div className="w-full max-h-[75vh] flex items-center justify-center bg-neutral-950 rounded-2xl overflow-hidden p-2 border border-neutral-800/80">
+              <img
+                src={modalImage.src}
+                alt={modalImage.alt}
+                title={modalImage.title}
+                className="max-h-[72vh] max-w-full w-auto h-auto object-contain mx-auto rounded-xl shadow-lg"
+              />
+            </div>
+
+            {/* Caption & Close Action */}
+            <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3 px-3 pt-3 mt-1 text-xs text-neutral-400">
+              <p className="text-center sm:text-left text-neutral-300 italic">
+                Revelación de género con disparador TNT retro y columna de humo aéreo rosa a 15 metros.
+              </p>
+              <button
+                type="button"
+                onClick={() => setModalImage(null)}
+                className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-xl transition-colors cursor-pointer shrink-0"
+              >
+                Cerrar imagen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
