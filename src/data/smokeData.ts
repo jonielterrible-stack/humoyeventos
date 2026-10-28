@@ -183,11 +183,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'humo_aereo',
     highlight: true,
     badge: 'MÁS ELEGIDO POR NOVIOS',
-    image: '/assets/services/pack-entrada-nupcial-humo-colores.jpg',
+    image: '/assets/aistudio/Pack_Nupcial_de_Humo_y_Efectos_15e7f342.png',
     imageAlt:
-      'Batería oficial de cañones de humo aéreo vertical en 10 colores homologados CE Clase T1 para entrada triunfal de novios en finca o cóctel',
+      'Pack Entrada Nupcial Signature con batería de cañones de humo aéreo vertical de 15 metros en abanico multicolor para la llegada más emocionante y viral de los novios a la finca en Talavera, Madrid y España',
     imageTitle:
-      'Pack Entrada Nupcial Signature con Cañones de Humo Aéreo Multicolor | Humo Y Efectos',
+      'Pack Entrada Nupcial Signature con Cañones de Humo Aéreo Vertical Multicolor | Humo Y Efectos',
     tubesRecommendation: 'De 4 a 6 Cañones en abanico',
     height: '15 metros de altura vertical',
     duration: 'Disparo instantáneo simultáneo de alto impacto',
@@ -341,11 +341,11 @@ export const SMOKE_PACKS: SmokePack[] = [
     category: 'revelacion_genero',
     highlight: true,
     badge: 'TOP VIRAL PAPÁS',
-    image: '/assets/services/disparador-tnt-revelacion-real.jpg',
+    image: '/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png',
     imageAlt:
-      'Caja detonadora TNT retro con palanca de empuje y decoración Niño o Niña para revelación de género sorpresa con humo rosa o azul',
+      'Revelación de género sorpresa con disparador TNT retro y gran columna de humo aéreo rosa vertical hacia el cielo de 15 metros en evento privado para futuros papás con arco de globos en Talavera de la Reina, Madrid y España - Humo Y Efectos',
     imageTitle:
-      'Pack Revelación de Género con Disparador TNT Retro Sorpresa | Humo Y Efectos',
+      'Pack Revelación de Género con Disparador TNT Retro y Humo Aéreo Rosa | Humo Y Efectos',
     tubesRecommendation: 'De 2 a 4 Cañones sorpresa + Caja TNT',
     height: '15 metros de altura hacia el cielo',
     duration: 'Disparo instantáneo con palanca de detonador vintage',
@@ -420,9 +420,9 @@ export const SMOKE_PACKS: SmokePack[] = [
     tagline: 'Efecto envolvente con anilla Wire-Pull de ignición fría sin mechero',
     category: 'bengalas',
     badge: 'FOTOGRAFÍA CREATIVA',
-    image: '/assets/services/pack-bengalas-humo-mano-colores.jpg',
+    image: '/assets/aistudio/Bengalas_de_humo_en_acci_n_13e2d214.png',
     imageAlt:
-      'Efecto envolvente de bengala profesional de humo de color con ignición fría por anilla para sesiones fotográficas de novios e invitados',
+      'Bengalas de humo de mano en acción con anilla Wire-Pull de ignición fría sin mechero para sesiones fotográficas dinámicas de novios, preboda y photocall - Humo Y Efectos',
     imageTitle:
       'Pack Bengalas Profesionales de Mano para Fotografía de Bodas y Eventos | Humo Y Efectos',
     tubesRecommendation: 'Pack de 10 o 20 unidades',
@@ -576,9 +576,38 @@ export const FAQS = [
   },
 ];
 
-export const TESTIMONIALS = [
+export interface Testimonial {
+  id: number;
+  couple: string;
+  location: string;
+  date: string;
+  rating: number;
+  text: string;
+  pack: string;
+  photo?: string;
+  photoAlt?: string;
+  photoTitle?: string;
+  badge?: string;
+}
+
+export const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
+    couple: 'Jonathan & María José',
+    location: 'Evento Privado · Revelación con TNT (Talavera / Madrid)',
+    date: 'Octubre 2026',
+    rating: 5,
+    text: 'Jonathan y María José confiaron en nosotros para hacer su revelación con TNT súper especial. Bajaron juntos la palanca del detonador vintage y al instante el cielo se tiñó con un impresionante humo rosa vertical de 15 metros enmarcado por el arco de globos. ¡Fue el momento más emocionante y viral de la celebración familiar!',
+    pack: 'Pack Revelación de Género con Disparador TNT Retro',
+    photo: '/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png',
+    photoAlt:
+      'Jonathan y María José celebrando su revelación de género con disparador TNT retro y gran columna de humo rosa vertical de 15 metros en evento privado con Humo Y Efectos',
+    photoTitle:
+      'Reseña de Evento Privado: Jonathan y María José - Revelación de Género con TNT | Humo Y Efectos',
+    badge: 'Evento Privado · Revelación TNT',
+  },
+  {
+    id: 2,
     couple: 'Lucía & Álvaro',
     location: 'Finca Los Lavaderos (Talavera de la Reina, Toledo)',
     date: 'Octubre 2026',
@@ -587,7 +616,7 @@ export const TESTIMONIALS = [
     pack: 'Pack Entrada Nupcial Signature',
   },
   {
-    id: 2,
+    id: 3,
     couple: 'Marta & Javier (Revelación de Género)',
     location: 'Finca Las Palmeras (Madrid)',
     date: 'Agosto 2026',
@@ -596,7 +625,7 @@ export const TESTIMONIALS = [
     pack: 'Pack Revelación de Género con Disparador TNT Retro',
   },
   {
-    id: 3,
+    id: 4,
     couple: 'Carlos & Sofía',
     location: 'Finca Soto de Cerrolén (Madrid)',
     date: 'Julio 2026',
@@ -605,7 +634,7 @@ export const TESTIMONIALS = [
     pack: 'Pack Máquina de Niebla Baja (Vals sobre las Nubes)',
   },
   {
-    id: 4,
+    id: 5,
     couple: 'Elena & David',
     location: 'Cigarral del Ángel (Toledo)',
     date: 'Junio 2026',
@@ -614,7 +643,7 @@ export const TESTIMONIALS = [
     pack: 'Pack Salida de Ceremonia',
   },
   {
-    id: 5,
+    id: 6,
     couple: 'Raúl & Andrea',
     location: 'Finca El Pendolero (Torrelodones, Madrid)',
     date: 'Mayo 2026',
@@ -623,7 +652,7 @@ export const TESTIMONIALS = [
     pack: 'Pack Cañones de Confeti Romántico (Mariposas & Papel Blanco)',
   },
   {
-    id: 6,
+    id: 7,
     couple: 'Marcos & Patricia',
     location: 'Dehesa de Valbuena (Ávila / Valle del Tiétar)',
     date: 'Marzo 2026',

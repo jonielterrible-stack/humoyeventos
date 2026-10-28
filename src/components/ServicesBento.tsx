@@ -297,16 +297,16 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                     <span className="text-xs font-mono font-bold text-amber-600">02. REVELACIÓN GÉNERO</span>
                     <Bomb className="w-5 h-5 text-amber-600" />
                   </div>
-                  <div className="mb-4 h-48 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-900">
+                  <div className="mb-4 h-72 sm:h-84 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center p-1.5 shadow-inner">
                     <img
-                      src={assetUrl('/assets/services/disparador-tnt-revelacion-real.jpg')}
-                      alt="Caja detonadora TNT retro con palanca para revelación de género con humo rosa o azul en Talavera, Madrid y España"
-                      title="Pack Revelación de Género con Disparador TNT Retro - Humo Y Efectos"
-                      width={800}
-                      height={600}
+                      src={assetUrl('/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png')}
+                      alt="Revelación de género con disparador TNT retro y cañón de humo aéreo vertical rosa de 15 metros para futuros papás con arco de globos en Talavera de la Reina, Madrid y España - Humo Y Efectos"
+                      title="Disparador TNT Retro para Revelación de Género con Humo Aéreo Rosa | Humo Y Efectos"
+                      width={900}
+                      height={900}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover object-[center_65%] group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500 rounded-xl"
                     />
                   </div>
                   <p className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-amber-600 transition-colors font-display">
@@ -346,16 +346,16 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                     <span className="text-xs font-mono font-bold text-neutral-400">03. REPORTAJES FOTOGRÁFICOS</span>
                     <Flame className="w-5 h-5 text-rose-500" />
                   </div>
-                  <div className="mb-4 h-48 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-900">
+                  <div className="mb-4 h-72 sm:h-84 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center p-1.5 shadow-inner">
                     <img
-                      src={assetUrl('/assets/services/pack-bengalas-humo-mano-colores.jpg')}
-                      alt="Bengalas profesionales de humo de mano en colores para sesiones fotográficas de bodas y eventos"
-                      title="Pack Bengalas Profesionales de Mano para Fotografía - Humo Y Efectos"
+                      src={assetUrl('/assets/aistudio/Bengalas_de_humo_en_acci_n_13e2d214.png')}
+                      alt="Bengalas de humo de mano en acción con anilla Wire-Pull de ignición fría sin mechero para sesiones fotográficas dinámicas de novios, preboda y photocall - Humo Y Efectos"
+                      title="Bengalas de Humo de Mano para Fotografía Creativa de Bodas y Eventos | Humo Y Efectos"
                       width={800}
                       height={600}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500 rounded-xl"
                     />
                   </div>
                   <p className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-rose-600 transition-colors font-display">

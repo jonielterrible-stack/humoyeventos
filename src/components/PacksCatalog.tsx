@@ -160,13 +160,17 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                     {pack.tagline}
                   </p>
 
-                  {/* Uniform Promotional Image Container with object-fit: cover and SEO ImageObject microdata */}
+                  {/* Uniform Promotional Image Container - for TNT we use object-contain so the full smoke plume and couple are seen without cropping */}
                   {imageSrc && (
                     <figure
                       itemProp="image"
                       itemScope
                       itemType="https://schema.org/ImageObject"
-                      className="relative mb-5 h-56 sm:h-60 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-900 shadow-xs group"
+                      className={`relative mb-5 ${
+                        isTnt
+                          ? 'h-72 sm:h-84 bg-neutral-950 p-1.5 border-neutral-800'
+                          : 'h-56 sm:h-60 bg-neutral-900 border-neutral-200/80'
+                      } w-full rounded-2xl overflow-hidden border shadow-xs group flex items-center justify-center`}
                     >
                       <img
                         src={imageSrc}
@@ -177,7 +181,11 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                         loading="lazy"
                         decoding="async"
                         itemProp="contentUrl"
-                        className={`w-full h-full ${objectPositionClass} block group-hover:scale-105 transition-transform duration-500`}
+                        className={
+                          isTnt
+                            ? 'w-full h-full object-contain mx-auto rounded-xl group-hover:scale-102 transition-transform duration-500'
+                            : `w-full h-full ${objectPositionClass} block group-hover:scale-105 transition-transform duration-500`
+                        }
                       />
                       <meta itemProp="name" content={imageTitle} />
                       <meta itemProp="description" content={imageAlt} />
