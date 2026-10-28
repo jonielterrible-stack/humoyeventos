@@ -180,6 +180,24 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
 
             {/* Flagship Card: Cañones de Humo Aéreo Vertical (Foto Oficial IMG-20261024-WA0020) */}
             <div className="bg-white border-2 border-rose-200 hover:border-rose-400 rounded-3xl overflow-hidden shadow-lg transition-all group">
+              {/* Header: Etiqueta coincidente + Título Principal */}
+              <div className="p-6 sm:p-8 pb-4 border-b border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50/50">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-mono font-bold text-rose-600 uppercase tracking-wider">
+                      01. CAÑONES DE HUMO AÉREO VERTICAL
+                    </span>
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800">
+                      Disparo Instantáneo CE Clase T1
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
+                    Cañones de Humo Aéreo Vertical (1 a 9 Cañones)
+                  </h3>
+                </div>
+              </div>
+
+              {/* Fotografía Oficial */}
               <div className="w-full bg-neutral-950 flex items-center justify-center overflow-hidden">
                 <img
                   src={assetUrl('/assets/aistudio/IMG-20261024-WA0020_cb7a103d.jpg')}
@@ -190,21 +208,13 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                 />
               </div>
 
+              {/* Subtítulo SEO y Detalles Técnicos */}
               <div className="p-7 sm:p-9">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                   <div className="lg:col-span-7 space-y-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold text-rose-600 uppercase">
-                        01. SERVICIO ESTRELLA Nº 1 EN ESPAÑA
-                      </span>
-                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800">
-                        Disparo Instantáneo CE Clase T1
-                      </span>
-                    </div>
-
-                    <p className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
-                      Humo Aéreo en Todos los Colores: Tú Eliges la Cantidad de Cañones (1 a 9)
-                    </p>
+                    <h4 className="text-xl sm:text-2xl font-extrabold text-neutral-900 font-display">
+                      Humo Aéreo en Todos los Colores Oficiales: Cañones Sbruffo Smoke 40 CE Clase T1
+                    </h4>
 
                     <p className="text-sm text-neutral-600 leading-relaxed">
                       Artificio pirotécnico <strong>Sbruffo Smoke 40 homologado CE Clase T1</strong>. Propulsa columnas verticales ultrarrápidas a <strong>14-15 metros de altura</strong>. Al alcanzar el cenit, abre en un espectacular abanico multicolor para la fotografía cumbre de vuestra boda y <strong>se disipa limpiamente en el aire en pocos segundos</strong> sin dejar rastro, niebla pesada ni residuos.
@@ -289,14 +299,25 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
               </div>
             </div>
 
-            {/* Sub-cards: Revelación TNT y Bengalas */}
+            {/* Sub-cards: Revelación TNT y Bengalas de Humo */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-2">
+              {/* Tarjeta 1: Disparador TNT Retro para Papás */}
               <div className="md:col-span-7 bg-white border border-neutral-200 rounded-3xl p-7 flex flex-col justify-between hover:border-amber-400 shadow-sm transition-all group">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono font-bold text-amber-600">02. REVELACIÓN GÉNERO</span>
+                  {/* Etiqueta coincidente con el servicio */}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-mono font-bold text-amber-600 uppercase tracking-wider">
+                      02. DISPARADOR TNT RETRO (REVELACIÓN DE GÉNERO)
+                    </span>
                     <Bomb className="w-5 h-5 text-amber-600" />
                   </div>
+
+                  {/* Título Principal antes de la fotografía */}
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 group-hover:text-amber-600 transition-colors font-display">
+                    Disparador TNT Retro para Papás
+                  </h3>
+
+                  {/* Fotografía Completa sin recortes */}
                   <div className="mb-4 h-72 sm:h-84 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center p-1.5 shadow-inner">
                     <img
                       src={assetUrl('/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png')}
@@ -309,13 +330,17 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       className="w-full h-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500 rounded-xl"
                     />
                   </div>
-                  <p className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-amber-600 transition-colors font-display">
-                    Disparador TNT Retro para Papás
-                  </p>
+
+                  {/* Subtítulo descriptivo con palabras clave SEO */}
+                  <h4 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 font-display">
+                    Revelación de Género con Detonador TNT Vintage y Humo Aéreo Sorpresa
+                  </h4>
+
                   <p className="text-xs text-neutral-600 leading-relaxed mb-4">
                     Los futuros papás bajan juntos la palanca de nuestra icónica caja detonadora TNT vintage y al instante los
                     cañones estallan hacia el cielo en rosa o azul sorpresa. Embalaje neutro 100% confidencial con código secreto para cómplice o ginecólogo.
                   </p>
+
                   <div className="space-y-1.5 text-xs text-neutral-700">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
@@ -340,12 +365,23 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                 </div>
               </div>
 
+              {/* Tarjeta 2: Bengalas de Humo de Mano */}
               <div className="md:col-span-5 bg-white border border-neutral-200 rounded-3xl p-7 flex flex-col justify-between hover:border-rose-300 shadow-sm transition-all group">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono font-bold text-neutral-400">03. REPORTAJES FOTOGRÁFICOS</span>
+                  {/* Etiqueta coincidente con el servicio */}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-mono font-bold text-rose-600 uppercase tracking-wider">
+                      03. BENGALAS DE HUMO DE MANO
+                    </span>
                     <Flame className="w-5 h-5 text-rose-500" />
                   </div>
+
+                  {/* Título Principal antes de la fotografía */}
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 group-hover:text-rose-600 transition-colors font-display">
+                    Bengalas de Humo
+                  </h3>
+
+                  {/* Fotografía de las Bengalas de Humo en acción */}
                   <div className="mb-4 h-72 sm:h-84 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center p-1.5 shadow-inner">
                     <img
                       src={assetUrl('/assets/aistudio/Bengalas_de_humo_en_acci_n_13e2d214.png')}
@@ -358,14 +394,18 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       className="w-full h-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500 rounded-xl"
                     />
                   </div>
-                  <p className="text-xl font-bold text-neutral-900 mb-2.5 group-hover:text-rose-600 transition-colors font-display">
-                    Bengalas de Humo de Mano
-                  </p>
+
+                  {/* Subtítulo descriptivo con palabras clave SEO */}
+                  <h4 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 font-display">
+                    Bengalas de Humo o Bengalas de Mano para Bodas y Reportajes
+                  </h4>
+
                   <p className="text-xs text-neutral-600 leading-relaxed mb-3">
-                    Activación por anilla sin mechero para sesiones de fotos dinámicas, prebodas y photocalls.
+                    Activación por anilla sin mechero (sistema Wire-Pull de ignición fría) para sesiones de fotos dinámicas, prebodas, postbodas y photocalls al aire libre con humo denso y colores vivos.
                   </p>
+
                   <div className="p-2.5 bg-amber-50 rounded-xl border border-amber-200 text-[11px] text-amber-900 leading-snug">
-                    <strong>Consejo técnico:</strong> Mantener a distancia prudente y vigilar la dirección del viento para cuidar vestidos.
+                    <strong>Consejo técnico:</strong> Mantener a distancia prudente y vigilar la dirección del viento para cuidar vuestros vestidos.
                   </div>
                 </div>
 
@@ -407,6 +447,24 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
 
             {/* Unified Comprehensive Confeti Card (Foto Oficial IMG-20261024-WA0018) */}
             <div className="bg-white border-2 border-fuchsia-200 hover:border-fuchsia-400 rounded-3xl overflow-hidden shadow-lg transition-all group">
+              {/* Header: Etiqueta coincidente + Título Principal */}
+              <div className="p-6 sm:p-8 pb-4 border-b border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50/50">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-mono font-bold text-fuchsia-600 uppercase tracking-wider">
+                      02. CAÑONES DE CONFETI PARA BODAS
+                    </span>
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-fuchsia-100 text-fuchsia-800">
+                      Vals &bull; Salida &bull; Fiesta
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
+                    Cañones de Confeti para Bodas y Eventos (Multicolor y Mariposas)
+                  </h3>
+                </div>
+              </div>
+
+              {/* Fotografía Oficial */}
               <div className="w-full bg-neutral-950 flex items-center justify-center overflow-hidden">
                 <img
                   src={assetUrl('/assets/aistudio/IMG-20261024-WA0018_9dfc7d92.jpg')}
@@ -417,21 +475,13 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                 />
               </div>
 
+              {/* Subtítulo SEO y Detalles Técnicos */}
               <div className="p-7 sm:p-9">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                   <div className="lg:col-span-7 space-y-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold text-fuchsia-600 uppercase">
-                        02. DALE COLOR Y MAGIA A TUS EVENTOS
-                      </span>
-                      <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-fuchsia-100 text-fuchsia-800">
-                        Vals &bull; Salida &bull; Fiesta
-                      </span>
-                    </div>
-
-                    <p className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
-                      Todos los Tipos de Confeti en un Solo Lugar: Mariposas, Nieve y Multicolor
-                    </p>
+                    <h4 className="text-xl sm:text-2xl font-extrabold text-neutral-900 font-display">
+                      Todos los Tipos de Confeti: Mariposas de Seda, Nieve Romántica y Fiesta Multicolor
+                    </h4>
 
                     <p className="text-sm text-neutral-600 leading-relaxed">
                       Ponemos a vuestra disposición la gama completa de cañones neumáticos y eléctricos inalámbricos con todos los acabados disponibles para cada instante del evento:
@@ -539,6 +589,24 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
 
             {/* Sparkulars Card con Foto Oficial IMG-20261024-WA0017 */}
             <div className="bg-white border-2 border-amber-200 hover:border-amber-400 rounded-3xl overflow-hidden shadow-lg transition-all group">
+              {/* Header: Etiqueta coincidente + Título Principal */}
+              <div className="p-6 sm:p-8 pb-4 border-b border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50/50">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-mono font-bold text-amber-600 uppercase tracking-wider">
+                      03. FUENTES DE CHISPAS FRÍAS (SPARKULARS)
+                    </span>
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                      No Quema la Piel ni la Ropa
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
+                    Máquinas de Chispas Frías (Fuentes Sparkulars)
+                  </h3>
+                </div>
+              </div>
+
+              {/* Fotografía Oficial */}
               <div className="w-full bg-neutral-950 flex items-center justify-center overflow-hidden">
                 <img
                   src={assetUrl('/assets/aistudio/IMG-20261024-WA0017_4f707a65.jpg')}
@@ -551,18 +619,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
 
               <div className="p-7 sm:p-9 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-mono font-bold text-amber-600 uppercase">
-                      03. EFECTO SPARKULAR PROFESIONAL
-                    </span>
-                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">
-                      No Quema la Piel ni la Ropa
-                    </span>
-                  </div>
-
-                  <p className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-amber-600 transition-colors font-display">
+                  <h4 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3 font-display">
                     Fuentes de Chispas Frías para Entradas, Baile y Tarta
-                  </p>
+                  </h4>
 
                   <p className="text-sm text-neutral-600 leading-relaxed mb-6">
                     Chorros verticales continuos o ráfagas rítmicas de chispas luminosas basadas en microgránulos de titanio a baja temperatura.
@@ -635,6 +694,24 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
 
             {/* Niebla Baja Card con Foto Oficial IMG-20261024-WA0019 */}
             <div className="bg-white border-2 border-sky-200 hover:border-sky-400 rounded-3xl overflow-hidden shadow-lg transition-all group">
+              {/* Header: Etiqueta coincidente + Título Principal */}
+              <div className="p-6 sm:p-8 pb-4 border-b border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50/50">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-mono font-bold text-sky-600 uppercase tracking-wider">
+                      04. MÁQUINAS DE HUMO BAJO Y NIEBLA BAJA
+                    </span>
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800">
+                      100% Libre de Manchas y Charcos
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display">
+                    Máquinas de Humo Bajo / Niebla Baja para Bailes Nupciales
+                  </h3>
+                </div>
+              </div>
+
+              {/* Fotografía Oficial */}
               <div className="w-full bg-neutral-950 flex items-center justify-center overflow-hidden">
                 <img
                   src={assetUrl('/assets/aistudio/IMG-20261024-WA0019_e63127eb.jpg')}
@@ -647,18 +724,9 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
 
               <div className="p-7 sm:p-9 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-mono font-bold text-sky-600 uppercase">
-                      04. NIEBLA PESADA LIMPIA A RAS DE SUELO
-                    </span>
-                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800">
-                      100% Libre de Manchas y Charcos
-                    </span>
-                  </div>
-
-                  <p className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-sky-600 transition-colors font-display">
+                  <h4 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3 font-display">
                     Máquina de Niebla Baja (Baile sobre las Nubes para Novios)
-                  </p>
+                  </h4>
 
                   <p className="text-sm text-neutral-600 leading-relaxed mb-6">
                     La máquina profesional de humo bajo sumerge hielo seco en agua a alta temperatura para liberar
@@ -756,17 +824,21 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                 <div className="lg:col-span-6 p-7 sm:p-9 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-mono font-bold text-indigo-600 uppercase">
-                        05. COMPLETA TU EVENTO
+                      <span className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-wider">
+                        05. ALQUILER DE SONIDO, ILUMINACIÓN Y DJ
                       </span>
                       <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800">
                         Todo en Un Solo Proveedor
                       </span>
                     </div>
 
-                    <p className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-indigo-600 transition-colors font-display">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 group-hover:text-indigo-600 transition-colors font-display">
                       Alquiler de Sonido, Luces y Discotecas Móviles con DJ
-                    </p>
+                    </h3>
+
+                    <h4 className="text-lg font-bold text-indigo-950 mb-3 font-display">
+                      Equipos de Sonido PA, Microfonía Inalámbrica y Cabina DJ para Bodas
+                    </h4>
 
                     <p className="text-sm text-neutral-600 leading-relaxed mb-6">
                       Aunque nuestra gran especialidad número uno son los efectos de humo y pirotecnia homologada, ponemos a tu disposición
