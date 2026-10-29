@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Star,
   Quote,
@@ -11,8 +11,6 @@ import {
   X,
   Share2,
   Check,
-  ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TESTIMONIALS, Testimonial } from '../data/smokeData';
@@ -27,11 +25,11 @@ export const TestimonialsSection: React.FC = () => {
     location?: string;
   } | null>(null);
 
-  const [copiedId, setCopiedId] = useState<number | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [copiedId, setCopiedId] = useState<string | number | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
-  // Curate top high-credibility testimonials with the photo at the front
-  const displayedTestimonials = TESTIMONIALS.slice(0, 5);
+  // Show 3 featured cards by default (fits 3 cards per screen on desktop cleanly without lateral cutoffs), expandable downwards
+  const displayedTestimonials = showAll ? TESTIMONIALS : TESTIMONIALS.slice(0, 3);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -55,7 +53,7 @@ export const TestimonialsSection: React.FC = () => {
       const el = document.getElementById(window.location.hash.slice(1));
       if (el) {
         setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 350);
       }
     }
@@ -86,23 +84,11 @@ export const TestimonialsSection: React.FC = () => {
     }
   };
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -360, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 360, behavior: 'smooth' });
-    }
-  };
-
   return (
     <section id="opiniones" aria-label="Opiniones de Parejas 2026" className="py-20 bg-white border-b border-neutral-200">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-bold text-rose-600 uppercase tracking-widest mb-2">
               <Heart className="w-4 h-4 fill-rose-600 text-rose-600" />
@@ -112,7 +98,7 @@ export const TestimonialsSection: React.FC = () => {
               Más de 385 clientes y parejas han confiado en Humo Y Efectos
             </h2>
             <p className="text-sm text-neutral-600 mt-2">
-              Experiencias reales de bodas y eventos con humo aéreo y efectos especiales. Desliza para explorar las opiniones destacadas.
+              Experiencias reales de bodas y eventos con humo aéreo y efectos especiales en Talavera de la Reina, Madrid, Toledo y toda España.
             </p>
           </div>
 
@@ -142,42 +128,8 @@ export const TestimonialsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Carousel Controls Header */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Opiniones destacadas · Desplazamiento horizontal</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={scrollLeft}
-              className="p-2.5 rounded-xl border border-neutral-200 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-700 transition-colors cursor-pointer shadow-2xs"
-              title="Desplazar a la izquierda"
-              aria-label="Desplazar a la izquierda"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={scrollRight}
-              className="p-2.5 rounded-xl border border-neutral-200 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-700 transition-colors cursor-pointer shadow-2xs"
-              title="Desplazar a la derecha"
-              aria-label="Desplazar a la derecha"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Horizontal Scroll Track with Framer Motion Fade-In & Upward Motion */}
-        <div
-          ref={scrollContainerRef}
-          tabIndex={0}
-          aria-label="Carrusel de opiniones de clientes"
-          className="flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth focus:outline-none [scrollbar-width:thin] [scrollbar-color:#d4d4d8_transparent]"
-        >
+        {/* Responsive Grid Layout: 3 cards side-by-side on desktop, vertical downward scroll on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
           {displayedTestimonials.map((t, index) => {
             const hasPhoto = Boolean(t.photo);
             const isCopied = copiedId === t.id;
@@ -192,7 +144,7 @@ export const TestimonialsSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-                className={`min-w-[320px] sm:min-w-[380px] max-w-[400px] shrink-0 snap-start rounded-3xl p-7 flex flex-col justify-between shadow-sm transition-all ${
+                className={`w-full rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-sm transition-all ${
                   hasPhoto
                     ? 'bg-amber-50/25 border-2 border-amber-300 hover:border-amber-400 shadow-md ring-1 ring-amber-200/50'
                     : 'bg-neutral-50 border border-neutral-200 hover:border-neutral-300'
@@ -268,7 +220,7 @@ export const TestimonialsSection: React.FC = () => {
                         }
                       }}
                       title="Haz clic para ver la foto en grande"
-                      className="mb-4 h-40 sm:h-44 w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800 p-1 shadow-inner flex items-center justify-center group cursor-pointer relative transition-transform hover:scale-[1.01]"
+                      className="mb-4 h-44 sm:h-48 w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800 p-1 shadow-inner flex items-center justify-center group cursor-pointer relative transition-transform hover:scale-[1.01]"
                     >
                       <img
                         src={assetUrl(t.photo)}
@@ -335,6 +287,18 @@ export const TestimonialsSection: React.FC = () => {
               </motion.article>
             );
           })}
+        </div>
+
+        {/* Toggle to expand more reviews downwards */}
+        <div className="mt-8 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAll(!showAll)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 text-xs font-bold transition-all shadow-xs cursor-pointer"
+          >
+            <span>{showAll ? 'Mostrar menos opiniones' : 'Ver más opiniones reales de parejas (385 valoraciones)'}</span>
+            <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-200 ${showAll ? '-rotate-90' : 'rotate-90'}`} />
+          </button>
         </div>
 
         {/* Internal Cross-Link Banner */}
