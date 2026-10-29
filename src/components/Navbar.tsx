@@ -378,14 +378,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 w-full bg-neutral-950/98 backdrop-blur-md border-b border-neutral-900 text-white shadow-2xl transition-all">
-      {/* FILA 1: LOGO + MENÚ DE PÁGINAS + WHATSAPP Y BOTÓN CONFIGURAR (100% DENTRO DE PANTALLA) */}
-      <div className="max-w-7xl mx-auto px-2.5 sm:px-5 lg:px-6">
-        <div className="flex items-center justify-between h-15 sm:h-18 md:h-20 w-full gap-1.5 sm:gap-2">
+      {/* BARRA DE NAVEGACIÓN PRINCIPAL ÚNICA */}
+      <div className="max-w-7xl mx-auto px-2 sm:px-5 lg:px-6" ref={searchContainerRef}>
+        <div className="relative flex items-center justify-between h-15 sm:h-18 md:h-20 w-full gap-1 sm:gap-2">
           {/* 1. LADO IZQUIERDO: TOGGLE MÓVIL + LOGO NÍTIDO */}
           <div className="flex items-center shrink-0 min-w-0">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-neutral-300 hover:text-white rounded-xl border border-neutral-800 hover:border-neutral-700 bg-neutral-900/90 transition-colors lg:hidden mr-1.5 sm:mr-2 cursor-pointer shrink-0"
+              className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-neutral-300 hover:text-white rounded-xl border border-neutral-800 hover:border-neutral-700 bg-neutral-900/90 transition-colors lg:hidden mr-1.5 sm:mr-2 cursor-pointer shrink-0"
               aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
               title={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             >
@@ -404,7 +404,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <img
                 src={assetUrl('/assets/logo-humo-y-efectos-eventos.png?v=7')}
                 alt="HUMO Y EFECTOS - Efectos de Boda Personalizados, Bengalas de Humo de Mano y Humo Aéreo"
-                className="h-7 sm:h-10 md:h-12 xl:h-13 w-auto max-w-[96px] sm:max-w-[150px] md:max-w-[175px] xl:max-w-[205px] object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.35)] filter brightness-105"
+                className="h-6 sm:h-10 md:h-12 xl:h-13 w-auto max-w-[84px] sm:max-w-[145px] md:max-w-[170px] xl:max-w-[200px] object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.35)] filter brightness-105"
               />
             </a>
           </div>
@@ -605,10 +605,31 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </nav>
 
-          {/* 3. LADO DERECHO: REDES + WHATSAPP + BOTÓN CONFIGURAR (SIEMPRE VISIBLE Y ALINEADO) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* 3. LADO DERECHO: ICONO DE BÚSQUEDA + WHATSAPP + BOTÓN CONFIGURAR */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* Botón de Búsqueda en la Barra de Navegación (la barra solo se abre al hacer clic) */}
+            <button
+              type="button"
+              onClick={() => {
+                const next = !searchOpen;
+                setSearchOpen(next);
+                if (next) {
+                  setTimeout(() => searchInputRef.current?.focus(), 50);
+                }
+              }}
+              className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg sm:rounded-xl border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
+                searchOpen
+                  ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/20'
+                  : 'bg-neutral-900 hover:bg-neutral-800 border-neutral-800 hover:border-cyan-500/50 text-cyan-400'
+              }`}
+              aria-label="Abrir barra de búsqueda"
+              title="Buscar servicios, packs o información de seguridad"
+            >
+              {searchOpen ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
+            </button>
+
             {/* Social Links (Instagram & Facebook) */}
-            <div className="hidden xl:flex items-center gap-1.5">
+            <div className="hidden 2xl:flex items-center gap-1.5">
               <a
                 href="https://www.instagram.com/humoyefectos/"
                 target="_blank"
@@ -659,164 +680,124 @@ export const Navbar: React.FC<NavbarProps> = ({
                 e.preventDefault();
                 onOpenConfigurator();
               }}
-              className="h-8 sm:h-9 md:h-10 px-2.5 sm:px-3.5 text-[10px] sm:text-xs font-black uppercase tracking-wider rounded-lg sm:rounded-xl text-white bg-gradient-to-r from-cyan-500 via-fuchsia-600 to-rose-600 hover:from-cyan-400 hover:via-fuchsia-500 hover:to-rose-500 shadow-md shadow-fuchsia-600/25 transition-all hover:scale-102 active:scale-98 cursor-pointer flex items-center gap-1 whitespace-nowrap shrink-0"
+              className="h-8 sm:h-9 md:h-10 px-2 sm:px-3.5 text-[10px] sm:text-xs font-black uppercase tracking-wider rounded-lg sm:rounded-xl text-white bg-gradient-to-r from-cyan-500 via-fuchsia-600 to-rose-600 hover:from-cyan-400 hover:via-fuchsia-500 hover:to-rose-500 shadow-md shadow-fuchsia-600/25 transition-all hover:scale-102 active:scale-98 cursor-pointer flex items-center gap-1 whitespace-nowrap shrink-0"
               title="Configurar presupuesto personalizado online"
             >
               <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
               <span>Configurar</span>
             </a>
           </div>
-        </div>
-      </div>
 
-      {/* FILA 2: BARRA DE BÚSQUEDA EN TIEMPO REAL INTEGRADA EN CABECERA (NO DESPLAZA NINGÚN BOTÓN) */}
-      <div className="bg-neutral-900/95 border-t border-neutral-800/80 py-1.5 px-2.5 sm:px-5 lg:px-6" ref={searchContainerRef}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 relative">
-          {/* Input de Búsqueda en Tiempo Real */}
-          <div className="relative flex-1 max-w-xl">
-            <div className="flex items-center bg-neutral-950/90 border border-neutral-800 focus-within:border-cyan-400 rounded-xl px-3 h-8 sm:h-9 w-full transition-all shadow-inner">
-              <Search className="w-3.5 h-3.5 text-cyan-400 shrink-0 mr-2" />
-              <input
-                ref={searchInputRef}
-                type="search"
-                value={searchQuery}
-                onFocus={() => setSearchOpen(true)}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setSearchOpen(true);
-                }}
-                placeholder="Buscar servicios, packs, fiesta de la espuma, bengalas de mano, TNT o seguridad..."
-                aria-label="Buscar servicios, packs o información de seguridad en tiempo real"
-                className="bg-transparent text-xs text-white placeholder-neutral-400 focus:outline-none w-full"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="text-neutral-400 hover:text-white ml-1 cursor-pointer"
-                  aria-label="Limpiar búsqueda"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            {/* Desplegable de Resultados Filtrados en Tiempo Real */}
-            {searchOpen && (
-              <div className="absolute left-0 right-0 sm:right-auto sm:w-[460px] top-full mt-1.5 bg-neutral-950 border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden animate-fade-in">
-                {/* Etiquetas Rápidas dentro del desplegable */}
-                <div className="px-3 py-2 bg-neutral-900/60 border-b border-neutral-900 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 shrink-0">
-                    Rápido:
-                  </span>
-                  {['Fiesta Espuma', 'Pack Boda 360°', 'Bengalas de Mano', 'Humo Aéreo', 'Detonador TNT', 'Seguridad CE'].map((chip) => (
+          {/* BARRA DE BÚSQUEDA EN LA PROPIA BARRA DE NAVEGACIÓN (SOLO SE MUESTRA AL HACER CLIC) */}
+          {searchOpen && (
+            <div className="absolute inset-x-0 top-0 h-full bg-neutral-950/98 backdrop-blur-md z-50 flex items-center px-1 sm:px-2 animate-fade-in">
+              <div className="relative w-full">
+                <div className="flex items-center bg-neutral-900 border border-cyan-500/60 focus-within:border-cyan-400 rounded-xl px-3 h-10 sm:h-11 w-full shadow-lg">
+                  <Search className="w-4 h-4 text-cyan-400 shrink-0 mr-2.5" />
+                  <input
+                    ref={searchInputRef}
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Buscar servicios, packs, fiesta de la espuma, bengalas de mano, TNT o seguridad..."
+                    aria-label="Buscar servicios, packs o información de seguridad en tiempo real"
+                    className="bg-transparent text-xs sm:text-sm text-white placeholder-neutral-400 focus:outline-none w-full"
+                    autoFocus
+                  />
+                  {searchQuery && (
                     <button
-                      key={chip}
                       type="button"
-                      onClick={() => setSearchQuery(chip)}
-                      className="px-2 py-0.5 rounded-full bg-neutral-800 hover:bg-cyan-600/30 text-[10px] font-semibold text-neutral-200 hover:text-cyan-300 border border-neutral-700 transition-colors whitespace-nowrap cursor-pointer"
+                      onClick={() => setSearchQuery('')}
+                      className="text-neutral-400 hover:text-white px-1.5 cursor-pointer"
+                      aria-label="Limpiar texto"
                     >
-                      {chip}
+                      Limpiar
                     </button>
-                  ))}
-                </div>
-
-                {/* Lista de Resultados */}
-                <div className="max-h-80 overflow-y-auto divide-y divide-neutral-900/80 p-1.5">
-                  {filteredResults.length === 0 ? (
-                    <div className="py-8 px-4 text-center space-y-2">
-                      <p className="text-xs font-bold text-neutral-300">
-                        No hemos encontrado resultados para &ldquo;{searchQuery}&rdquo;
-                      </p>
-                      <p className="text-[11px] text-neutral-500">
-                        Prueba buscando &ldquo;humo aéreo&rdquo;, &ldquo;espuma&rdquo;, &ldquo;bengalas&rdquo;, &ldquo;TNT&rdquo; o &ldquo;seguridad&rdquo;.
-                      </p>
-                    </div>
-                  ) : (
-                    filteredResults.map((item) => {
-                      const badgeColors: Record<SearchResultItem['category'], string> = {
-                        Servicio: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-                        Pack: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-                        Seguridad: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
-                        Sección: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-                      };
-                      return (
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => handleSelectSearchResult(item)}
-                          className="w-full text-left p-2.5 rounded-xl hover:bg-neutral-900 transition-colors flex items-start justify-between gap-2.5 group cursor-pointer"
-                        >
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-1.5 mb-0.5">
-                              <span
-                                className={`text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2 rounded border ${badgeColors[item.category]}`}
-                              >
-                                {item.category}
-                              </span>
-                              {item.badge && (
-                                <span className="text-[10px] font-mono text-neutral-400 truncate">
-                                  {item.badge}
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
-                              {item.title}
-                            </p>
-                            <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
-                              {item.subtitle}
-                            </p>
-                          </div>
-                          <ArrowRight className="w-3.5 h-3.5 text-neutral-500 group-hover:text-cyan-400 shrink-0 mt-2 transition-transform group-hover:translate-x-0.5" />
-                        </button>
-                      );
-                    })
                   )}
-                </div>
-
-                {/* Pie del Buscador */}
-                <div className="px-3 py-2 bg-neutral-900/90 border-t border-neutral-800 flex items-center justify-between text-[11px] text-neutral-400">
-                  <span className="flex items-center gap-1">
-                    <FileText className="w-3 h-3 text-rose-400" />
-                    <span>Filtra servicios, packs y normas en tiempo real</span>
-                  </span>
                   <button
                     type="button"
                     onClick={() => setSearchOpen(false)}
-                    className="text-neutral-300 hover:text-white font-bold cursor-pointer"
+                    className="ml-1.5 p-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white transition-colors cursor-pointer shrink-0"
+                    aria-label="Cerrar barra de búsqueda"
+                    title="Cerrar barra de búsqueda"
                   >
-                    Cerrar
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
-              </div>
-            )}
-          </div>
 
-          {/* Accesos rápidos visibles en tablet/escritorio al lado del buscador */}
-          <div className="hidden md:flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 shrink-0">
-              Acceso rápido:
-            </span>
-            {[
-              { label: 'Fiesta Espuma', query: 'Fiesta de la Espuma' },
-              { label: 'Pack Boda 360°', query: 'Pack Boda Total 360' },
-              { label: 'Bengalas de Mano', query: 'Bengalas de Humo de Mano' },
-              { label: 'Detonador TNT', query: 'Disparador TNT' },
-              { label: 'Seguridad CE', query: 'Dossier Técnico' },
-            ].map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => {
-                  setSearchQuery(item.query);
-                  setSearchOpen(true);
-                }}
-                className="px-2.5 py-1 rounded-lg bg-neutral-950 hover:bg-cyan-500/20 text-[11px] font-semibold text-neutral-300 hover:text-cyan-300 border border-neutral-800 hover:border-cyan-500/40 transition-colors whitespace-nowrap cursor-pointer"
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+                {/* Resultados en Tiempo Real debajo de la barra al estar abierta */}
+                <div className="absolute left-0 right-0 top-full mt-2 bg-neutral-950 border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden">
+                  <div className="px-3 py-2 bg-neutral-900/60 border-b border-neutral-900 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 shrink-0">
+                      Sugerencias:
+                    </span>
+                    {['Fiesta Espuma', 'Pack Boda 360°', 'Bengalas de Mano', 'Humo Aéreo', 'Detonador TNT', 'Seguridad CE'].map((chip) => (
+                      <button
+                        key={chip}
+                        type="button"
+                        onClick={() => setSearchQuery(chip)}
+                        className="px-2 py-0.5 rounded-full bg-neutral-800 hover:bg-cyan-600/30 text-[10px] font-semibold text-neutral-200 hover:text-cyan-300 border border-neutral-700 transition-colors whitespace-nowrap cursor-pointer"
+                      >
+                        {chip}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="max-h-80 overflow-y-auto divide-y divide-neutral-900/80 p-1.5">
+                    {filteredResults.length === 0 ? (
+                      <div className="py-8 px-4 text-center space-y-2">
+                        <p className="text-xs font-bold text-neutral-300">
+                          No hemos encontrado resultados para &ldquo;{searchQuery}&rdquo;
+                        </p>
+                        <p className="text-[11px] text-neutral-500">
+                          Prueba buscando &ldquo;humo aéreo&rdquo;, &ldquo;espuma&rdquo;, &ldquo;bengalas&rdquo;, &ldquo;TNT&rdquo; o &ldquo;seguridad&rdquo;.
+                        </p>
+                      </div>
+                    ) : (
+                      filteredResults.map((item) => {
+                        const badgeColors: Record<SearchResultItem['category'], string> = {
+                          Servicio: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+                          Pack: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+                          Seguridad: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+                          Sección: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+                        };
+                        return (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => handleSelectSearchResult(item)}
+                            className="w-full text-left p-2.5 rounded-xl hover:bg-neutral-900 transition-colors flex items-start justify-between gap-2.5 group cursor-pointer"
+                          >
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-1.5 mb-0.5">
+                                <span
+                                  className={`text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2 rounded border ${badgeColors[item.category]}`}
+                                >
+                                  {item.category}
+                                </span>
+                                {item.badge && (
+                                  <span className="text-[10px] font-mono text-neutral-400 truncate">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                                {item.title}
+                              </p>
+                              <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+                                {item.subtitle}
+                              </p>
+                            </div>
+                            <ArrowRight className="w-3.5 h-3.5 text-neutral-500 group-hover:text-cyan-400 shrink-0 mt-2 transition-transform group-hover:translate-x-0.5" />
+                          </button>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -826,61 +807,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* MENÚ MÓVIL DESPLEGABLE ESTRUCTURADO */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-neutral-950 border-b border-neutral-800 px-5 py-6 space-y-6 shadow-2xl animate-fade-in max-h-[85vh] overflow-y-auto">
-          {/* Buscador Integrado en Menú Móvil */}
-          <div className="space-y-2">
-            <label htmlFor="mobile-menu-search" className="text-[10px] uppercase font-black tracking-widest text-cyan-400 px-1 block">
-              Buscador en Tiempo Real
-            </label>
-            <div className="flex items-center bg-neutral-900 border border-neutral-800 focus-within:border-cyan-400 rounded-2xl px-3.5 py-2.5">
-              <Search className="w-4 h-4 text-cyan-400 shrink-0 mr-2.5" />
-              <input
-                id="mobile-menu-search"
-                type="search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar Fiesta de la Espuma, TNT, Humo, Seguridad..."
-                className="bg-transparent text-xs text-white placeholder-neutral-400 focus:outline-none w-full"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="text-neutral-400 hover:text-white ml-1"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
-            {searchQuery.trim() !== '' && (
-              <div className="bg-neutral-900/90 border border-neutral-800 rounded-2xl p-2 space-y-1 max-h-60 overflow-y-auto">
-                {filteredResults.length === 0 ? (
-                  <p className="text-xs text-neutral-400 p-2 text-center">
-                    Sin resultados para &ldquo;{searchQuery}&rdquo;
-                  </p>
-                ) : (
-                  filteredResults.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => handleSelectSearchResult(item)}
-                      className="w-full text-left p-2.5 rounded-xl hover:bg-neutral-800 flex items-center justify-between gap-2"
-                    >
-                      <div className="min-w-0">
-                        <span className="text-[9px] font-bold uppercase text-cyan-400 block">
-                          {item.category}
-                        </span>
-                        <p className="text-xs font-bold text-white truncate">{item.title}</p>
-                        <p className="text-[11px] text-neutral-400 truncate">{item.subtitle}</p>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-cyan-400 shrink-0" />
-                    </button>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
-
           {/* SECCIÓN 1: APARTADOS PRINCIPALES DE LA WEB */}
           <div className="space-y-2">
             <div className="text-[10px] uppercase font-black tracking-widest text-neutral-400 px-1 flex items-center justify-between">
