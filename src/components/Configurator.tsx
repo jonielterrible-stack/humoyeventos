@@ -34,6 +34,7 @@ export type ConfigEffectType =
   | 'humo_bajo'
   | 'chispas_frias'
   | 'sonido_luces'
+  | 'fiesta_espuma'
   | 'boda_completa';
 
 export interface EffectOption {
@@ -73,6 +74,12 @@ export const EFFECT_OPTIONS: EffectOption[] = [
     title: '5. Alquiler de Sonido, Luces & Discoteca Móvil (con DJ)',
     desc: 'Equipos de sonido PA para ceremonia/banquete, puentes de iluminación LED robotizada y DJ para barra libre.',
     badge: 'Producción Integral',
+  },
+  {
+    id: 'fiesta_espuma',
+    title: '6. Fiesta de la Espuma (Blanca Clásica o de Colores)',
+    desc: '1º Espuma blanca normal de toda la vida para cumpleaños, fiestas privadas, colegios y todo tipo de eventos · 2º Espuma de colores para revelaciones de género especiales y bodas.',
+    badge: 'Espuma Blanca & Colores',
   },
   {
     id: 'boda_completa',

@@ -27,6 +27,7 @@ type PackFilterTab =
   | 'chispas_frias'
   | 'humo_bajo'
   | 'sonido_luces'
+  | 'fiesta_espuma'
   | 'revelacion_genero';
 
 export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
@@ -54,11 +55,11 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
               Catálogo de Packs por Efecto y Servicio
             </h2>
             <p className="text-sm sm:text-base text-neutral-600 mt-2">
-              Elige tu pack ideal: <strong>1. Cañones de humo aéreo</strong>, <strong>2. Confeti (multicolor y mariposas)</strong>, <strong>3. Fuentes de chispas frías</strong>, <strong>4. Humo bajo sobre las nubes</strong>, o <strong>5. Sonido profesional con DJ</strong>.
+              Elige tu pack ideal: <strong>1. Cañones de humo aéreo</strong>, <strong>2. Confeti (multicolor y mariposas)</strong>, <strong>3. Fuentes de chispas frías</strong>, <strong>4. Humo bajo sobre las nubes</strong>, <strong>5. Sonido con DJ</strong> o <strong>6. Fiesta de la Espuma (Blanca y de Colores)</strong>.
             </p>
           </div>
 
-          {/* Filter tabs strictly ordered 1 to 5 */}
+          {/* Filter tabs strictly ordered 1 to 6 */}
           <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-white rounded-2xl border border-neutral-200 shadow-xs shrink-0 max-w-full">
             {[
               { id: 'all', label: 'Todos' },
@@ -67,6 +68,7 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
               { id: 'chispas_frias', label: '3. Chispas Frías' },
               { id: 'humo_bajo', label: '4. Humo Bajo' },
               { id: 'sonido_luces', label: '5. Sonido & DJ' },
+              { id: 'fiesta_espuma', label: '6. Fiesta Espuma' },
               { id: 'revelacion_genero', label: 'Revelación TNT' },
             ].map((tab) => (
               <button
@@ -93,6 +95,14 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
             const isChispas = pack.category === 'chispas_frias';
             const isHumoBajo = pack.category === 'humo_bajo';
             const isSonido = pack.category === 'sonido_luces';
+            const isEspuma = pack.category === 'fiesta_espuma';
+            const isBodaTotal = pack.id === 'pack-boda-total';
+            const isFullGraphic =
+              isTnt ||
+              isEspuma ||
+              isBodaTotal ||
+              pack.id === 'pack-entrada-triunfal' ||
+              pack.id === 'pack-bengalas-humo-mano';
 
             let cardTheme = 'border-neutral-200 hover:border-neutral-300 bg-white';
             let badgeColor = 'text-rose-600';
@@ -100,6 +110,9 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
             if (isTnt) {
               cardTheme = 'border-2 border-amber-500 shadow-xl shadow-amber-500/10 bg-amber-50/20';
               badgeColor = 'text-amber-800';
+            } else if (isEspuma) {
+              cardTheme = 'border-2 border-cyan-500 shadow-xl shadow-cyan-500/10 bg-cyan-50/20';
+              badgeColor = 'text-cyan-800';
             } else if (isConfeti) {
               cardTheme = 'border-2 border-fuchsia-400 shadow-xl shadow-fuchsia-500/10 bg-fuchsia-50/20';
               badgeColor = 'text-fuchsia-700';
@@ -120,7 +133,6 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
             const imageSrc = assetUrl(pack.image);
             const imageAlt = pack.imageAlt || `${pack.name} - Efectos especiales para bodas y eventos Humo Y Efectos`;
             const imageTitle = pack.imageTitle || `${pack.name} | Humo Y Efectos`;
-            // For the vertical TNT pedestal photo, center slightly lower so the TNT box and balloon arch both appear cleanly
             const objectPositionClass =
               pack.id === 'pack-revelacion-tnt' ? 'object-cover object-[center_65%]' : 'object-cover object-center';
 
@@ -150,6 +162,7 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                     className="text-xl font-bold text-neutral-900 font-display mb-1.5 flex items-center gap-2"
                   >
                     {isTnt && <Bomb className="w-5 h-5 text-amber-600 shrink-0" />}
+                    {isEspuma && <Sparkles className="w-5 h-5 text-cyan-600 shrink-0" />}
                     {isConfeti && <PartyPopper className="w-5 h-5 text-fuchsia-600 shrink-0" />}
                     {isChispas && <Flame className="w-5 h-5 text-amber-600 shrink-0" />}
                     {isHumoBajo && <CloudRain className="w-5 h-5 text-sky-600 shrink-0" />}
@@ -160,15 +173,15 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                     {pack.tagline}
                   </p>
 
-                  {/* Uniform Promotional Image Container - for TNT we use object-contain so the full smoke plume and couple are seen without cropping */}
+                  {/* Promotional Image Container */}
                   {imageSrc && (
                     <figure
                       itemProp="image"
                       itemScope
                       itemType="https://schema.org/ImageObject"
                       className={`relative mb-5 ${
-                        isTnt
-                          ? 'h-72 sm:h-84 bg-neutral-950 p-1.5 border-neutral-800'
+                        isFullGraphic
+                          ? 'h-64 sm:h-72 bg-neutral-950 p-1.5 border-neutral-800'
                           : 'h-56 sm:h-60 bg-neutral-900 border-neutral-200/80'
                       } w-full rounded-2xl overflow-hidden border shadow-xs group flex items-center justify-center`}
                     >
@@ -182,7 +195,7 @@ export const PacksCatalog: React.FC<PacksCatalogProps> = ({ onSelectPack }) => {
                         decoding="async"
                         itemProp="contentUrl"
                         className={
-                          isTnt
+                          isFullGraphic
                             ? 'w-full h-full object-contain mx-auto rounded-xl group-hover:scale-102 transition-transform duration-500'
                             : `w-full h-full ${objectPositionClass} block group-hover:scale-105 transition-transform duration-500`
                         }

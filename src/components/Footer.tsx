@@ -223,6 +223,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </a>
               </li>
               <li>
+                <a href="/servicios" onClick={(e) => handleNav('servicios', e)} className="hover:text-cyan-400 transition-colors">
+                  6. Fiesta de la Espuma (Blanca Clásica y de Colores)
+                </a>
+              </li>
+              <li>
                 <a href="/packs" onClick={(e) => handleNav('packs', e)} className="hover:text-rose-400 transition-colors">
                   Revelación de Género con Detonador TNT Retro
                 </a>
@@ -376,18 +381,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                       title="Ubicación de la sede central en Google Maps"
                     >
                       <span>Sede Talavera (Google Maps)</span>
-                      <ExternalLink className="w-3 h-3 text-neutral-500" />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.bodas.net/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-neutral-400 hover:text-rose-400 transition-colors inline-flex items-center gap-1"
-                      title="Portal oficial de bodas Bodas.net"
-                    >
-                      <span>Perfil en Bodas.net (4.9 ★)</span>
                       <ExternalLink className="w-3 h-3 text-neutral-500" />
                     </a>
                   </li>

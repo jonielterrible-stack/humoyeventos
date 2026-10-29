@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Star,
   Quote,
   Heart,
-  ExternalLink,
   ArrowRight,
   CheckCircle2,
   Sparkles,
@@ -11,10 +10,15 @@ import {
   X,
   Share2,
   Check,
+  MessageSquarePlus,
+  Send,
+  MessageCircle,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TESTIMONIALS, Testimonial } from '../data/smokeData';
 import { assetUrl } from '../utils/assetUrl';
+
+const STORAGE_KEY_REVIEWS = 'humoyefectos_custom_reviews_v1';
 
 export const TestimonialsSection: React.FC = () => {
   const [modalImage, setModalImage] = useState<{
@@ -28,8 +32,30 @@ export const TestimonialsSection: React.FC = () => {
   const [copiedId, setCopiedId] = useState<string | number | null>(null);
   const [showAll, setShowAll] = useState(false);
 
+  // User-submitted reviews persisted in localStorage
+  const [customReviews, setCustomReviews] = useState<Testimonial[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_REVIEWS);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Review form state
+  const [coupleName, setCoupleName] = useState('');
+  const [eventLocation, setEventLocation] = useState('');
+  const [selectedPack, setSelectedPack] = useState('Pack Entrada Nupcial Signature');
+  const [rating, setRating] = useState(5);
+  const [reviewText, setReviewText] = useState('');
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+
+  const formRef = useRef<HTMLDivElement | null>(null);
+
+  const allTestimonials = [...TESTIMONIALS.slice(0, 1), ...customReviews, ...TESTIMONIALS.slice(1)];
+
   // Show 3 featured cards by default (fits 3 cards per screen on desktop cleanly without lateral cutoffs), expandable downwards
-  const displayedTestimonials = showAll ? TESTIMONIALS : TESTIMONIALS.slice(0, 3);
+  const displayedTestimonials = showAll ? allTestimonials : allTestimonials.slice(0, 3);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -84,6 +110,48 @@ export const TestimonialsSection: React.FC = () => {
     }
   };
 
+  const scrollToReviewForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  const handleReviewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!coupleName.trim() || !reviewText.trim()) return;
+
+    const months = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
+    ];
+    const now = new Date();
+    const dateLabel = `${months[now.getMonth()]} ${now.getFullYear()}`;
+
+    const newReview: Testimonial = {
+      id: Date.now(),
+      couple: coupleName.trim(),
+      location: eventLocation.trim() || 'Evento privado / Finca en España',
+      date: dateLabel,
+      rating,
+      text: reviewText.trim(),
+      pack: selectedPack,
+      badge: 'Nueva Reseña de Cliente',
+    };
+
+    const updated = [newReview, ...customReviews];
+    setCustomReviews(updated);
+    try {
+      localStorage.setItem(STORAGE_KEY_REVIEWS, JSON.stringify(updated));
+    } catch {
+      // Ignore storage quota errors
+    }
+
+    setCoupleName('');
+    setEventLocation('');
+    setReviewText('');
+    setRating(5);
+    setReviewSubmitted(true);
+    setTimeout(() => setReviewSubmitted(false), 6000);
+  };
+
   return (
     <section id="opiniones" aria-label="Opiniones de Parejas 2026" className="py-20 bg-white border-b border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -92,13 +160,13 @@ export const TestimonialsSection: React.FC = () => {
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-bold text-rose-600 uppercase tracking-widest mb-2">
               <Heart className="w-4 h-4 fill-rose-600 text-rose-600" />
-              <span>Reseñas Verificadas de Bodas y Eventos 2026</span>
+              <span>Reseñas Reales de Bodas y Eventos</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight font-display">
-              Más de 385 clientes y parejas han confiado en Humo Y Efectos
+              Opiniones de clientes y parejas que han confiado en Humo Y Efectos
             </h2>
             <p className="text-sm text-neutral-600 mt-2">
-              Experiencias reales de bodas y eventos con humo aéreo y efectos especiales en Talavera de la Reina, Madrid, Toledo y toda España.
+              Experiencias reales de bodas, revelaciones de género y eventos con humo aéreo y efectos especiales en Talavera de la Reina, Madrid, Toledo y toda España.
             </p>
           </div>
 
@@ -110,21 +178,20 @@ export const TestimonialsSection: React.FC = () => {
                 ))}
               </div>
               <div className="text-xs">
-                <p className="font-extrabold text-neutral-900 tabular-nums">4.9 / 5.0 (385 valoraciones)</p>
-                <p className="text-neutral-500 text-[11px] font-medium">Temporada 2026 en Bodas.net & Google Reviews</p>
+                <p className="font-extrabold text-neutral-900 tabular-nums">4.9 / 5.0 Valoración Media</p>
+                <p className="text-neutral-500 text-[11px] font-medium">Opiniones directas de nuestros clientes</p>
               </div>
             </div>
 
-            <a
-              href="https://www.bodas.net/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-neutral-700 hover:text-rose-600 bg-white hover:bg-neutral-50 rounded-xl border border-neutral-200 transition-colors shadow-xs"
-              title="Consultar directorio oficial en Bodas.net"
+            <button
+              type="button"
+              onClick={scrollToReviewForm}
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 rounded-xl transition-colors shadow-xs cursor-pointer"
+              title="Escribir y publicar tu reseña"
             >
-              <span>Ver en Bodas.net</span>
-              <ExternalLink className="w-3.5 h-3.5 text-neutral-400" />
-            </a>
+              <MessageSquarePlus className="w-4 h-4" />
+              <span>Dejar una reseña</span>
+            </button>
           </div>
         </div>
 
@@ -296,9 +363,184 @@ export const TestimonialsSection: React.FC = () => {
             onClick={() => setShowAll(!showAll)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
-            <span>{showAll ? 'Mostrar menos opiniones' : 'Ver más opiniones reales de parejas (385 valoraciones)'}</span>
+            <span>{showAll ? 'Mostrar menos opiniones' : 'Ver todas las opiniones reales de clientes y parejas'}</span>
             <ArrowRight className={`w-3.5 h-3.5 transition-transform duration-200 ${showAll ? '-rotate-90' : 'rotate-90'}`} />
           </button>
+        </div>
+
+        {/* Dedicated Section for Visitors to Leave Their Own Review */}
+        <div
+          id="dejar-opinion"
+          ref={formRef}
+          className="mt-12 p-6 sm:p-8 rounded-3xl bg-neutral-50 border border-neutral-200/90 shadow-sm"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-5 space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold uppercase tracking-wider">
+                <MessageSquarePlus className="w-3.5 h-3.5 text-rose-600" />
+                <span>Comparte tu Experiencia</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-neutral-900 font-display">
+                ¿Has celebrado tu boda o evento con nosotros? Deja aquí tu opinión
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                Tu valoración ayuda a otras parejas y familias a conocer cómo funcionan nuestros efectos de humo aéreo, detonador TNT, confeti, chispas frías y niebla baja.
+              </p>
+
+              <div className="pt-2 space-y-2 text-xs text-neutral-600">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Publicación directa en nuestra sección de opiniones</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>¿Tienes foto o vídeo del disparo? Puedes enviárnoslo por WhatsApp</span>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <a
+                  href="https://wa.me/34600082462?text=Hola%20Humo%20Y%20Efectos,%20os%20env%C3%ADo%20nuestra%20opini%C3%B3n%20y%20fotos%20del%20evento%20para%20la%20web"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-xs"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Enviar foto y reseña por WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 bg-white p-6 rounded-2xl border border-neutral-200 shadow-xs">
+              {reviewSubmitted ? (
+                <div className="py-8 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-lg font-extrabold text-neutral-900 font-display">
+                    ¡Muchísimas gracias por compartir vuestra opinión!
+                  </h4>
+                  <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto">
+                    Vuestra reseña ya se ha añadido al listado de opiniones de esta página.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setReviewSubmitted(false)}
+                    className="mt-2 px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-bold transition-colors cursor-pointer"
+                  >
+                    Escribir otra reseña
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleReviewSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="review-couple" className="block text-xs font-bold text-neutral-800 mb-1">
+                        Nombre o Pareja *
+                      </label>
+                      <input
+                        id="review-couple"
+                        type="text"
+                        required
+                        value={coupleName}
+                        onChange={(e) => setCoupleName(e.target.value)}
+                        placeholder="Ej: Laura & Dani"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 text-xs text-neutral-900 focus:outline-none focus:border-rose-500 bg-neutral-50/50"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="review-location" className="block text-xs font-bold text-neutral-800 mb-1">
+                        Ciudad o Finca del Evento
+                      </label>
+                      <input
+                        id="review-location"
+                        type="text"
+                        value={eventLocation}
+                        onChange={(e) => setEventLocation(e.target.value)}
+                        placeholder="Ej: Finca en Talavera / Madrid"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 text-xs text-neutral-900 focus:outline-none focus:border-rose-500 bg-neutral-50/50"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                    <div>
+                      <label htmlFor="review-pack" className="block text-xs font-bold text-neutral-800 mb-1">
+                        Efecto o Servicio Contratado
+                      </label>
+                      <select
+                        id="review-pack"
+                        value={selectedPack}
+                        onChange={(e) => setSelectedPack(e.target.value)}
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 text-xs text-neutral-900 focus:outline-none focus:border-rose-500 bg-neutral-50/50"
+                      >
+                        <option value="Pack Entrada Nupcial Signature">Pack Entrada Nupcial Signature (Humo Aéreo)</option>
+                        <option value="Pack Revelación de Género con Disparador TNT Retro">Revelación de Género con Detonador TNT</option>
+                        <option value="Pack Salida de Ceremonia">Pack Salida de Ceremonia (Humo Aéreo)</option>
+                        <option value="Pack Bengalas Profesionales de Mano">Bengalas de Humo de Mano</option>
+                        <option value="Pack Cañones de Confeti Romántico (Mariposas & Papel Blanco)">Cañones de Confeti / Mariposas</option>
+                        <option value="Pack Fuentes de Chispas Frías (Sparkulars)">Fuentes de Chispas Frías (Sparkulars)</option>
+                        <option value="Pack Máquina de Niebla Baja (Vals sobre las Nubes)">Máquina de Humo Bajo (Vals sobre las Nubes)</option>
+                        <option value="Pack Boda Total 360° (Multiefecto Integral)">Pack Boda Total 360°</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <span className="block text-xs font-bold text-neutral-800 mb-1">
+                        Valoración del Servicio *
+                      </span>
+                      <div className="flex items-center gap-1.5 py-1.5">
+                        {[1, 2, 3, 4, 5].map((starValue) => (
+                          <button
+                            key={starValue}
+                            type="button"
+                            onClick={() => setRating(starValue)}
+                            className="p-1 rounded-lg hover:bg-amber-50 transition-colors cursor-pointer"
+                            aria-label={`Valorar con ${starValue} estrellas`}
+                          >
+                            <Star
+                              className={`w-5 h-5 ${
+                                starValue <= rating ? 'text-amber-400 fill-amber-400' : 'text-neutral-300'
+                              }`}
+                            />
+                          </button>
+                        ))}
+                        <span className="ml-2 text-xs font-bold text-neutral-700">{rating} / 5</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="review-text" className="block text-xs font-bold text-neutral-800 mb-1">
+                      Vuestra Opinión *
+                    </label>
+                    <textarea
+                      id="review-text"
+                      rows={3}
+                      required
+                      value={reviewText}
+                      onChange={(e) => setReviewText(e.target.value)}
+                      placeholder="Cuéntanos cómo fue vuestra experiencia con el disparo de humo aéreo, el detonador TNT o los efectos especiales..."
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 text-xs text-neutral-900 focus:outline-none focus:border-rose-500 bg-neutral-50/50 resize-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 pt-1">
+                    <span className="text-[11px] text-neutral-500">
+                      Se publicará directamente en nuestro muro de experiencias reales.
+                    </span>
+                    <button
+                      type="submit"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-bold transition-all shadow-sm cursor-pointer shrink-0"
+                    >
+                      <Send className="w-3.5 h-3.5 text-rose-400" />
+                      <span>Publicar Reseña</span>
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Internal Cross-Link Banner */}

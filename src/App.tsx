@@ -38,40 +38,54 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-const PAGE_META: Record<PageView, { title: string; desc: string; path: string }> = {
+const PAGE_META: Record<PageView, { title: string; desc: string; keywords: string; path: string }> = {
   inicio: {
-    title: 'Humo Y Efectos | Humo Aéreo y Efectos para Bodas en España',
-    desc: 'Humo aéreo, confeti, chispas frías y niebla baja para bodas. Sede en Talavera y servicio en Madrid y toda España.',
+    title: 'Humo Y Efectos | Efectos de Boda Personalizados y Humo Aéreo',
+    desc: 'Efectos de boda personalizados, humo aéreo, bengalas de humo de mano, chispas frías y confeti. Sede en Talavera con servicio en Madrid, Toledo y España.',
+    keywords:
+      'bengalas de humo de mano, efectos de boda personalizados, humo aéreo bodas, cañones humo aéreo vertical, pack boda total 360, chispas frías bodas, confeti mariposas, humo bajo hielo seco, fiesta de la espuma, talavera de la reina, madrid, toledo, españa',
     path: '/',
   },
   servicios: {
-    title: 'Servicios Oficiales de Efectos Especiales para Bodas | Humo Y Efectos',
-    desc: 'Catálogo de 5 efectos para bodas: humo aéreo vertical, confeti nupcial, chispas frías Sparkulars y humo bajo de hielo seco.',
+    title: 'Servicios de Efectos de Boda Personalizados | Humo Y Efectos',
+    desc: 'Catálogo de efectos de boda personalizados: humo aéreo vertical, bengalas de humo de mano, confeti, chispas frías, niebla baja y fiesta de la espuma.',
+    keywords:
+      'efectos de boda personalizados, bengalas de humo de mano, cañones de humo aéreo, fuentes de chispas frías sparkulars, máquina de niebla baja, fiesta de la espuma blanca y colores, talavera, madrid, toledo',
     path: '/servicios',
   },
   packs: {
-    title: 'Catálogo de Packs y Precios para Bodas y Eventos | Humo Y Efectos',
-    desc: 'Precios y packs oficiales de efectos especiales para bodas: salida de ceremonia, vals sobre las nubes, chispas y detonador TNT.',
+    title: 'Packs de Efectos de Boda Personalizados y Precios | Humo Y Efectos',
+    desc: 'Packs de efectos de boda personalizados: Pack Boda Total 360°, bengalas de humo de mano, salida de ceremonia, detonador TNT y fiesta de la espuma.',
+    keywords:
+      'pack boda total 360, efectos de boda personalizados, bengalas de humo de mano, packs humo aéreo bodas, precios efectos especiales bodas, disparador tnt revelación de género, talavera, madrid, toledo, españa',
     path: '/packs',
   },
   simulador: {
-    title: 'Simulador de Cañones de Humo Aéreo en Directo | Humo Y Efectos',
-    desc: 'Prueba el disparo instantáneo de 1 a 9 cañones de humo aéreo en directo con la cámara de tu móvil o la foto de vuestra finca.',
+    title: 'Simulador de Humo Aéreo y Efectos de Boda Personalizados | Humo Y Efectos',
+    desc: 'Diseña tus efectos de boda personalizados y simula el disparo de 1 a 9 cañones de humo aéreo y bengalas de humo de mano en vuestra finca.',
+    keywords:
+      'simulador efectos de boda personalizados, simulador humo aéreo bodas, bengalas de humo de mano colores, cañones de humo bodas madrid toledo talavera',
     path: '/simulador',
   },
   opiniones: {
-    title: 'Opiniones y Reseñas Reales de Bodas 2026 | Humo Y Efectos',
-    desc: 'Opiniones 2026 de novios y parejas sobre cañones de humo aéreo y efectos especiales para bodas en Talavera, Madrid y España.',
+    title: 'Opiniones de Efectos de Boda Personalizados 2026 | Humo Y Efectos',
+    desc: 'Reseñas reales de parejas sobre nuestros efectos de boda personalizados, humo aéreo, bengalas de humo de mano y revelaciones TNT en España.',
+    keywords:
+      'opiniones efectos de boda personalizados, reseñas humo y efectos, bengalas de humo de mano bodas, revelación de género tnt opiniones, bodas talavera madrid toledo',
     path: '/opiniones',
   },
   contacto: {
-    title: 'Contacto Oficial y Presupuesto para Bodas | Humo Y Efectos',
-    desc: 'Solicita presupuesto para tu boda o evento con Humo Y Efectos. Sede en Talavera con servicio en Madrid, Toledo y toda España.',
+    title: 'Contacto y Presupuesto de Efectos de Boda Personalizados | Humo Y Efectos',
+    desc: 'Pide presupuesto de efectos de boda personalizados, humo aéreo y bengalas de humo de mano. Sede en Talavera con cobertura en Madrid, Toledo y España.',
+    keywords:
+      'presupuesto efectos de boda personalizados, comprar bengalas de humo de mano, contratar humo aéreo bodas talavera madrid toledo españa',
     path: '/contacto',
   },
   seguridad: {
-    title: 'Dossier Técnico de Seguridad y Normas de Uso | Humo Y Efectos',
-    desc: 'Dossier oficial de seguridad para fincas: homologación CE Clase T1 (EN 16263), distancias certificadas y material de uso libre (+18 años) sin licencias ni ADR.',
+    title: 'Dossier Técnico CE T1 y Seguridad de Bengalas de Humo | Humo Y Efectos',
+    desc: 'Dossier oficial para fincas: homologación CE Clase T1 de humo aéreo, bengalas de humo de mano y efectos de boda personalizados de uso libre (+18 años).',
+    keywords:
+      'seguridad bengalas de humo de mano, normativa efectos de boda personalizados, homologación ce clase t1 humo aéreo, dossier seguridad fincas bodas',
     path: '/seguridad',
   },
 };
@@ -118,6 +132,21 @@ function updateSeoMeta(view: PageView) {
 
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', meta.desc);
+
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) metaKeywords.setAttribute('content', meta.keywords);
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', meta.title);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', meta.desc);
+
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute('content', meta.title);
+
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute('content', meta.desc);
 
     const baseUrl =
       window.location.origin &&
@@ -288,10 +317,10 @@ export default function App() {
                       <span>Catálogo Completo de Efectos</span>
                     </div>
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight font-display">
-                      Nuestros 5 Efectos Especiales para Bodas
+                      Nuestros 6 Efectos Especiales para Bodas y Eventos
                     </h2>
                     <p className="text-sm sm:text-base text-neutral-600 mt-2">
-                      Además del humo aéreo, ofrecemos una gama completa de efectos profesionales homologados para cada momento clave del enlace.
+                      Además del humo aéreo, ofrecemos una gama completa de efectos profesionales homologados para bodas, revelaciones de género, cumpleaños, colegios y fiestas privadas.
                     </p>
                   </div>
 
@@ -304,13 +333,13 @@ export default function App() {
                   </button>
                 </div>
 
-                {/* 5 Service Quick Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {/* 6 Service Quick Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
                     {
                       id: 'humo-aereo' as ServiceTabType,
                       title: '1. Humo Aéreo',
-                      desc: 'Disparo vertical a 15 metros en 10 colores oficiales.',
+                      desc: 'Disparo vertical a 15 metros en 10 colores oficiales, detonador TNT y bengalas.',
                       badge: 'Nº1 Especialidad',
                       icon: <Zap className="w-5 h-5 text-rose-500" />,
                       color: 'border-rose-200 hover:border-rose-400',
@@ -318,7 +347,7 @@ export default function App() {
                     {
                       id: 'confeti' as ServiceTabType,
                       title: '2. Confeti Nupcial',
-                      desc: 'Mariposas de seda blanca y lluvia multicolor.',
+                      desc: 'Mariposas de seda blanca y lluvia multicolor biodegradable.',
                       badge: 'Vals & Fiesta',
                       icon: <PartyPopper className="w-5 h-5 text-fuchsia-500" />,
                       color: 'border-fuchsia-200 hover:border-fuchsia-400',
@@ -326,7 +355,7 @@ export default function App() {
                     {
                       id: 'chispas-frias' as ServiceTabType,
                       title: '3. Chispas Frías',
-                      desc: 'Fuentes Sparkulars de 2 a 5m que no queman la ropa.',
+                      desc: 'Fuentes Sparkulars de 2 a 5m que no queman la piel ni la ropa.',
                       badge: 'Seguro en Interior',
                       icon: <Flame className="w-5 h-5 text-amber-500" />,
                       color: 'border-amber-200 hover:border-amber-400',
@@ -334,7 +363,7 @@ export default function App() {
                     {
                       id: 'humo-bajo' as ServiceTabType,
                       title: '4. Niebla Baja',
-                      desc: 'Vals sobre las nubes con hielo seco sin residuos.',
+                      desc: 'Vals sobre las nubes con hielo seco sin residuos ni humedad.',
                       badge: 'Cero Manchas',
                       icon: <CloudRain className="w-5 h-5 text-sky-500" />,
                       color: 'border-sky-200 hover:border-sky-400',
@@ -342,10 +371,18 @@ export default function App() {
                     {
                       id: 'sonido-luces' as ServiceTabType,
                       title: '5. Sonido & DJ',
-                      desc: 'Equipos de sonido, microfonía e iluminación.',
+                      desc: 'Equipos de sonido PA, microfonía inalámbrica e iluminación con DJ.',
                       badge: 'Producción Total',
                       icon: <Speaker className="w-5 h-5 text-indigo-500" />,
                       color: 'border-indigo-200 hover:border-indigo-400',
+                    },
+                    {
+                      id: 'fiesta-espuma' as ServiceTabType,
+                      title: '6. Fiesta de la Espuma',
+                      desc: '1º Espuma blanca normal de toda la vida (cumpleaños, colegios, fiestas privadas y todo tipo de eventos) y 2º Espuma de colores para revelaciones de género especiales y bodas.',
+                      badge: 'Blanca & Colores',
+                      icon: <Sparkles className="w-5 h-5 text-cyan-500" />,
+                      color: 'border-cyan-200 hover:border-cyan-400',
                     },
                   ].map((service) => (
                     <div

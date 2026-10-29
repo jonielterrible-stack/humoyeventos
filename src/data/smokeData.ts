@@ -2,7 +2,7 @@ export interface SmokePack {
   id: string;
   name: string;
   tagline: string;
-  category: 'bodas' | 'revelacion_genero' | 'humo_aereo' | 'confeti' | 'humo_bajo' | 'chispas_frias' | 'sonido_luces' | 'bengalas';
+  category: 'bodas' | 'revelacion_genero' | 'humo_aereo' | 'confeti' | 'humo_bajo' | 'chispas_frias' | 'sonido_luces' | 'bengalas' | 'fiesta_espuma';
   badge?: string;
   highlight?: boolean;
   image: string;
@@ -337,28 +337,28 @@ export const SMOKE_PACKS: SmokePack[] = [
   {
     id: 'pack-revelacion-tnt',
     name: 'Pack Revelación de Género con Disparador TNT Retro',
-    tagline: '¡El efecto más visual para los papás! Empuja la palanca TNT y el cielo se tiñe de color',
+    tagline: '¡Haz de tu momento algo mágico! Empuja la palanca TNT y el cielo estalla en azul o rosa a 15 metros',
     category: 'revelacion_genero',
     highlight: true,
     badge: 'TOP VIRAL PAPÁS',
-    image: '/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png',
+    image: '/assets/aistudio/file_0000000087408246b89fbac4c664e786_78339485.png',
     imageAlt:
-      'Revelación de género sorpresa con disparador TNT retro y gran columna de humo aéreo rosa vertical hacia el cielo de 15 metros en evento privado para futuros papás con arco de globos en Talavera de la Reina, Madrid y España - Humo Y Efectos',
+      'Detonador TNT oficial de Humo Y Efectos para revelación de género con disparo instantáneo de humo aéreo azul y rosa de hasta 15 metros de alcance y confeti de alta calidad seguro y fácil de usar',
     imageTitle:
-      'Pack Revelación de Género con Disparador TNT Retro y Humo Aéreo Rosa | Humo Y Efectos',
-    tubesRecommendation: 'De 2 a 4 Cañones sorpresa + Caja TNT',
-    height: '15 metros de altura hacia el cielo',
-    duration: 'Disparo instantáneo con palanca de detonador vintage',
+      'Disparador TNT Oficial para Revelación de Género con Humo Aéreo y Confeti a 15 Metros | Humo Y Efectos',
+    tubesRecommendation: 'De 2 a 4 Cañones sorpresa + Detonador TNT Oficial',
+    height: 'Alcance de hasta 15 metros de altura',
+    duration: 'Disparo instantáneo con humo y confeti de alta calidad',
     colors: ['Rosa Intenso o Azul Cielo sorpresa (Embalaje 100% secreto)'],
     includes: [
-      'Caja detonadora TNT de estilo retro vintage con palanca de empuje hacia abajo',
-      'Sistema de conexión inalámbrica sin cables entre la caja TNT y los cañones',
-      'Cañones de humo aéreo sorpresa con exterior idéntico y precinto codificado',
-      'Cañón de confeti biodegradable sorpresa a juego para los invitados',
-      'Disparo a gran altura (15m) con disipación limpia respetando distancias de seguridad',
+      'Detonador TNT oficial en color blanco con letras doradas en relieve y palanca de empuje',
+      'Disparo instantáneo sincronizado de humo aéreo y confeti de alta calidad',
+      'Alcance vertical de hasta 15 metros de altura con apertura espectacular',
+      'Cañones sorpresa con exterior neutro idéntico y precinto codificado 100% confidencial',
+      'Sistema 100% seguro y fácil de usar para futuros papás y familiares',
     ],
     description:
-      'Los futuros papás colocan las manos juntos sobre la clásica palanca del detonador TNT. Hacen la cuenta atrás con sus seres queridos, bajan la palanca con fuerza y al instante el cielo estalla en una espectacular nube vertical azul o rosa de 15 metros. ¡El momento fotográfico más divertido y emocionante!',
+      'Los futuros papás colocan las manos juntos sobre la palanca de nuestro detonador TNT oficial. Tras la cuenta atrás con todos los invitados, empujan la palanca hacia abajo y al instante se produce un disparo de humo aéreo y confeti de alta calidad que alcanza hasta 15 metros en azul o rosa sorpresa. ¡Seguro, fácil de usar y mágico!',
     idealMoment: 'Fiesta de Revelación de Género y Baby Shower',
   },
   {
@@ -390,29 +390,29 @@ export const SMOKE_PACKS: SmokePack[] = [
   {
     id: 'pack-boda-total',
     name: 'Pack Boda Total 360° (Humo Aéreo + Confeti + Niebla Baja + Chispas Frías)',
-    tagline: 'La experiencia completa que cubre todos los momentos cumbres del día',
+    tagline: '¡Todo lo que necesitas para que tu boda sea inolvidable! Espectacular, seguro y personalizable a tu gusto',
     category: 'bodas',
-    badge: 'TODO INCLUIDO',
-    image: '/assets/services/novios-baile-nubes-humo-bajo.jpg',
+    highlight: true,
+    badge: 'PACK BODA TOTAL 360° · TODO INCLUIDO',
+    image: '/assets/aistudio/file_000000004f788243bd434446823e262f_13f183ab.png',
     imageAlt:
-      'Celebración de boda integral combinando baile de los novios sobre niebla baja y fuentes de chispas frías Sparkulars rodeados de sus invitados',
+      'Cartel oficial Pack Boda Total 360° de Humo Y Efectos con efectos de boda personalizados: columnas de humo aéreo de colores, confeti multicolor o de mariposas, niebla baja para un primer baile de ensueño y fuentes de chispas frías seguras en toda España',
     imageTitle:
-      'Pack Boda Total 360° (Humo Aéreo + Confeti + Niebla Baja + Chispas Frías) | Humo Y Efectos',
-    tubesRecommendation: 'Cañones Aéreos + Confeti + Niebla Baja + Chispas Frías + Sonido',
+      'Pack Boda Total 360° (Humo Aéreo + Confeti + Niebla Baja + Chispas Frías) - Efectos de Boda Personalizados | Humo Y Efectos',
+    tubesRecommendation: 'Humo Aéreo + Confeti + Niebla Baja + Chispas Frías',
     height: '15m Aéreo + Nube Suelo + Chispas 4m + Lluvia Confeti',
-    duration: 'Disparos coordinados por momentos clave',
-    colors: ['Colores aéreos a la carta + Mariposas / Blanco + Chispas Frías'],
+    duration: 'Cobertura integral en todos los momentos clave de la boda',
+    colors: ['Personalizable a tu gusto: 10 colores aéreos + Mariposas / Multicolor + Chispas Frías'],
     includes: [
-      'Disparo instantáneo de humo aéreo para la entrada exterior o salida de iglesia',
-      'Lluvia de confeti de mariposas o blanco nupcial biodegradable',
-      'Máquina de niebla baja (hielo seco y agua caliente) para el primer baile nupcial',
-      'Fuentes de Chispas Frías (Sparkulars) que no queman para interiores y noche',
-      'Montaje y disparo oficial con técnico presencial en finca',
-      'Dossier de homologación CE Clase T1 y normas de uso libre (+18 años) para la finca',
+      'HUMO AÉREO: Columnas de colores a 15 metros que llenan el cielo en la salida o entrada nupcial',
+      'CONFETI: Multicolor o de mariposas de seda biodegradables para un toque mágico',
+      'NIEBLA BAJA: Manto denso de hielo seco a ras de suelo para un primer baile de ensueño sobre las nubes',
+      'CHISPAS FRÍAS: Fuentes electrónicas Sparkulars con elegancia y brillo en cada momento sin quemar',
+      'Efectos de boda personalizados a tu gusto, seguros, profesionales y disponibles en toda España y alrededores',
     ],
     description:
-      'La cobertura definitiva: disparo de humo aéreo al aire libre, lluvia de mariposas o confeti blanco, baile sobre las nubes con niebla baja y fuentes de chispas frías en el salón.',
-    idealMoment: 'Ceremonia, Entrada al Banquete y Primer Baile',
+      '¡Todo lo que necesitas para que tu boda sea inolvidable! El Pack Boda Total 360° reúne nuestros 4 grandes efectos de boda personalizados: columnas de humo aéreo que llenan el cielo, lluvia de confeti multicolor o de mariposas, niebla baja para un primer baile de ensueño y chispas frías llenas de elegancia y brillo.',
+    idealMoment: 'Ceremonia, Entrada al Cóctel, Primer Baile y Fiesta en Toda España',
   },
   {
     id: 'pack-bengalas-humo-mano',
@@ -438,6 +438,33 @@ export const SMOKE_PACKS: SmokePack[] = [
     description:
       'El complemento estrella para reportajes fotográficos con damas de honor, amigos o invitados alrededor de los novios.',
     idealMoment: 'Preboda, reportaje nupcial y photocall dinámico',
+  },
+  {
+    id: 'pack-fiesta-espuma',
+    name: 'Pack Fiesta de la Espuma (Espuma Blanca Clásica y Espuma de Colores)',
+    tagline: '¡La diversión está asegurada! Primero la espuma blanca tradicional de toda la vida y también espuma de colores para revelaciones de género y eventos únicos',
+    category: 'fiesta_espuma',
+    highlight: true,
+    badge: 'BODAS · EVENTOS · COLEGIOS · REVELACIONES',
+    image: '/assets/aistudio/file_000000000a1481f4ace1e57bdf04b6c5_768b4674.png',
+    imageAlt:
+      'Cañón de Fiesta de la Espuma profesional de Humo Y Efectos con espuma blanca clásica para cumpleaños, colegios, comuniones y fiestas privadas, y espuma de colores para revelaciones de género y bodas en toda España',
+    imageTitle:
+      'Fiestas de la Espuma para Todos los Eventos: Espuma Blanca Clásica y Espuma de Colores | Humo Y Efectos',
+    tubesRecommendation: 'Cañón Jet de Espuma de Alta Potencia + Técnico Operador',
+    height: 'Proyección de chorro de 6 a 10 metros',
+    duration: 'Sesión continua de 45 a 90 minutos de diversión',
+    colors: ['1º Espuma Blanca Clásica de toda la vida · 2º Espuma de Colores (Rosa, Azul y más)'],
+    includes: [
+      '1. Espuma Blanca Tradicional de toda la vida: ideal para cumpleaños, fiestas privadas, colegios, comuniones, bautizos y fiestas populares',
+      '2. Espuma de Colores Especial: perfecta para hacer las revelaciones de género (rosa o azul) aún más especiales, bodas y fiestas temáticas',
+      'Cañón generador profesional de gran caudal con técnico operador durante todo el evento',
+      'Fórmula cosmética homologada con pH neutro: no irrita los ojos, no pica en la piel y es 100% biodegradable',
+      'No mancha la ropa ni el césped y desaparece de forma limpia tras el evento',
+    ],
+    description:
+      '¡Hacemos de tu evento una experiencia única! Ofrecemos en primer lugar nuestra clásica Fiesta de la Espuma Blanca de toda la vida para cumpleaños, fiestas privadas, fin de curso en colegios, comuniones, bautizos y bodas; y además contamos con Fiesta de la Espuma de Colores para que las revelaciones de género y celebraciones especiales sean inolvidables.',
+    idealMoment: 'Cumpleaños, Colegios, Fiestas Privadas, Comuniones, Revelación de Género y Bodas',
   },
 ];
 
@@ -545,6 +572,11 @@ export const FAQS = [
     category: 'Revelación de Género',
   },
   {
+    q: '¿Qué tipos de Fiesta de la Espuma ofrecéis (Espuma Blanca Clásica y Espuma de Colores)?',
+    a: 'Ofrecemos dos modalidades con cañones profesionales de gran caudal: 1) Primero, la Fiesta de la Espuma Blanca tradicional de toda la vida, perfecta para cumpleaños, fiestas privadas, colegios, comuniones, bautizos, ayuntamientos y bodas; y 2) La Fiesta de la Espuma de Colores, pensada especialmente para hacer las revelaciones de género (con espuma rosa o azul sorpresa) aún más originales y divertidas. Toda nuestra espuma tiene pH neutro cosmético, es biodegradable, no pica en los ojos y no mancha la ropa.',
+    category: 'Fiesta de la Espuma',
+  },
+  {
     q: '¿Qué opciones de Cañones de Confeti tenéis para bodas y fiestas?',
     a: 'Disponemos de cañones profesionales eléctricos y neumáticos de gran alcance (hasta 10-12 metros). Ofrecemos tres cargas estrella: 1) Confeti de Mariposas de seda o papel, que planean y giran suavemente en el aire creando un efecto poético e inolvidable para el primer baile o salida de novios; 2) Confeti de papel blanco mate, ideal para simular una elegante lluvia de nieve romántica; y 3) Confeti multicolor y metalizado en oro o plata para estallidos de fiesta y barra libre. Todo nuestro confeti es 100% biodegradable, no destiñe e ignífugo homologado CE.',
     category: 'Confeti',
@@ -566,12 +598,12 @@ export const FAQS = [
   },
   {
     q: '¿Con cuánta antelación debo solicitar mi reserva?',
-    a: 'Recomendamos consultar disponibilidad con un mínimo de 2 a 4 semanas para asegurar el stock de tus colores preferidos, máquinas de niebla baja, chispas frías, cañones de confeti y caja TNT. Te enviamos una propuesta personalizada según fecha y lugar.',
+    a: 'Recomendamos consultar disponibilidad con un mínimo de 2 a 4 semanas para asegurar el stock de tus colores preferidos, máquinas de niebla baja, chispas frías, cañones de confeti, fiesta de la espuma y caja TNT. Te enviamos una propuesta personalizada según fecha y lugar.',
     category: 'Servicio & Asistencia',
   },
   {
     q: '¿Cómo funciona la Revelación de Género sorpresa para los padres?',
-    a: 'Tu clínica, matrona o la persona encargada nos comunica en secreto el resultado por WhatsApp o email con vuestro número de reserva. Nosotros preparamos los cañones con exterior idéntico y un precinto oculto. Ni los novios ni los invitados sabrán si el cielo se teñirá de azul o rosa hasta accionar el disparador.',
+    a: 'Tu clínica, matrona o la persona encargada nos comunica en secreto el resultado por WhatsApp o email con vuestro número de reserva. Nosotros preparamos los cañones o la máquina de espuma de color con código ciego. Ni los novios ni los invitados sabrán si será azul o rosa hasta el momento del disparo.',
     category: 'Revelación de Género',
   },
 ];

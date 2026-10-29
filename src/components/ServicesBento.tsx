@@ -23,7 +23,8 @@ export type ServiceTabType =
   | 'confeti'
   | 'chispas-frias'
   | 'humo-bajo'
-  | 'sonido-luces';
+  | 'sonido-luces'
+  | 'fiesta-espuma';
 
 interface ServicesBentoProps {
   onSelectService: (serviceName: string) => void;
@@ -51,11 +52,11 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
               Efectos Especiales y Servicios para Bodas y Eventos
             </h2>
             <p className="text-sm sm:text-base text-neutral-600 mt-3 leading-relaxed">
-              Catálogo oficial ordenado: <strong>1. Humo Aéreo Vertical</strong>, <strong>2. Cañones de Confeti (Multicolor y Mariposas)</strong>, <strong>3. Fuentes de Chispas Frías</strong> y <strong>4. Máquinas de Humo Bajo sobre las Nubes</strong>. Asistencia y disparo presencial con técnicos en fincas de toda España.
+              Catálogo oficial ordenado: <strong>1. Humo Aéreo Vertical</strong>, <strong>2. Cañones de Confeti (Multicolor y Mariposas)</strong>, <strong>3. Fuentes de Chispas Frías</strong>, <strong>4. Máquinas de Humo Bajo sobre las Nubes</strong>, <strong>5. Sonido & DJ</strong> y <strong>6. Fiesta de la Espuma (Blanca y de Colores)</strong>. Asistencia y disparo presencial con técnicos en toda España.
             </p>
           </div>
 
-          {/* Interactive Service Tabs (Strictly Ordered 1 to 5) */}
+          {/* Interactive Service Tabs (Strictly Ordered 1 to 6) */}
           <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-neutral-200/80 rounded-2xl border border-neutral-300/80 self-start">
             <button
               type="button"
@@ -127,6 +128,18 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
             >
               <Speaker className="w-3.5 h-3.5" />
               <span>5. Sonido & DJ</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onTabChange('fiesta-espuma')}
+              className={`px-3.5 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                activeTab === 'fiesta-espuma'
+                  ? 'bg-cyan-600 text-white shadow-sm'
+                  : 'text-neutral-700 hover:text-neutral-950 hover:bg-white/60'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>6. Fiesta de la Espuma</span>
             </button>
           </div>
         </div>
@@ -302,7 +315,11 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
             {/* Sub-cards: Revelación TNT y Bengalas de Humo */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-2">
               {/* Tarjeta 1: Disparador TNT Retro para Papás */}
-              <div className="md:col-span-7 bg-white border border-neutral-200 rounded-3xl p-7 flex flex-col justify-between hover:border-amber-400 shadow-sm transition-all group">
+              <div
+                itemScope
+                itemType="https://schema.org/Product"
+                className="md:col-span-7 bg-white border border-neutral-200 rounded-3xl p-7 flex flex-col justify-between hover:border-amber-400 shadow-sm transition-all group"
+              >
                 <div>
                   {/* Etiqueta coincidente con el servicio */}
                   <div className="flex items-center justify-between mb-2">
@@ -313,48 +330,75 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                   </div>
 
                   {/* Título Principal antes de la fotografía */}
-                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 group-hover:text-amber-600 transition-colors font-display">
+                  <h3
+                    itemProp="name"
+                    className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 group-hover:text-amber-600 transition-colors font-display"
+                  >
                     Disparador TNT Retro para Papás
                   </h3>
 
-                  {/* Fotografía Completa sin recortes */}
-                  <div className="mb-4 h-72 sm:h-84 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center p-1.5 shadow-inner">
+                  {/* Fotografía Oficial del Detonador TNT completa sin recortes + SEO ImageObject */}
+                  <figure
+                    itemProp="image"
+                    itemScope
+                    itemType="https://schema.org/ImageObject"
+                    className="mb-4 h-72 sm:h-84 w-full rounded-2xl overflow-hidden border border-neutral-200/80 bg-neutral-950 flex items-center justify-center p-1.5 shadow-inner"
+                  >
                     <img
-                      src={assetUrl('/assets/aistudio/Celebraci_n_con_humo_rosa_y_globos_680fa823.png')}
-                      alt="Revelación de género con disparador TNT retro y cañón de humo aéreo vertical rosa de 15 metros para futuros papás con arco de globos en Talavera de la Reina, Madrid y España - Humo Y Efectos"
-                      title="Disparador TNT Retro para Revelación de Género con Humo Aéreo Rosa | Humo Y Efectos"
+                      src={assetUrl('/assets/aistudio/file_0000000087408246b89fbac4c664e786_78339485.png')}
+                      alt="Detonador TNT oficial de Humo Y Efectos para revelación de género con disparo instantáneo de humo aéreo azul y rosa de hasta 15 metros de alcance y confeti de alta calidad seguro y fácil de usar"
+                      title="Detonador TNT Oficial para Revelación de Género con Humo y Confeti a 15m | Humo Y Efectos"
                       width={900}
                       height={900}
                       loading="lazy"
                       decoding="async"
+                      itemProp="contentUrl"
                       className="w-full h-full object-contain mx-auto block group-hover:scale-[1.01] transition-transform duration-500 rounded-xl"
                     />
-                  </div>
+                    <meta
+                      itemProp="name"
+                      content="Detonador TNT Oficial para Revelación de Género | Humo Y Efectos"
+                    />
+                    <meta
+                      itemProp="description"
+                      content="Caja detonadora TNT blanca con letras doradas para revelación de género con disparo instantáneo de humo aéreo azul o rosa a 15 metros y confeti de alta calidad."
+                    />
+                    <figcaption className="sr-only">
+                      Detonador TNT oficial de Humo Y Efectos para revelación de género: disparo instantáneo, alcance de hasta 15 metros, humo y confeti de alta calidad, seguro y fácil de usar.
+                    </figcaption>
+                  </figure>
 
                   {/* Subtítulo descriptivo con palabras clave SEO */}
                   <h4 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 font-display">
-                    Revelación de Género con Detonador TNT Vintage y Humo Aéreo Sorpresa
+                    Revelación de Género con Detonador TNT, Humo Aéreo y Confeti a 15 Metros
                   </h4>
 
-                  <p className="text-xs text-neutral-600 leading-relaxed mb-4">
-                    Los futuros papás bajan juntos la palanca de nuestra icónica caja detonadora TNT vintage y al instante los
-                    cañones estallan hacia el cielo en rosa o azul sorpresa. Embalaje neutro 100% confidencial con código secreto para cómplice o ginecólogo.
+                  <p itemProp="description" className="text-xs text-neutral-600 leading-relaxed mb-4">
+                    Los futuros papás bajan juntos la palanca de nuestra icónica caja detonadora TNT con letras doradas y al instante se activa un disparo sincronizado de humo aéreo y confeti de alta calidad con alcance de hasta 15 metros en rosa o azul sorpresa. Embalaje neutro 100% confidencial.
                   </p>
 
-                  <div className="space-y-1.5 text-xs text-neutral-700">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-700">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>Palanca TNT vintage de madera con muelle</span>
+                      <span>Disparo instantáneo hasta 15 metros</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span>100% confidencial: el secreto mejor guardado</span>
+                      <span>Humo y confeti de alta calidad</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+                      <span>Seguro, fácil de usar y sin cables</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+                      <span>100% confidencial: código secreto</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="pt-5 mt-5 border-t border-neutral-100 flex items-center justify-between text-xs">
-                  <span className="text-neutral-500 font-medium">Inalámbrico 80m</span>
+                  <span className="text-neutral-500 font-medium">Alcance 15m · Disparo Instantáneo</span>
                   <button
                     onClick={() => onSelectService('Revelación TNT')}
                     className="font-bold text-amber-700 hover:text-amber-800 cursor-pointer flex items-center gap-1"
@@ -784,7 +828,7 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
         {/* 5. SONIDO, ILUMINACIÓN & DISCOTECA MÓVIL                  */}
         {/* ======================================================== */}
         {(activeTab === 'todos' || activeTab === 'sonido-luces') && (
-          <div id="sonido-luces" className="space-y-6">
+          <div id="sonido-luces" className="mb-14 space-y-6">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
               <div>
                 <span className="text-xs font-black tracking-widest uppercase text-indigo-600">
@@ -884,6 +928,196 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({
                       <MessageCircle className="w-4 h-4" />
                       <span>WhatsApp Directo</span>
                     </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* 6. FIESTA DE LA ESPUMA (Blanca Clásica y De Colores)     */}
+        {/* ======================================================== */}
+        {(activeTab === 'todos' || activeTab === 'fiesta-espuma') && (
+          <div id="fiesta-espuma" className="space-y-6">
+            <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+              <div>
+                <span className="text-xs font-black tracking-widest uppercase text-cyan-600">
+                  Apartado 06 · ¡La Diversión Está Asegurada!
+                </span>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-neutral-900 font-display mt-0.5">
+                  6. Fiesta de la Espuma para Todo Tipo de Eventos (Espuma Blanca Clásica y Espuma de Colores)
+                </h3>
+                <p className="text-xs sm:text-sm text-neutral-600">
+                  Primero nuestra espuma blanca tradicional de toda la vida para cumpleaños, fiestas privadas, colegios y comuniones; y también espuma de colores para hacer las revelaciones de género y bodas aún más especiales.
+                </p>
+              </div>
+            </div>
+
+            {/* Tarjeta Principal Oficial de Fiesta de la Espuma */}
+            <div
+              itemScope
+              itemType="https://schema.org/Service"
+              className="bg-white border-2 border-cyan-200 hover:border-cyan-400 rounded-3xl overflow-hidden shadow-lg transition-all group"
+            >
+              {/* Header: Etiqueta coincidente + Título Principal */}
+              <div className="p-6 sm:p-8 pb-4 border-b border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50/50">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-mono font-bold text-cyan-600 uppercase tracking-wider">
+                      06. FIESTA DE LA ESPUMA PARA TODOS LOS EVENTOS
+                    </span>
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-900">
+                      1º Blanca Tradicional &bull; 2º Espuma de Colores
+                    </span>
+                  </div>
+                  <h3
+                    itemProp="name"
+                    className="text-2xl sm:text-3xl font-extrabold text-neutral-900 font-display"
+                  >
+                    Fiestas de la Espuma para Todo Tipo de Eventos
+                  </h3>
+                </div>
+              </div>
+
+              {/* Fotografía Oficial Completa sin recortes + SEO ImageObject */}
+              <figure
+                itemProp="image"
+                itemScope
+                itemType="https://schema.org/ImageObject"
+                className="w-full bg-neutral-950 flex items-center justify-center overflow-hidden p-1.5"
+              >
+                <img
+                  src={assetUrl('/assets/aistudio/file_000000000a1481f4ace1e57bdf04b6c5_768b4674.png')}
+                  alt="Cañón de Fiesta de la Espuma de Humo Y Efectos en acción con espuma blanca clásica para cumpleaños, colegios, comuniones y fiestas privadas, y espuma de colores para revelaciones de género y bodas en toda España"
+                  title="Fiestas de la Espuma para Todos los Eventos: Espuma Blanca Normal y Espuma de Colores | Humo Y Efectos"
+                  width={1200}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                  itemProp="contentUrl"
+                  className="w-full h-auto max-h-[540px] object-contain block group-hover:scale-[1.01] transition-transform duration-300 rounded-2xl"
+                />
+                <meta
+                  itemProp="name"
+                  content="Fiestas de la Espuma para Todos los Eventos (Blanca Clásica y de Colores) | Humo Y Efectos"
+                />
+                <meta
+                  itemProp="description"
+                  content="Servicio profesional de Fiesta de la Espuma con cañón de gran caudal: primero la espuma blanca normal de toda la vida para cumpleaños, fiestas privadas, colegios y comuniones, y después espuma de colores especial para revelaciones de género y bodas."
+                />
+                <figcaption className="sr-only">
+                  Fiestas de la Espuma de Humo Y Efectos para bodas, cumpleaños, comuniones, bautizos, colegios, revelaciones de género y fiestas privadas.
+                </figcaption>
+              </figure>
+
+              {/* Contenido Descriptivo Ordenado: 1º Espuma Blanca Normal de toda la vida, 2º Espuma de Colores */}
+              <div className="p-7 sm:p-9">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  <div className="lg:col-span-7 space-y-5">
+                    <h4 className="text-xl sm:text-2xl font-extrabold text-neutral-900 font-display">
+                      1º Espuma Blanca Clásica de Toda la Vida y 2º Espuma de Colores para Revelaciones de Género
+                    </h4>
+
+                    <p itemProp="description" className="text-sm text-neutral-600 leading-relaxed">
+                      ¡Hacemos de tu evento una experiencia única donde la diversión está asegurada! Ponemos a vuestra disposición nuestros cañones generadores de espuma de alta potencia con técnico operador para todo tipo de celebraciones:
+                    </p>
+
+                    {/* Bloque 1: Primero la Espuma Normal Blanca de toda la vida */}
+                    <div className="p-5 bg-cyan-50/70 rounded-2xl border-2 border-cyan-200 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-black uppercase tracking-wider text-cyan-800">
+                          1. Primero: La Espuma Blanca Normal de Toda la Vida
+                        </span>
+                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white text-cyan-900 border border-cyan-200">
+                          Clásica & Refrescante
+                        </span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed">
+                        Nuestra <strong>espuma blanca tradicional de toda la vida</strong>, ultra densa, limpia y refrescante. Es la opción favorita e imprescindible para <strong>cumpleaños, fiestas privadas en jardines o chalets, fiestas de fin de curso en colegios, comuniones, bautizos, campamentos, fiestas patronales y cualquier tipo de evento</strong> donde niños y adultos quieran disfrutar sin límites.
+                      </p>
+                    </div>
+
+                    {/* Bloque 2: Después la Espuma de Colores */}
+                    <div className="p-5 bg-gradient-to-r from-pink-50/80 via-fuchsia-50/60 to-sky-50/80 rounded-2xl border-2 border-pink-200 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-black uppercase tracking-wider text-pink-800">
+                          2. Después: Espuma de Colores para Revelaciones de Género y Más
+                        </span>
+                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-white text-pink-900 border border-pink-200">
+                          Rosa · Azul · Multicolor
+                        </span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed">
+                        Además, contamos con <strong>espuma de colores</strong> para hacer las <strong>revelaciones de género (en rosa o azul sorpresa) aún más especiales, originales y mágicas</strong>, así como para sorprender a tus invitados en <strong>bodas, fiestas temáticas y celebraciones exclusivas</strong>. ¡Tú pones la idea y nosotros ponemos la magia!
+                      </p>
+                    </div>
+
+                    {/* 5 Categorías del Cartel Oficial */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs">
+                      <div className="p-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                        <strong className="text-neutral-900 block">🎂 Cumpleaños y Colegios</strong>
+                        <span className="text-[11px] text-neutral-600">Comuniones, bautizos y fiestas escolares</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                        <strong className="text-neutral-900 block">🏡 Fiestas Privadas</strong>
+                        <span className="text-[11px] text-neutral-600">Diversión sin límites en jardines y fincas</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-neutral-50 border border-neutral-200">
+                        <strong className="text-neutral-900 block">👶 Revelación de Género</strong>
+                        <span className="text-[11px] text-neutral-600">El momento más especial con espuma de color</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Columna Derecha: Garantías Cosméticas y Botones de Reserva */}
+                  <div className="lg:col-span-5 bg-neutral-50 p-6 rounded-2xl border border-neutral-200/80 space-y-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-neutral-900">
+                      Calidad y Seguridad de Nuestra Espuma
+                    </p>
+
+                    <ul className="space-y-2.5 text-xs text-neutral-700">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span><strong>Espuma blanca clásica</strong> para colegios, cumpleaños y fiestas</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span><strong>Espuma de colores</strong> para revelaciones de género y bodas</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span><strong>Fórmula hipoalergénica con pH neutro</strong> (no pica en los ojos)</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span><strong>100% Biodegradable y limpia</strong>: no mancha la ropa ni el césped</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span><strong>Cañón profesional de gran alcance</strong> con técnico incluido</span>
+                      </li>
+                    </ul>
+
+                    <div className="pt-2 flex flex-col sm:flex-row gap-2">
+                      <button
+                        onClick={() => onSelectService('Fiesta de la Espuma')}
+                        className="flex-1 px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md shadow-cyan-600/20"
+                      >
+                        <span>Solicitar Fiesta de Espuma</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+
+                      <a
+                        href="https://wa.me/34600082462?text=Hola%20Humo%20Y%20Efectos,%20quiero%20informaci%C3%B3n%20sobre%20la%20Fiesta%20de%20la%20Espuma%20(Blanca%20o%20de%20Colores)%20para%20un%20evento."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/20"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>WhatsApp (+34 600 08 24 62)</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
